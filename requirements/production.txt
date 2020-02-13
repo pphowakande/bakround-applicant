@@ -13,7 +13,7 @@ django-storages
 
 # Email backends for Mailgun, Postmark, SendGrid and more
 # -------------------------------------------------------
-django-anymail==0.6.1
+django-anymail==1.2.1
 
 # CORS (for serving assets via Cloudfront)
 django-cors-headers
