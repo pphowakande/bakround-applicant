@@ -68,7 +68,7 @@ bs4
 tldextract
 stem
 
-requests==2.12.1
+requests==2.20.0
 
 # json serializing/deserializing complex objects
 marshmallow
