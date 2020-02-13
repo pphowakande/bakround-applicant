@@ -1,0 +1,125 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Email Settings{% endblock %}
+
+{% block content %}
+<style>
+    .tab-pane {
+        padding-top: 15px;
+    }
+  .drop-area {
+    min-width: 200px;
+    min-height: 200px;
+    border: 2px dashed gray;
+    position:relative;
+    font-size: 18px;
+    font-weight: 400;
+  }
+
+  input#file:hover {
+    cursor: pointer;
+  }
+</style>
+
+<div class="container">
+    <h3>Candidate Email Settings</h3>
+    <br />
+    <ul class="nav nav-tabs">
+      <li class="active"><a href="#body" data-toggle="tab">Company Description</a></li>
+      <li><a id="logoTab" href="#logo" data-toggle="tab">Logo</a></li>
+    </ul>
+    <div class="tab-content clearfix">
+      <div class="tab-pane active" id="body">
+          <p>Use the box below to set your company description.</p>
+            <p>
+                <form id="formEmailBody" action="{% url 'employer:company_description' %}" method="post">
+                    {% csrf_token %}
+                    <div class="content">
+                        <div class="row">
+
+                          <div style="margin-left: 15px">
+                              <textarea id="company_description" name="company_description">
+                                  {{ company_description|default_if_none:'' }}
+                              </textarea>
+                          </div>
+                        </div>
+                    </div>
+                    <div class="clearfix" style="margin-top: 10px">
+                        <div class="pull-right">
+                            <button type="submit" name="action" id="btnSave" class="btn btn-primary"
+                              style="margin-bottom: 30px">Save</button>
+                        </div>
+                    </div>
+                </form>
+            </p>
+      </div>
+        <div class="tab-pane" id="logo">
+          <p>You can upload a logo to use in your candidate emails. After you select and upload a file, you can go back to the Body tab and decide where to place the logo.</p>
+          <p><b>Note:</b> The max dimensions for the logo image are 150px x 150px. If your logo is larger than these dimensions, it will be resized.</p>
+            {% if logo_url is not None %}
+                <p>Current logo: <img src="{{logo_url}}" /></p>
+            {% endif %}
+            <p>
+              <div class="wireframe-centered-column">
+                <form id="formEmailLogo" action="/employer/email_settings/logo" method="post" enctype="multipart/form-data" style="width: 300px" class="wireframe-center grey-font form-horizontal">
+                  {% csrf_token %}
+                  <div class="clearfix">
+                    <div class="drop-area">
+                    <input type="file"
+                           name="file"
+                           id="file"
+                           style="position: absolute; width: 300px; height: 200px; z-index: 0; opacity: 0"
+                           onchange='$("#formEmailLogo").submit()'
+                           alt="Click here to upload or drop your resume...."
+                           title="Click here to upload or drop your resume...">
+                      <div style="margin-top: 90px" id="message_before">
+                        Drop your logo here
+                      </div>
+                      <div style="margin-top: 60px; display: none; color: #008000" id="message_after">
+                        Your logo is being uploaded.
+                        <br/>
+                        Please wait...
+                        <br/>
+                        <br/>
+                        <span class="glyphicon-left glyphicon glyphicon-refresh spinning" style="color: black"></span>
+                      </div>
+                    </div>
+                    <a class="btn btn-primary" id="btnSelectFile" href="#" style="min-width: 150px; margin: 20px 0px;">Select a file</a>
+                    <br />
+                    <br />
+                          <!-- <button type="submit" name="action" id="btnSave" class="btn btn-primary">Save</button> -->
+                  </div>
+
+
+                </form>
+              </div>
+            </p>
+        </div>
+    </div>
+    <div id="modal1" class="modal" role="dialog" style="padding: 20px">
+        <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-body">
+                      {% autoescape off %}{{ current_email_body }}{% endautoescape %}
+              </div>
+            </div>
+        </div>
+  </div>
+</div>
+
+<script>
+    if (window.location.hash && window.location.hash == "#logo") {
+        $("#logoTab").click();
+    }
+
+    window.onload = function() {
+        $("#btnSelectFile").on("click", function() {
+          $("#file").click();
+        });
+      }
+</script>
+
+{% include "employer/load_tinymce.html" with selector="textarea#company_description" %}
+
+{% endblock %}

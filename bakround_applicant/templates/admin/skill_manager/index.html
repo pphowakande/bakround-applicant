@@ -1,0 +1,133 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+{{ object_type|title }} Manager
+{% endblock %}
+
+
+{% block content %}
+  <script src="{% static 'vendor/typeahead.js/typeahead.bundle.min.js' %}"></script>
+
+  <h3>{{ object_type|title }} Manager</h3>
+
+  <form action="{% url 'skill_manager:add_object' %}" method="POST"
+        onsubmit="return $('#new_object_name').val() != '' && prevent_duplicate_form_submission('form')">
+    {% csrf_token %}
+    <P style="font-weight: bold">
+      Add new {{ object_type }}:
+    </P>
+
+    <input type="text" name="new_object_name" id="new_object_name"
+           size="40" maxlength="100" class="typeahead">
+    <input type="hidden" name="object_type" value="{{ object_type }}">
+    <input type="submit">
+  </form>
+
+  <P style="min-height: 120px; margin-top: 10px">
+    {% if object_was_added %}
+      <span class="fadeout" style="color: #008000">The new {{ object_type }} was added successfully.</span>
+    {% endif %}
+    {% if object_was_not_added %}
+      <span class="fadeout" style="color: #800000">The {{ object_type }} could not be added.</span>
+    {% endif %}
+  </P>
+  <input type="hidden" id="newest_timestamp" value="0">
+
+  <hr style="border-color: black"/>
+
+  <P style="font-weight: bold">
+    Currently existing {{ object_type }}s:
+  </P>
+
+  {% for object in objects %}
+    <li>
+      {% if object_type == 'skill' %}
+        {{ object.skill_name }}
+      {% endif %}
+      {% if object_type == 'certification' %}
+        {{ object.certification_name }}
+      {% endif %}
+    </li>
+  {% endfor %}
+
+<script>
+
+  function get_prefixes_of_string(s){
+    var prefixes = [];
+    var i, n = s.length;
+    for (i = 0; i < n - 2; i++){
+      prefixes.push(s.substring(i, n));
+    }
+    return prefixes;
+  }
+
+  // copied from profile.js lines 242-258
+  var substringMatcher = function(strs) {
+    return function findMatches(q, cb) {
+      var matches, substrRegex;
+      // an array that will be populated with substring matches
+      matches = [];
+      // regex used to determine if a string contains the substring `q`
+      substrRegex = new RegExp(q, 'i');
+      // iterate through the pool of strings and for any string that
+      // contains the substring `q`, add it to the `matches` array
+      $.each(strs, function(i, str) {
+        if (substrRegex.test(str)) {
+          matches.push(str)
+        }
+      });
+      cb(matches);
+    }
+  }
+
+
+  var names = [];
+  {% for object in objects %}
+    {% if object_type == 'skill' %}
+      names.push("{{ object.skill_name|escapejs }}");
+    {% endif %}
+    {% if object_type == 'certification' %}
+      names.push("{{ object.certification_name|escapejs }}");
+    {% endif %}
+  {% endfor %}
+
+  // from example at http://twitter.github.io/typeahead.js/examples/
+  // var bloodhound = new Bloodhound({
+  //   datumTokenizer: get_prefixes_of_string,
+  //   queryTokenizer: Bloodhound.tokenizers.whitespace,
+  //   local: names
+  // });
+
+  $("#new_object_name").typeahead({
+    hint: false,
+    highlight: true,
+    minLength: 3
+  },
+  {
+    name: 'objects',
+    // source: bloodhound
+    source: substringMatcher(names)
+  });
+
+
+
+  setTimeout(function(){
+    $(".fadeout").fadeOut({
+      "duration": 2000
+    });
+  }, 1000);
+
+  $(function (){
+    $("#new_object_name").focus();
+  });
+</script>
+
+<style>
+  .tt-menu {
+    background-color: white;
+    margin-top: 10px;
+  }
+</style>
+
+{% endblock %}

@@ -1,0 +1,2755 @@
+id,job_name,date_created,date_updated,job_description,visible,parent_job_id,job_family_id,employer_id,is_waiting_to_be_scored,has_ever_been_scored,onet_position_id,accuracy,remap_order,remap_query,last_remap_date
+1,Registered Nurse,2017-01-11 18:17:11.986686+00,2017-10-04 19:49:26.717609+00,"The registered nurse’s duties include but are not limited to:
+Utilizing the Nursing Process in the planning and delivery of care, 
+Coordinating patient care, demonstrating safe practice, developing a nurse-patient/family relationship
+Applying clinical leadership and problem solving
+Preparing and clarifying treatment schedules for patients
+Instructing individuals, families, or other groups on topics such as health education, disease prevention, or childbirth and developing health improvement programs
+Administering medications to patients and monitoring patients for reactions or side effects
+Recording and monitoring patients' medical information and vital signs
+Performing venipuncture and administering IV fluids
+Independently collects pertinent laboratory data into the plan of care 
+Complies with all regulations and standards of regulatory and accrediting bodies
+Some experience with EHR and EMR medical software is a plus.  E.g. Epic Systems, MEDITECH software, eClinicalWorks, Cerner, etc
+Current CPR / BLS certification is a plus
+
+Requirements:
+Graduate of an accredited school of nursing
+Active state nursing license in good standing
+Must be able to assume responsibility and perform assigned tasks without direct supervision",t,,1,,f,t,902,2,,,
+18,Host/Hostess - Neighborhood/Gastropub,2017-06-16 15:54:35.162203+00,2017-08-25 14:41:39.104675+00,"~~~~~ This job is in a Neighborhood/Gastropub restaurant setting ~~~~~
+
+The host/hostess responsibilities include:
+- Greet incoming and departing guests warmly
+- Seat guests in the bar or dining area and ensure a smooth handoff to the service staff
+- Promptly answer incoming calls to the restaurant and provide appropriate service
+- Manage the flow of guests into the dining and bar areas, provide accurate wait times to incoming guests where appropriate
+- Tend to special guest needs and requests
+- Keep a professional, personable and bright demeanor 
+- Perform well under pressure in a fast-paced and possibly loud environment
+- Excellent communication, phone and customer service skills 
+- Highly organized, dependable and punctual",t,,2,,f,t,520,1,,,
+20,Line Cook - Neighborhood/Gastropub,2017-06-16 16:18:48.096129+00,2017-08-25 14:47:42.459929+00,"~~~~~ This job is in a Neighborhood/Gastropub restaurant setting ~~~~~
+
+The line cook's duty is to prepare food items in accordance with production requirements and established guest service and sustainability standards. The responsibilities include:
+
+- Operate, maintain and properly clean kitchen tools and equipment
+- Prepare food of consistent quality following recipes standards for production and portions
+- Cook and execute dishes in cooperation the kitchen team
+- Must remain calm and perform well under stressful or high volume situations
+- Must work cleanly, quickly and efficiently
+- Label and properly store prepared foods
+- Personal hygiene, dependability, and punctuality are required",t,,2,,f,t,220,1,,,
+19,Bartender - Neighborhood/Gastropub,2017-06-16 16:04:25.319927+00,2017-08-25 14:36:02.885474+00,"~~~~~ This job is in a Neighborhood/Gastropub restaurant setting ~~~~~
+
+The bartender should demonstrate genuine hospitality and deliver exceptional guest services in the bar area. Responsibilities include:
+- Mixing, garnishing and serving alcoholic and non-alcoholic drinks according to company specifications for guests at the bar and in the restaurant 
+- Helping guests choose menu items, taking orders and making guests feel taken care of during their visit
+- Keeping the bar stocked and clean while always providing friendly and attentive service 
+- Adhering to company standards in addition to relevant local, state and federal guidelines for serving alcoholic beverages
+- Handling all guest service issues in an immediate and professional manner
+- Aid in moving and installing kegs, CO2 tanks and soda mixes
+- Balance cash register at the end of each shift 
+- Maintain clean and orderly bar and cash register
+- Must have a general proficiency with computers, with the ability to process information through the POS system
+- Must be a multitasking master
+- Assist in training staff",t,,2,,f,t,93,1,,,
+44,Physical Therapy Assistant,2017-11-20 16:20:07.114048+00,2018-07-10 07:21:53.893842+00,"The Physical Therapist Assistant will primarily provide outpatient rehabilitation services in an in-home setting for the adult and geriatric population. The in-home setting could be a patient's private residence or in a patient's room in a skilled nursing facility (SNF/), in an assisted living facility, or in an independent living facility. Duties include but not limited to:
+
+- Attend and contributes to patient care, staffing conferences and other required meetings as a representative of physical therapy, under the direction of the physical therapist.
+
+- Responsible for adherence to department and patient treatment schedule, timely clinical and billing documentation requirements.
+
+- Implements patient's individualized treatment plan as established by the primary Physical Therapist.
+
+- Help organizes and facilitates treatment groups.
+
+- Works with other members of the rehabilitation team to implement programs and activities consistent with the needs and capabilities of each patient.
+
+- Assistants the Physical Therapist in performing tests, evaluations, and complex procedures.
+
+- Instructs patients, families and other caregivers in the skills and techniques of the physical therapy treatment program.
+
+- Maintains appropriate and timely documentation for all patients treated.
+
+- Cleans, maintains, identifies, and reports the need for repair of equipment, as necessary.
+
+- Ensures that patients and families receive the highest quality of service in a caring and compassionate atmosphere which recognizes the individuals' needs and rights.
+
+- Provides individualized physical therapy treatments including but not limited to:
+    -  Therapeutic exercise including aerobic capacity conditioning, balance coordination, agility training, body mechanics and postural stabilization, flexibility exercises, gait training, locomotion training, neuromotor development training, relaxation, strength, power, and endurance training, functional training, manual therapy, airway clearance techniques, use of electrotherapeutic, physical agent and mechanical modalities, falls risk interventions, Chronic Disease Management Education.",t,,6,,f,t,805,0,20,"Select distinct past_job_matches.profile_id
+from
+( select profile_id, position_title as match_title, position_description as match_description
+	from profile_experience
+	left join profile on profile.id = profile_experience.profile_id
+	where 
+	(
+		position_title like '% PTA %'
+		or position_title like 'PTA %'
+		or position_title like '% PTA'
+		or position_title like '%/PTA %'
+		or position_title like '%/PTA'
+		or position_title ilike '%physical therap%ass%'
+	)
+		--> Make sure they are not above or below this position
+	and position_title not ilike '%midwife%'
+	and position_title not ilike '%tech%'
+	and position_title not ilike '%intern%'
+	and position_title not ilike '%case manager%'
+	and position_title not ilike '%practitioner%'
+	and position_title not ilike '%lpn%'
+	and position_title not like '%RN%'
+	and position_title not ilike '%nurse%'
+	and position_title not ilike '%clinical manager%'
+	and position_title not ilike '%instructor%'
+) past_job_matches
+
+inner join 
+
+( select distinct on (profile_experience.profile_id) profile_id, position_title as current_title, position_description as current_description
+from profile_experience 
+order by profile_id asc, end_date desc NULLS FIRST, start_date desc NULLS LAST
+) current_job
+on (past_job_matches.profile_id = current_job.profile_id)
+
+inner join profile on profile.id = past_job_matches.profile_id
+
+where 
+ current_title not ilike '%student%'
+and current_title not ilike '%liaison%'
+and current_title not ilike '%practitioner%'
+and current_title not ilike '%nurse%'
+and current_title not ilike '%midwife%'
+and current_title not ilike '%tech%'
+and current_title not ilike '%intern%'
+and current_title not ilike '%extern%'
+and current_title not ilike '%school%'
+and current_title not ilike '%case manager%'
+and current_title not ilike '%clinical manager%'
+and current_title not ilike '%lpn%'
+and current_title not ilike '%hospitalist%'
+and	current_title not ilike '%lvn%'
+and	current_title not like '%RN%'
+and	current_title not like '%NP%'
+and	current_title not ilike '%sales%'
+and	current_title not ilike '%bartender%'
+and	current_title not ilike 'rn %'
+and	current_title not ilike '%cna%'
+and	current_title not ilike '%manager%'
+and	current_title not ilike '%director%'
+and	current_title not ilike '%office%'
+and	current_title not ilike '%massage therapist%'
+and	current_title not ilike '% rn %'
+",2018-07-10 07:21:53.893456+00
+46,OR Registered Nurse,2018-01-09 13:28:54.82131+00,2018-01-09 13:35:38.328905+00,"The Operating Room Nurse’s duties include but are not limited to:
+
+- Assist the physician in accomplishing the plan of care for the patient and to provide continuity between the patient care unit and the Operating Room Unit
+
+- Provides pre and post surgical teaching and follow-up to patient/family, as well as psychological support as needed.
+
+- Assists in helping the surgeon and anesthesiologist accomplish a plan of care for the patient.
+
+- Recording and monitoring patients' medical information and vital signs
+
+- Circulate cases or function as a scrub nurse as assigned.
+
+- Monitor leads, anesthesia supplies. Prepare anesthesia equipment, circuits, gasses
+
+- Assist with spinals, general anesthesia intubation and extubation.
+
+- Set up and assist with injections/venipuncture, administering IV fluids, and arterial and central line placement
+
+- Some experience with EHR and EMR medical software is a plus.  E.g. Epic Systems, Cerner, etc
+",t,10,1,55,f,t,902,1,,,
+47,CRNA,2018-01-09 13:36:15.485604+00,2018-01-09 13:37:14.347862+00,"The Nurse Anesthetist's job duties include but are not limited to:
+
+- As part of the anesthesia team, the CRNA is expected to engage in accurate, ongoing patient assessments, communicate with members of the healthcare team, and use resources efficiently to deliver optimal care.
+
+- Administer anesthetics to patients and monitor their care during surgery.
+
+- Attend to preoperative (pre-op) evaluations and postoperative (post-op) care of patients.
+
+- Administer epidurals, bier blocks, spinals, line placement and other blocks where appropriate.
+
+- Perform intubations and respond to emergencies outside the operating room as required. 
+
+- Document care thoroughly in the appropriate records.
+
+
+
+",t,34,1,55,f,t,734,1,,,
+51,"Registered Nurse - Medical Surgical ICU (SICU, MICU, MSICU)",2018-02-09 18:39:37.922684+00,2018-02-15 04:17:36.741822+00,"Duties include but are not limited to:
+- Perform emergency medical procedures, such as basic life support (BLS), advanced cardiac life support (ACLS), and other condition stabilizing interventions. 
+- Monitor patients following surgeries or other treatments
+- Administer and titrate sedatives and paralytics
+- Knowledge or familiarity with patient intubation, ventilation, extubation 
+- Assess medical conditions, including acute or chronic conditions that could result in rapid physiological deterioration or life-threatening instability
+- Care for patients in pre and post surgery
+- Assist physicians with bedside procedures including line placements
+- Document data related to patients' care including assessment results, interventions, medications, patient responses, or treatment changes.
+- Administer blood and blood product transfusions or intravenous infusions, monitoring patients for adverse reactions.
+- Assess urgent and emergent health conditions using both physiologically and technologically derived data.
+- Assess the impact of illnesses or injuries on patients' health, function, growth, development, nutrition, sleep, rest, quality of life, or family, social and educational relationships
+- Interpret information obtained from electrocardiograms (EKG) or radiographs (x-ray).
+- Obtain specimens or samples for laboratory work.
+- Some experience with EHR and EMR medical software is a plus.  E.g. Epic Systems, MEDITECH software, eClinicalWorks, Cerner, etc
+- Current  BLS / ACLS certification
+
+Requirements:
+Graduate of an accredited school of nursing
+Active state nursing license in good standing
+Must be able to assume responsibility and perform assigned tasks without direct supervision",t,,1,,f,t,902,1,,,
+14,Nurse Practitioner - Acute Care,2017-05-23 19:50:56.584399+00,2017-10-04 20:32:01.970442+00,"The acute care nurse practitioner’s duties include but are not limited to:
+Provide direct client care as well as collaborates with a licensed physician according to state guidelines 
+Perform history and physical examination, order diagnostic tests and prescribe appropriate medication and treatment
+Treat or refer patients for primary care conditions, such as headaches, hypertension, urinary tract infections, upper respiratory infections, and dermatological conditions
+Prescribe medication dosages, routes, and frequencies based on patient characteristics such as age and gender.
+Assesses vital signs, administers injections, and performs minor procedures. 
+Order, perform, or interpret the results of diagnostic tests, such as complete blood counts (CBC), electrocardiograms (EKG), and radiographs (xray).
+Develop treatment plans based on scientific rationale, standards of care, and professional practice guidelines.
+Assists in the assessment of patients' conditions. Documents results of screenings and testing in client records. 
+Educates and advises patients on pertinent health issues and helps patients manage their well-being with vaccinations and patient education
+Regulates and monitors patient flow. Prepares patients for examination, sets up examination rooms, and assists healthcare providers with procedures. 
+Ensure patient information, visit history, refer outs, lab follow-up, phone calls, and consults are carefully and completely documented in the EMR
+Identify opportunities within local communities for development of outreach activities
+Experience with EHR / EMR medical software like Epic Systems, MEDITECH software, eClinicalWorks, Cerner, etc
+
+Requirements:
+Masters of Science in Nursing MSN degree, or doctorate degree
+Certified Registered Nurse Practitioner (CRNP) certification in good standing
+A minimum of one year of recent, verifiable experience as an advanced practice nurse",f,,7,,f,t,736,1,,,
+22,Clinical Manager - Home Health,2017-07-11 18:24:02.667585+00,2017-10-13 18:03:40.510714+00,"The Home Health Clinical Manager's responsibilities include:
+
+- Implements and provides initial and ongoing home health clinical leadership development, training, and guidance
+- Acts as a role model in mentoring and coaching clinical staff.
+- Promotes sound clinical standards for clinical staff, associates and educators
+- Assumes a role in ensuring consistently high quality service outcomes and program delivery
+- Effective execution high quality clinical care
+- Identifies patient care priorities and assigns staff accordingly
+- Ensures regulatory and Community Health Accreditation Partner (CHAP) specific clinical compliance
+- Manages professional development for the clinical team
+- Coordinates clinical case load assignments and productivity expectations
+- Provides clinical oversight to Clinical staff and Associates by observing and confirming competency with assessments and supervisory visits through home visits and documentation
+- Provides clinical oversight to Clinical Educators by observing and confirming competency of trainings and in-services through classroom observation
+- Maintains fiscal responsibility through budgeting
+- Effective manages materials and supplies 
+- Develop beneficial professional relationships with coworkers and management
+- Responsible for evaluating annual competencies/benchmarks
+
+Not required but good to have:
+- OASIS-C certification
+
+
+",t,,1,,f,t,656,1,,,
+49,Director of Quality,2018-01-31 08:03:54.185533+00,2018-01-31 08:06:52.07607+00,"The Director of Quality responsibilities include:
+
+•	Strategically and operationally organizes, plans, directs and coordinates the integration of the Quality Improvement Plan throughout the Hospital.  Assures that program goals and objective are met.
+•	Establishes and maintains a written organizational Quality Improvement plan that supports a systemic, coordinated, continuous improvement approach to the delivery of patient care and services by all medical and hospital staff.
+•	Assures that the plan meets the standards and requirements of governing bodies, review agencies 
+•	Provides an oversight and accountability to assure that Quality Improvement efforts are managed and reported according to the plan.  Assures timely notification of significant quality issues through appropriately designated committee and administrative channels.
+•	Assures appropriate action plans are developed, implemented, and monitored and demonstrates improvement.  Provides reports as requested.",f,,3,,f,t,872,0,,,
+36,Hospitalist,2017-09-18 07:55:18.784144+00,2018-03-02 22:46:07.177691+00,"The Hospitalist's duties include but are not limited to:
+
+- Diagnose, treat and provide continuous care for hospital inpatients.
+
+- Prescribe medications or treatment regimen to hospital inpatients.
+
+- Admit patients to hospital stays.
+
+- Order or interpret the results of tests such as laboratory tests and radiographs.
+
+- Refer patients to medical specialists, social services or other professionals as appropriate.
+
+- Participate in continuing education activities to maintain or enhance knowledge and skills.
+
+- Attend inpatient consultations in areas of specialty.
+
+- Supervises and provides teaching services for residents, medical students, and other trainees, as designated by the Department Chair
+
+- Properly executes/prepares documentation that pertains to medical records, billing and patent coding
+
+- Write patient discharge summaries and send them to primary care physicians.
+
+- Conduct discharge planning and discharge patients.
+
+- Communicate with patients' primary care physicians upon admission, when treatment plans change or at discharge to maintain continuity and quality care.
+
+Requirements:
+- MD or DO from an accredited program, completion of 3 years of training with an approved residency in internal medicine or family medicine.
+
+- NP or PA who have graduated from a Nurse Practitioner program or  Physician Assistant program accredited by the appropriate agencies.
+
+- Certification as a Nurse Practitioner or Physician Assistant by the appropriate boards.  A current and active NP or PA license. 
+
+- A current and active DEA with for Schedule II-V and all independent prescriptive authority therein.  Must hold a valid ACLS certificate.
+
+- ABIM, ABFP or Focused Practice in Hospital Medicine board certification or active participation in the Board certification process for either of these designations.
+
+- ECFMG evaluation and USMLE Step II certification for internationally-trained medical graduates required. 
+
+Preferred:
+-Prior hospitalist, internal medicine or family medicine experience is preferred.
+",t,,4,,f,t,519,1,,,
+45,Registered Nurse - Case Manager,2017-12-08 17:18:59.318947+00,2018-07-10 07:19:17.79095+00,"This position is a Nurse Case Manager position in a hospital setting. 
+The RN Case Manager’s duties include but are not limited to:
+
+- Utilizes the Nursing Process by performing needs assessments, evaluating levels of care, developing and implementing appropriate plans of care for clients and families.
+
+- To coordinate services, programs, and personnel necessary to facilitate the patient through the continuum of care.
+
+- Facilitates and insures the achievement of goals set by the Case Management and/or Performance Improvement programs such as quality patient care, timely and appropriate resource use and minimal financial risk.
+
+- Collaborates closely with the health Care Team to provide a coordinated experience to patients and families.
+
+- Documents and monitors client’s medical information, as well as educates clients and caretakers.
+
+Requirements:	 
+- Graduate of an accredited school of nursing
+- Active state nursing license in good standing
+- Must be able to assume responsibility and perform assigned tasks safely without direct supervision
+
+",f,,1,,f,t,902,1,13,"with current_job as 
+(
+select distinct on (profile_experience.profile_id) profile_id, position_title as current_title, position_description as current_description
+from profile_experience 
+order by profile_id asc, end_date desc NULLS FIRST, start_date desc NULLS LAST
+)
+select distinct profile_id
+from current_job left join profile on current_job.profile_id = profile.id
+where 
+(
+	current_title ilike '%case%manage%'
+	or current_title ilike '%care%manage%'
+	or current_title ilike '%coordinator%'
+)
+and
+(	current_title like '%RN%'
+	or current_title ilike '%nurse%'
+	or current_title like '% rn%'
+	or current_title like 'rn'
+)
+and current_title not ilike '%clinical manager%'
+and current_title not ilike '%nurse manager%'
+and current_title not ilike '% rn manager%'
+and current_title not ilike 'rn manager%'
+and current_title not ilike '%/rn manager%'
+and current_title not ilike '%unit manager%'
+and current_title not ilike '%student%'
+and current_title not ilike '%assistant%'
+and current_title not ilike '%liaison%'
+and current_title not ilike '% nicu %'
+and current_title not ilike '%/nicu%'
+and current_title not ilike 'nicu %'
+and current_title not ilike '%pacu%'
+and current_title not ilike '%coordinator%'
+and current_title not ilike '%practitioner%'
+and current_title not ilike '%np%'
+and current_title not ilike '%intern%'
+and current_title not ilike '%dialysis%'
+and current_title not ilike '%extern%'
+and current_title not ilike '%assistant%'
+and current_title not ilike '%nicu%'
+and current_title not ilike '%tech%'
+and current_title not ilike '%director%'
+and current_title not ilike '%school%'
+and current_title not ilike '% icu %'
+and current_title not ilike 'icu %'
+and current_title not ilike 'icu/%'
+and current_title not ilike '%critical care%'
+and current_title not ilike '%administrat%'
+and current_title not ilike '%flu%'
+and current_title not ilike '%rehab%'
+and current_title not ilike '%midwife%'
+and current_title not ilike '%psych%'
+and current_title not ilike '%intern%'
+and current_title not ilike '%extern%'
+and current_title not ilike '%dialysis%'
+and current_title not ilike '%aide%'
+and current_title not ilike '%oncology%'
+and current_title not ilike '%paralegal%'
+and current_title not ilike '%quality%'
+and current_title not ilike '%consultant%'
+and current_title not ilike '%utilization%'
+and current_title not ilike '%labor%'
+and current_title not ilike '%transport%'
+and current_title not ilike '%instructor%'
+and current_title not ilike '%educator%'
+and current_title not ilike '%faculty%'
+and current_title not ilike '%nicu%'
+and current_title not ilike '%practicum%'
+and current_title not ilike '%nurse anesthetist%'
+and current_title not ilike '%crna%'
+and current_title not ilike '%paralegal%'
+and current_title not ilike '%advice%'
+and current_title not ilike '%behavior%'
+and current_title not ilike '%cath%lab%'
+and current_title not ilike '%ccu%'
+and current_title not ilike '%corporate%'
+and current_title not ilike '%correctional%'
+and current_title not like '% ECT %'
+and current_title not like 'ECT %'
+and current_title not ilike '%Electrophysiology%'",2018-07-10 07:19:17.790568+00
+56,Caregiver / Direct Care Worker / Aide,2018-04-24 14:45:27.221936+00,2018-07-10 07:19:26.284122+00,"The Caregiver's responsibilities include:
+
+- Assist clients with personal care, including dressing, mobility, administering medication, personal hygiene, eating and transporting to doctor’s appointments
+- Monitor patient medications and update health charts
+- Maintain open communication between families and health care professionals regarding client’s medical and emotional condition
+- Document and report any changes in client’s health status
+- Ensure highest client safety and well-being
+- Experience working with the elderly is a plus
+- Excellent written and oral communication 
+- Experience and knowledge working with patients who have chronic and acute conditions
+- Ability to problem solve quickly
+
+- High school diploma required (college degree preferred)
+- Current and valid caregiver certification
+- Current and valid first aid and CPR certification",t,,5,,f,t,786,0,14,"select distinct profile_id from
+( select distinct on (profile_experience.profile_id) profile_id, position_title as current_title, position_description as current_description
+from profile_experience 
+order by profile_id asc, end_date desc NULLS FIRST, start_date desc NULLS LAST
+) current_job
+left join profile on current_job.profile_id = profile.id
+where 
+	(
+	current_title like '%care%giver%'
+	or current_title ilike '%direct%care%'
+	)
+and not current_title ilike '%registered%nurse%'
+and not current_title ilike '%home%health%aide%'
+and not current_title ilike '%director%'
+and not current_title like '%RN%'
+and not current_title like '%nurse%'
+and job_id not in (53, 54)",2018-07-10 07:19:26.283719+00
+23,Clinical Manager - Operating Room,2017-07-11 18:31:37.50277+00,2017-10-09 05:36:02.559258+00,"The Operating Room Clinical Manager's responsibilities include:
+
+- Implements and provides initial and ongoing operating room clinical leadership development, training, and guidance
+- Acts as a role model in mentoring and coaching clinical leaders.
+- Promotes sound clinical standards for clinical managers, associates and educators
+- Serves as a clinical resource to service office Directors, Division Directors and clinical leaders
+- Assumes a role in assuring consistently high quality service outcomes and program delivery
+- Accountable for supporting clinical leaders in the operating room
+- Effective execution high quality clinical care
+- Ensures regulatory and CHAP specific clinical compliance
+- Maintains professional development for the clinical team
+- Provides clinical oversight to Clinical Managers and Associates by observing and confirming competency with assessments and supervisory visits 
+- Provides clinical oversight to Clinical Educators by observing and confirming competency of trainings and in-services through classroom observation",f,,1,,f,t,656,1,,,
+21,Clinical Manager - Pediatrics,2017-07-11 17:54:37.40496+00,2017-10-13 17:04:24.681776+00,"The Pediatric Clinical Manager's responsibilities include:
+
+- Implements and provides initial and ongoing pediatric clinical leadership development, training, and guidance
+- Acts as a role model in mentoring and coaching clinical staff
+- Promotes sound clinical standards for clinical staff, associates and educators
+- Assumes a role in ensuring consistently high quality service outcomes and program delivery
+- Effective execution high quality clinical care
+- Identifies patient care priorities and assigns staff accordingly
+- Ensures regulatory compliance
+- Manages professional development for the clinical team
+- Coordinates clinical case load assignments and productivity expectations
+- Provides clinical oversight to Clinical staff and Associates by observing and confirming competency with assessments and supervisory visits through home visits and documentation
+- Provides clinical oversight to Clinical Educators by observing and confirming competency of trainings and in-services through classroom observation
+- Maintains fiscal responsibility through budgeting
+- Effective manages materials and supplies 
+- Develop beneficial professional relationships with coworkers and management
+- Responsible for evaluating annual competencies/benchmarks
+
+
+
+
+",f,,1,,f,t,656,1,,,
+52,Registered Nurse - Office,2018-03-05 22:35:36.598658+00,2018-03-06 01:55:56.73563+00,"The office registered nurse’s duties include but are not limited to:
+
+- Utilizing the Nursing Process in the planning and delivery of care.
+- Coordinating patient care, demonstrating safe practice, developing a nurse-patient/family relationship.
+- Applying clinical leadership and problem solving.
+- Preparing and clarifying treatment schedules for patients.
+- Administering medications to patients and monitoring patients for reactions or side effects.
+- Instructing individuals, families, or other groups on topics such as health education, disease prevention, or childbirth and developing health improvement programs.
+- Recording and monitoring patients' medical information and vital signs.
+- Performing venipuncture and administering IV fluids.
+- Independently collects pertinent laboratory data into the plan of care.
+- Complies with all regulations and standards of regulatory and accrediting bodies.
+- Some experience with EHR and EMR medical software is a plus.  E.g. Epic Systems, MEDITECH software, eClinicalWorks, Cerner, etc
+- Current CPR / BLS certification is a plus
+
+Requirements:
+- Graduate of an accredited school of nursing
+- Active state nursing license in good standing
+- Must be able to assume responsibility and perform assigned tasks without direct supervision",f,,1,,f,t,902,0,,,
+12,Nurse Practitioner - Pediatric,2017-05-23 19:46:37.986862+00,2018-03-19 22:28:50.341231+00,"The pediatric nurse practitioner’s duties include but are not limited to:
+Provide direct client care as well as collaborates with a licensed physician according to state guidelines 
+Perform history and physical examination, order diagnostic tests and prescribe appropriate medication and treatment
+Treat or refer patients for primary care conditions, such as headaches, hypertension, urinary tract infections, upper respiratory infections, and dermatological conditions
+Prescribe medication dosages, routes, and frequencies based on patient characteristics such as age and gender.
+Assesses vital signs, administers injections, and performs minor procedures. 
+Order, perform, or interpret the results of diagnostic tests, such as complete blood counts (CBC), electrocardiograms (EKG), and radiographs (xray).
+Develop treatment plans based on scientific rationale, standards of care, and professional practice guidelines.
+Assists in the assessment of patients' conditions. Documents results of screenings and testing in client records. 
+Educates and advises patients on pertinent health issues and helps patients manage their well-being with vaccinations and patient education
+Regulates and monitors patient flow. Prepares patients for examination, sets up examination rooms, and assists healthcare providers with procedures. 
+Ensure patient information, visit history, refer outs, lab follow-up, phone calls, and consults are carefully and completely documented in the EMR
+Identify opportunities within local communities for development of outreach activities
+Experience with EHR / EMR medical software like Epic Systems, MEDITECH software, eClinicalWorks, Cerner, etc
+
+Requirements:
+Masters of Science in Nursing MSN degree, or doctorate degree
+Certified Registered Nurse Practitioner (CRNP) certification in good standing
+A minimum of one year of recent, verifiable experience as an advanced practice nurse",f,,7,,f,t,736,1,,,
+59,Registered Nurse - Travel,2018-06-26 20:22:44.718825+00,2018-07-10 07:24:12.312344+00,"The registered nurse’s duties include but are not limited to:
+- Utilizing the Nursing Process in the planning and delivery of care, 
+- Coordinating patient care, demonstrating safe practice, developing a nurse-patient/family relationship
+- Applying clinical leadership and problem solving
+- Preparing and clarifying treatment schedules for patients
+- Instructing individuals, families, or other groups on topics such as health education, disease prevention, or childbirth and - developing health improvement programs
+- Administering medications to patients and monitoring patients for reactions or side effects
+- Recording and monitoring patients' medical information and vital signs
+- Performing venipuncture and administering IV fluids
+- Independently collects pertinent laboratory data into the plan of care 
+- Complies with all regulations and standards of regulatory and accrediting bodies
+- Some experience with EHR and EMR medical software is a plus.  E.g. Epic Systems, MEDITECH software, eClinicalWorks, Cerner, etc
+- Current CPR / BLS certification is a plus
+
+Requirements:
+Graduate of an accredited school of nursing
+Active state nursing license in good standing
+Must be able to assume responsibility and perform assigned tasks without direct supervision",t,,1,,f,t,902,1,21,"Select distinct past_job_matches.profile_id
+from
+( select profile_id, position_title as match_title, position_description as match_description,
+start_date as match_start, end_date as match_end 
+	from profile_experience
+	left join profile on profile.id = profile_experience.profile_id
+	where 
+	(
+		position_title ilike '%travel%nurse%'
+		or position_title ilike '%travel%rn%'
+		or position_title ilike '%rn%travel%'
+		or position_title ilike '%nurse%travel%'
+		or position_description ilike '%travel nurs%'
+		or position_description ilike '%travel rn%'
+		or position_description ilike '%travel agency%'
+		or position_description ilike '%travel company%'
+	)
+		--> Make sure they are not below this position
+	and position_title not ilike '%lpn%'
+	and position_title not ilike '%licensed%nurse%'
+	and position_title not ilike '%lvn%'
+) past_job_matches
+
+inner join 
+
+( select distinct on (profile_experience.profile_id) profile_id, position_title as current_title, position_description as current_description
+from profile_experience 
+order by profile_id asc, end_date desc NULLS FIRST, start_date desc NULLS LAST
+) current_job
+on (past_job_matches.profile_id = current_job.profile_id)
+
+inner join profile on profile.id = past_job_matches.profile_id
+
+where 
+current_title not ilike '%clinical manager%'
+and current_title not ilike '%nurse manager%'
+and current_title not ilike '%practitioner%'
+and current_title not ilike '%np%'
+and current_title not ilike '%anesthetist%'
+and current_title not ilike '%crna%'
+and current_title not ilike '%advanced practice%'
+and current_title not ilike '%aprn%'
+and current_title not like '%DON%'
+and current_title not ilike '%licensed%nurse%'
+and current_title not ilike '%lpn%'
+and current_title not ilike '%lvn%'
+",2018-07-10 07:24:12.311947+00
+31,Line Cook - Corporate Casual,2017-08-17 20:36:28.742984+00,2017-09-08 18:38:36.192962+00,"~~~~~ This job is in a Corporate Casual restaurant setting (e.g. TGI Fridays, Texas Roadhouse, Applebee's) ~~~~~
+
+The line cook's duty is to prepare food items in accordance with production requirements and established guest service and sustainability standards. The responsibilities include:
+
+- Operate, maintain and properly clean kitchen tools and equipment
+- Prepare food of consistent quality following recipes standards for production and portions
+- Cook and execute dishes in cooperation the kitchen team
+- Must remain calm and perform well under stressful or high volume situations
+- Must work cleanly, quickly and efficiently
+- Label and properly store prepared foods
+- Personal hygiene, dependability, and punctuality are required",f,,2,,f,t,220,1,,,
+53,Home Health Aide,2018-03-15 17:08:34.904269+00,2018-07-10 07:06:19.795047+00,"The Home Health Aide's duties include but are not limited to:
+
+- Assist with the daily tasks of elderly, mentally disabled, chronically ill, or physically challenged clients. 
+
+- Aides work in the clients' homes and may visit several clients a day or be assigned to one specific client. 
+
+- Home Health Aide generally are responsible for light cleaning, cooking, running errands, and doing laundry, as well as assisting clients with bathing, showering, grooming, and other personal hygiene tasks. 
+
+- Aides also engage clients in activities like reading, talking, and playing games. 
+
+- Additionally, home health aides might consult with a client's family members to address their concerns regarding the client's health, nutrition, and overall well-being.",t,,5,,f,t,518,1,3,"select distinct past_job_matches.profile_id from
+( select profile_id, position_title as match_title, position_description as match_description
+	from profile_experience
+	left join profile on profile.id = profile_experience.profile_id
+	where 
+	(
+	position_title like '%HHA%'
+	or position_title ilike '%home%aide%'
+	)
+	and not position_title ilike '%registered%nurse%'
+		--> Make sure they are not above or below this position
+	and position_title not ilike '%clinical manager%'
+	and position_title not ilike '%nurse manager%'
+	and position_title not ilike '%case manager%'
+	and position_title not ilike '%care manager%'
+	and cast(start_date as date) > '2006-01-01'
+) past_job_matches
+
+inner join 
+
+( select distinct on (profile_experience.profile_id) profile_id, position_title as current_title, position_description as current_description
+from profile_experience 
+order by profile_id asc, end_date desc NULLS FIRST, start_date desc NULLS LAST
+) current_job
+on (past_job_matches.profile_id = current_job.profile_id)
+where 
+current_title not ilike '%clinical manager%'
+and current_title not ilike '%nurse manager%'
+and current_title not ilike '%care manager%'
+and	
+(
+current_title like '%HHA%'
+or current_title ilike '%home%aide%'
+)
+and not current_title ilike '%registered%nurse%'",2018-07-10 07:06:19.794515+00
+7,Registered Nurse - Medical Surgical,2017-03-07 19:12:29.756218+00,2018-07-10 07:09:42.37636+00,"The med/surge registered nurse’s duties include but are not limited to:
+
+- Utilizing the Nursing Process in the planning and delivery of care
+- Coordinating patient care, and establishing a positive nurse-patient/family relationship
+- Applying clinical leadership and problem solving
+- Performing technical duties as directed by an RN/LPN, such as point of care testing, EKG’s, bladder scanning, and foley catheter insertion and care
+- Has experience with tracheostomy suctioning, wound care treatment including wound vac, managing surgical drains, administering tube feedings, managing chest tubes, and performing physical assessments
+- Instructing individuals, families, or other groups on topics such as health education, disease prevention
+- Administering medications to patients and monitoring for reactions or side effects
+- Administering IV fluids and maintaining central lines, midlines, PICC lines, and conventional peripheral lines
+- Administering blood/blood product transfusions, TPN, and analgesics (PCA pumps) and monitoring patients for adverse reactions
+- Performing venipunctures and independently collecting pertinent laboratory data into the plan of care
+- Demonstrating safe practices by complying with all regulations and standards of regulatory and accrediting bodies
+- Documenting accurately and monitoring patient’s medical information and vital signs
+
+
+Requirements:
+- Graduate of an accredited school of nursing
+- Active state nursing license in good standing
+- Must be able to assume responsibility and perform assigned tasks without direct supervision
+- Current CPR / BLS certification",t,,1,,f,t,902,1,6,"Select distinct past_job_matches.profile_id
+from
+( select profile_id, position_title as match_title, position_description as match_description,
+start_date as match_start, end_date as match_end 
+	from profile_experience
+	left join profile on profile.id = profile_experience.profile_id
+	where 
+	(
+		position_title ilike '%med%surg'
+		or position_description ilike '%medical surgical%'
+		or position_description ilike '%medical/surgical%'
+		or position_description ilike '%med/surg%'
+		or position_description ilike '%med surg%'
+		or position_description ilike '%medi/surg%'
+		or position_description ilike '%medi surg%'
+	)
+	and
+	(	position_title like '%RN%'
+		or position_title ilike '%nurse%'
+		or position_title like '% rn%'
+		or position_title like 'rn'
+	)
+		--> Make sure they are not above or below this position
+	and position_title not ilike '%clinical manager%'
+	and position_title not ilike '%nurse manager%'
+	and position_title not ilike '%case manager%'
+	and position_title not ilike '%nurse anesthetist%'
+	and position_title not ilike '%crna%'
+	and position_title not ilike '%practitioner%'
+	and position_title not ilike '%np%'
+	and position_title not ilike '%flu%'
+	and position_title not ilike '%tech%'
+	and position_title not ilike '%rehab%'
+	and position_title not ilike '%student%'
+	and position_title not ilike '%midwife%'
+	and position_title not ilike '%ccu%'
+	and position_title not ilike '%cticu%'
+	and position_title not ilike '%cvicu%'
+	and position_title not ilike '%psych%'
+	and position_title not ilike '%intern%'
+	and position_title not ilike '%dialysis%'
+	and position_title not ilike '%licensed%'
+	and position_title not ilike '%lpn%'
+	and position_title not ilike '%home%'
+	and position_title not ilike '%aide%'
+	and position_title not ilike '%pediatri%'
+	and position_title not ilike '%oncology%'
+	and position_title not ilike '%paralegal%'
+	and position_title not ilike '%consultant%'
+	and position_title not ilike '%extern%'
+	and position_title not ilike '%utilization%'
+	and position_title not ilike '%assistant%'
+	and position_title not ilike '%labor%'
+	and position_title not ilike '%instructor%'
+	and position_title not ilike '%educator%'
+	and position_title not ilike '%school%'	
+	and position_title not ilike '%faculty%'
+	and position_title not ilike '%nicu%'
+	and position_title not ilike '%practicum%'
+	and position_title not ilike '%coordinator%'
+	and position_description not ilike '%school%'	
+	and position_description not ilike '%practicum%'
+	and position_description not ilike '%clinical experience%'
+	and position_description not like '% ER%'
+	and position_description not like 'ER %'
+	and position_description not like '% ED%'
+	and position_description not like 'ED %'
+	and position_description not ilike '%emergency room%'
+) past_job_matches
+
+inner join 
+
+( select distinct on (profile_experience.profile_id) profile_id, position_title as current_title, position_description as current_description
+from profile_experience 
+order by profile_id asc, end_date desc NULLS FIRST, start_date desc NULLS LAST
+) current_job
+on (past_job_matches.profile_id = current_job.profile_id)
+
+inner join profile on profile.id = past_job_matches.profile_id
+
+where 
+current_title not ilike '%clinical manager%'
+and current_title not ilike '%nurse manager%'
+and current_title not ilike '%student%'
+and current_title not ilike '%assistant%'
+and current_title not ilike '%liaison%'
+and current_title not ilike '% nicu %'
+and current_title not ilike '%/nicu%'
+and current_title not ilike 'nicu %'
+and current_title not ilike '%pacu%'
+and current_title not ilike '%coordinator%'
+and current_title not ilike '%practitioner%'
+and current_title not ilike '%np%'
+and current_title not ilike '%intern%'
+and current_title not ilike '%dialysis%'
+and current_title not ilike '%extern%'
+and current_title not ilike '%assistant%'
+and current_title not ilike '%nicu%'
+and current_title not ilike '%tech%'
+and current_title not ilike '%director%'
+and current_title not ilike '%school%'
+and current_title not ilike '% icu %'
+and current_title not ilike 'icu %'
+and current_title not ilike 'icu/%'
+and current_title not ilike '%icu %'
+and current_title not ilike '%critical care%'
+and current_title not ilike '%case manager%'
+and current_title not ilike '%administrat%'
+and current_title not ilike '%hospice%'
+and current_title not ilike '%flu%'
+and current_title not ilike '%rehab%'
+and current_title not ilike '%midwife%'
+and current_title not ilike '%psych%'
+and current_title not ilike '%intern%'
+and current_title not ilike '%examiner%'
+and current_title not ilike '%extern%'
+and current_title not ilike '%dialysis%'
+and current_title not ilike '%licensed%'
+and current_title not ilike '%lpn%'
+and current_title not ilike '%home%'
+and current_title not ilike '%aide%'
+and current_title not ilike '%oncology%'
+and current_title not ilike '%paralegal%'
+and current_title not ilike '%consultant%'
+and current_title not ilike '%utilization%'
+and current_title not ilike '%labor%'
+and current_title not ilike '%transport%'
+and current_title not ilike '%instructor%'
+and current_title not ilike '%educator%'
+and current_title not ilike '%faculty%'
+and current_title not ilike '%occupational%'
+and current_title not ilike '%office%'
+and current_title not ilike '%nicu%'
+and current_title not ilike '%practicum%'
+and current_title not ilike '%coordinator%'
+and current_title not ilike '%nurse anesthetist%'
+and current_title not ilike '%crna%'
+and current_title not ilike '%post-op%'
+and current_title not ilike '%post- op%'
+and current_title not ilike '%post op%'
+and current_title not ilike '%pre-op%'
+and current_title not ilike '%pre- op%'
+and current_title not ilike '%pre op%'
+and current_title not ilike '%peri-op%'
+and current_title not ilike '%periop%'
+
+and current_description not ilike '%post-op%'
+and current_description not ilike '%post- op%'
+and current_description not ilike '%post op%'
+and current_description not ilike '%pre-op%'
+and current_description not ilike '%pre- op%'
+and current_description not ilike '%pre op%'
+and current_description not ilike '%peri-op%'
+and current_description not ilike '%periop%'
+
+and current_title not ilike 'peds %'
+and current_title not ilike '% peds %'
+and current_title not ilike '% peds'
+and current_title not ilike 'peds %'
+and current_title not ilike '%pediatri%'
+and current_title not ilike '%paralegal%'
+and current_title not ilike '%admission%'
+and current_title not ilike '%advice%'
+and current_title not ilike '%behavior%'
+and current_title not ilike '%ccu%'
+and current_title not ilike '%corporate%'
+and current_title not ilike '%correctional%'
+and current_title not like '% ECT %'
+and current_title not like 'ECT %'
+and current_title not ilike '%Electrophysiology%'
+and current_title not ilike '%community%'
+and current_title not ilike '%public health%'
+and current_title not like '%OR%'
+and current_title not ilike '%advanced practice%'
+and current_title not ilike '%aprn%'
+and current_title not ilike '%emergency%'
+and current_description not ilike '%emergency%'
+and current_title not like 'ER %'
+and current_title not like '% ER %'
+and current_title not like '% ER'
+and current_title not ilike '%(er)%'
+and current_title not like 'ED %'
+and current_title not like '% ED %'
+and current_title not like '% ED'
+and current_title not like '%review%'
+and current_title not like '%health coach%'
+and current_description not like '%labor and delivery%'
+and current_description not like '%labor & delivery%'
+and current_description not like '%l&d%'
+and current_description not like '%l & d%'
+and current_description not like '%partum%'
+and current_title not like '%DON%'
+and current_title not like '%ICU%'
+and current_description not ilike '%school%'	
+and current_description not ilike '%practicum%'
+and current_description not ilike '%clinical experience%'
+and current_description not like '% ER%'
+and current_description not like '%ICU%'
+and current_title not ilike '%health coach%'
+and current_title not ilike '%licensed%nurse%'
+and current_title not ilike '%lpn%'
+and current_title not ilike '%home%'
+and current_title not ilike '%lvn%'
+and current_title not ilike '%triage%'
+and current_title not ilike '%travel%'
+and	
+	(
+	current_title like '%RN%'
+	or current_title ilike '%nurse%'
+	or current_title like '% rn%'
+	or current_title like 'rn%'
+	or current_title like 'rn'
+	)",2018-07-10 07:09:42.375994+00
+15,Nurse Practitioner - Psychiatric / Mental Health,2017-05-23 19:57:48.432111+00,2018-03-19 22:52:09.8644+00,"The mental health nurse practitioner’s duties include but are not limited to:
+Provide direct client care as well as collaborates with a licensed physician according to state guidelines 
+Perform history and physical examination, order diagnostic tests and prescribe appropriate medication and treatment
+Treat or refer patients for primary care conditions, such as headaches, hypertension, urinary tract infections, upper respiratory infections, and dermatological conditions
+Prescribe medication dosages, routes, and frequencies based on patient characteristics such as age and gender.
+Assesses vital signs, administers injections, and performs minor procedures. 
+Order, perform, or interpret the results of diagnostic tests, such as complete blood counts (CBC), electrocardiograms (EKG), and radiographs (xray).
+Develop treatment plans based on scientific rationale, standards of care, and professional practice guidelines.
+Assists in the assessment of patients' conditions. Documents results of screenings and testing in client records. 
+Educates and advises patients on pertinent health issues and helps patients manage their well-being with vaccinations and patient education
+Regulates and monitors patient flow. Prepares patients for examination, sets up examination rooms, and assists healthcare providers with procedures. 
+Ensure patient information, visit history, refer outs, lab follow-up, phone calls, and consults are carefully and completely documented in the EMR
+Identify opportunities within local communities for development of outreach activities
+Experience with EHR / EMR medical software like Epic Systems, MEDITECH software, eClinicalWorks, Cerner, etc
+
+Requirements:
+Masters of Science in Nursing MSN degree, or doctorate degree
+Certified Registered Nurse Practitioner (CRNP) certification in good standing
+A minimum of one year of recent, verifiable experience as an advanced practice nurse",f,,7,,f,t,736,1,,,
+50,Registered Nurse - Emergency Room,2018-02-09 08:47:11.060234+00,2018-07-10 07:04:26.518414+00,"The ER nurse's responsibilities include:
+
+- Provides professional nursing care to assigned patients in the emergency room.
+ 
+- Triages each patient and determines priority of care based on physical, psychological, and social needs. 
+
+-Records patient histories, performs various diagnostic tests, administers medications, and develops patient care plans in conjunction with other medical professionals. 
+
+- Assists physicians during examinations and emergency procedures, operating and monitoring medical equipment as necessary. 
+
+- Observes patients' progress, records observations in patient medical record, and updates attending physician directly when necessary. 
+",t,,1,,f,t,902,1,1,"Select distinct past_job_matches.profile_id
+from
+( select profile_id, position_title as match_title, position_description as match_description,
+start_date as match_start, end_date as match_end 
+	from profile_experience
+	left join profile on profile.id = profile_experience.profile_id
+	where 
+	(
+	position_title like '% ER%'
+	or position_title like 'ER %'
+	or position_title like '%/ER %'
+	or position_title like '%,ER%'
+	or position_title like '%-ER%'
+	or position_title like '% ED%'
+	or position_title like 'ED %'
+	or position_title like '%/ED %'
+	or position_title like '%,ED%'
+	or position_title like '%-ED%'
+	or position_title ilike '%emergency room%'
+	or position_title ilike '%emergency department%'
+	or position_title ilike '%trauma%'
+	or position_description like '% ER%'
+	or position_description like 'ER %'
+	or position_description like '%/ER %'
+	or position_description like '%,ER%'
+	or position_description like '%-ER%'
+	or position_description like '% ED%'
+	or position_description like 'ED %'
+	or position_description like '%/ED %'
+	or position_description like '%,ED%'
+	or position_description like '%-ED%'
+	or position_description ilike '%emergency room%'
+	or position_description ilike '%emergency department%'
+	or position_description ilike '%trauma%'
+	)
+	and
+	(	position_title like '%RN%'
+		or position_title ilike '%nurse%'
+		or position_title like '% rn%'
+		or position_title like 'rn'
+	)
+		--> Make sure they are not above or below this position
+	and not position_description ilike '%trauma hospital%'
+	and not position_description ilike '%trauma center%'
+	and position_title not ilike '%clinical manager%'
+	and position_title not ilike '%nurse manager%'
+	and position_title not ilike '%volunteer%'
+	and position_title not ilike '%case manager%'
+	and position_title not ilike '%nurse anesthetist%'
+	and position_title not ilike '%crna%'
+	
+	and position_title not ilike '%nurse anesthetist%'
+	and position_title not ilike '%crna%'
+	and position_title not ilike '%post-op%'
+	and position_title not ilike '%post- op%'
+	and position_title not ilike '%post op%'
+	and position_title not ilike '%pre-op%'
+	and position_title not ilike '%pre- op%'
+	and position_title not ilike '%pre op%'
+	and position_title not ilike '%peri-op%'
+	and position_title not ilike '%periop%'
+	
+	and position_description not ilike '%post-op%'
+	and position_description not ilike '%post- op%'
+	and position_description not ilike '%post op%'
+	and position_description not ilike '%pre-op%'
+	and position_description not ilike '%pre- op%'
+	and position_description not ilike '%pre op%'
+	and position_description not ilike '%peri-op%'
+	and position_description not ilike '%periop%'
+	
+	and position_title not ilike '%practitioner%'
+	and position_title not ilike '%np%'
+	and position_title not ilike '%flu%'
+	and position_title not ilike '%tech%'
+	and position_title not ilike '%rehab%'
+	and position_title not ilike '%student%'
+	and position_title not ilike '%midwife%'
+	and position_title not ilike '%intern%'
+	and position_title not ilike '%dialysis%'
+	and position_title not ilike '%licensed%'
+	and position_title not ilike '%lpn%'
+	and position_title not ilike '%aide%'
+	and position_title not ilike '%paralegal%'
+	and position_title not ilike '%consultant%'
+	and position_title not ilike '%extern%'
+	and position_title not ilike '%utilization%'
+	and position_title not ilike '%assistant%'
+	and position_title not ilike '%labor%'
+	and position_title not ilike '%school%'	
+	and position_title not ilike '%faculty%'
+	and position_description not ilike '%school%'	
+	and position_description not ilike '%practicum%'
+	and position_title not ilike '%practicum%'
+	and position_description not ilike '%clinical experience%'
+	and 
+	( 
+		cast(end_date as date) >= '2008-01-01' 
+		or end_date is NULL
+	)
+) past_job_matches
+
+inner join 
+
+( select distinct on (profile_experience.profile_id) profile_id, position_title as current_title, position_description as current_description
+from profile_experience 
+order by profile_id asc, end_date desc NULLS FIRST, start_date desc NULLS LAST
+) current_job
+on (past_job_matches.profile_id = current_job.profile_id)
+
+inner join profile on profile.id = past_job_matches.profile_id
+
+where 
+current_title not ilike '%clinical manager%'
+and current_title not ilike '%nurse manager%'
+and current_title not ilike '%student%'
+and current_title not ilike '%assistant%'
+and current_title not ilike '%liaison%'
+
+and current_title not ilike '%pacu%'
+and current_title not ilike '%coordinator%'
+and current_title not ilike '%practitioner%'
+and current_title not ilike '%np%'
+and current_title not ilike '%dialysis%'
+and current_title not ilike '%assistant%'
+and current_title not ilike '%tech%'
+and current_title not ilike '%director%'
+and current_title not ilike '%school%'
+and current_title not ilike '%case manager%'
+and current_title not ilike '%administrat%'
+and current_title not ilike '%hospice%'
+and current_title not ilike '%flu%'
+and current_title not ilike '%rehab%'
+and current_title not ilike '%midwife%'
+and current_title not ilike '%examiner%'
+and current_title not ilike '%dialysis%'
+and current_title not ilike '%licensed%'
+and current_title not ilike '%lpn%'
+and current_title not ilike '%home%'
+and current_title not ilike '%aide%'
+and current_title not ilike '%paralegal%'
+and current_title not ilike '%consultant%'
+and current_title not ilike '%utilization%'
+and current_title not ilike '%labor%'
+and current_title not ilike '%transport%'
+and current_title not ilike '%occupational%'
+and current_title not ilike '%office%'
+and current_title not ilike '%practicum%'
+and current_title not ilike '%nurse anesthetist%'
+and current_title not ilike '%crna%'
+and current_title not ilike '%post-op%'
+and current_title not ilike '%post- op%'
+and current_title not ilike '%post op%'
+and current_title not ilike '%pre-op%'
+and current_title not ilike '%pre- op%'
+and current_title not ilike '%pre op%'
+and current_title not ilike '%peri-op%'
+and current_title not ilike '%periop%'
+
+and current_description not ilike '%post-op%'
+and current_description not ilike '%post- op%'
+and current_description not ilike '%post op%'
+and current_description not ilike '%pre-op%'
+and current_description not ilike '%pre- op%'
+and current_description not ilike '%pre op%'
+and current_description not ilike '%peri-op%'
+and current_description not ilike '%periop%'
+
+and current_title not ilike '%paralegal%'
+and current_title not ilike '%admission%'
+and current_title not ilike '%advice%'
+and current_title not ilike '%behavior%'
+and current_title not ilike '%corporate%'
+and current_title not ilike '%med%surg%'
+and current_title not ilike '%correctional%'
+and current_title not ilike '%community%'
+and current_title not ilike '%public health%'
+and current_title not like '%OR%'
+and current_title not ilike '%advanced practice%'
+and current_title not ilike '%aprn%'
+and current_title not like '%health coach%'
+and current_description not like '%labor and delivery%'
+and current_description not like '%labor & delivery%'
+and current_description not like '%l&d%'
+and current_description not like '%l & d%'
+and current_description not like '%partum%'
+and current_title not like '%DON%'
+and current_description not ilike '%school%'	
+and current_description not ilike '%practicum%'
+and current_description not ilike '%clinical experience%'
+and current_description not like '% ER%'
+and current_title not ilike '%health coach%'
+and current_title not ilike '%licensed%nurse%'
+and current_title not ilike '%lpn%'
+and current_title not ilike '%home%'
+and current_title not ilike '%lvn%'
+and current_title not ilike '%travel%'
+and	
+	(
+	current_title like '%RN%'
+	or current_title ilike '%nurse%'
+	or current_title like '% rn%'
+	or current_title like 'rn%'
+	or current_title like 'rn'
+	)",2018-07-10 07:04:26.517731+00
+6,Registered Nurse - NICU,2017-03-07 19:00:24.434806+00,2017-10-09 05:39:18.574278+00,"The neonatal intensive care registered nurse’s duties include but are not limited to:
+Utilizing the Nursing Process in the planning and delivery of care, 
+Coordinating patient care, demonstrating safe practice, developing a nurse-patient/family relationship
+Preparing and clarifying treatment schedules for patients
+Instructing individuals, families, or other groups on topics such as health education, disease prevention, or childbirth and developing health improvement programs
+Administering medications to patients and monitoring patients for reactions or side effects
+Attend high-risk deliveries
+Perform all functions of a medical surgical nurse while managing resources during multiple admissions and discharges
+Work primarily in the neonatal intensive care unit (NICU)
+Responsible for using highly specialized equipment
+Provide psychological, social and educational support to parents and family members
+Recording and monitoring patients' medical information and vital signs
+Performing venipuncture and administering IV fluids
+Current CPR / BLS certification
+
+Requirements:
+Graduate of an accredited school of nursing
+Active state nursing license in good standing
+Must be able to assume responsibility and perform assigned tasks without direct supervision",f,,1,,f,t,246,1,,,
+38,Physician Assistant,2017-09-25 17:12:51.473002+00,2018-07-10 07:06:39.656198+00," The Physician Assistant's duties include but are not limited to:
+
+- Manages the patients along with the attending physician.
+
+- Autonomously order diagnostic and therapeutic measures that make sure the patient-care is safe, timely, effective, efficient, equitable and patient-centered. 
+
+- Continually monitor and adjust the care of the patient.
+
+- Be the patient advocate in the medical system. 
+
+- Act as a liaison between the patient and all providers on the team. 
+
+- Coordinate the care of the patient when multiple physicians and providers are involved in the care of the patient. 
+
+- Provide other patient care through the execution of standing orders, protocols, and/or routine patient care tasks which are delineated in the written agreement. ",f,,4,,f,t,807,0,5,"Select distinct past_job_matches.profile_id
+from
+( select profile_id, position_title as match_title, position_description as match_description
+	from profile_experience
+	left join profile on profile.id = profile_experience.profile_id
+	where 
+	(
+		position_title ilike 'PA %'
+		or 	position_title ilike 'PA/%'
+		or position_title ilike '%physician%assistant%'
+	)
+		--> Make sure they are not above or below this position
+	and position_title not ilike '%clinical manager%'
+	and position_title not ilike '%nurse manager%'
+	and position_title not ilike '%case manager%'
+	and position_title not ilike '%practitioner%'
+	and position_title not ilike '%flu%'
+	and position_title not ilike '%rehab%'
+	and position_title not ilike '%student%'
+	and position_title not ilike '%midwife%'
+	and position_title not ilike '%psych%'
+	and position_title not ilike '%intern%'
+	and position_title not ilike '%dialysis%'
+	and position_title not ilike '%licensed%'
+	and position_title not ilike '%lpn%'
+	and position_title not ilike '%home%'
+	and position_title not ilike '%aide%'
+	and position_title not ilike '%telemetry%'
+	and position_title not ilike '%pediatri%'
+	and position_title not ilike '%oncology%'
+	and position_title not ilike '%paralegal%'
+	and position_title not ilike '%consultant%'
+	and position_title not ilike '%extern%'
+	and position_title not ilike '%utilization%'
+	and position_title not ilike '%labor%'
+	and position_title not ilike '%instructor%'
+	and position_title not ilike '%educator%'
+	and position_title not ilike '%school%'	
+	and position_title not ilike '%faculty%'
+	and position_title not ilike '%nicu%'
+	and position_title not ilike '%practicum%'
+	and position_title not ilike '%coordinator%'
+	--
+	and position_title not ilike '%hospitalist%'
+) past_job_matches
+
+inner join 
+
+( select distinct on (profile_experience.profile_id) profile_id, position_title as current_title, position_description as current_description
+from profile_experience 
+order by profile_id asc, end_date desc NULLS FIRST, start_date desc NULLS LAST
+) current_job
+on (past_job_matches.profile_id = current_job.profile_id)
+
+inner join profile on profile.id = past_job_matches.profile_id
+
+where 
+current_title not ilike '%clinical manager%'
+and current_title not ilike '%nurse manager%'
+and current_title not ilike '%student%'
+and current_title not ilike '%liaison%'
+and current_title not ilike '%nicu%'
+and current_title not ilike '%practitioner%'
+and current_title not ilike '%intern%'
+and current_title not ilike '%dialysis%'
+and current_title not ilike '%extern%'
+and current_title not ilike '%nicu%'
+and current_title not ilike '%tech%'
+and current_title not ilike '%school%'
+and current_title not ilike '%case manager%'
+and current_title not ilike '%flu%'
+and current_title not ilike '%rehab%'
+and current_title not ilike '%midwife%'
+and current_title not ilike '%psych%'
+and current_title not ilike '%intern%'
+and current_title not ilike '%dialysis%'
+and current_title not ilike '%lpn%'
+and current_title not ilike '%home%'
+and current_title not ilike '%aide%'
+and current_title not ilike '%oncology%'
+and current_title not ilike '%paralegal%'
+and current_title not ilike '%consultant%'
+and current_title not ilike '%extern%'
+and current_title not ilike '%labor%'
+and current_title not ilike '%instructor%'
+and current_title not ilike '%educator%'
+and current_title not ilike '%faculty%'
+and current_title not ilike '%nicu%'
+and current_title not ilike '%practicum%'
+--
+and current_title not ilike '%hospitalist%'
+and	
+(
+		current_title like 'PA %'
+		or 	current_title like 'PA/%'
+		or current_title ilike '%physician%assistant%'
+		or current_title ilike '%physician%asst%'
+)",2018-07-10 07:06:39.655766+00
+2,Nurse Practitioner,2017-01-11 18:17:11.986686+00,2018-07-10 07:06:08.951653+00,"The nurse practitioner’s duties include but are not limited to:
+Provide direct client care as well as collaborates with a licensed physician according to state guidelines 
+Perform history and physical examination, order diagnostic tests and prescribe appropriate medication and treatment
+Treat or refer patients for primary care conditions, such as headaches, hypertension, urinary tract infections, upper respiratory infections, and dermatological conditions
+Prescribe medication dosages, routes, and frequencies based on patient characteristics such as age and gender.
+Assesses vital signs, administers injections, and performs minor procedures. 
+Order, perform, or interpret the results of diagnostic tests, such as complete blood counts (CBC), electrocardiograms (EKG), and radiographs (xray).
+Develop treatment plans based on scientific rationale, standards of care, and professional practice guidelines.
+Assists in the assessment of patients' conditions. Documents results of screenings and testing in client records. 
+Educates and advises patients on pertinent health issues and helps patients manage their well-being with vaccinations and patient education
+Regulates and monitors patient flow. Prepares patients for examination, sets up examination rooms, and assists healthcare providers with procedures. 
+Ensure patient information, visit history, refer outs, lab follow-up, phone calls, and consults are carefully and completely documented in the EMR
+Identify opportunities within local communities for development of outreach activities
+Experience with EHR / EMR medical software like Epic Systems, MEDITECH software, eClinicalWorks, Cerner, etc
+
+Requirements:
+Masters of Science in Nursing MSN degree, or doctorate degree
+Certified Registered Nurse Practitioner (CRNP) certification in good standing
+A minimum of one year of recent, verifiable experience as an advanced practice nurse",t,,7,,f,t,736,1,2,"select distinct past_job_matches.profile_id from
+( select profile_id, position_title as match_title, position_description as match_description, job_id
+	from profile_experience
+	left join profile on profile.id = profile_experience.profile_id
+	where 
+	(	position_title like '%NP%'
+		or position_title ilike '%nurse%practitioner%'
+		or position_title like '% np%'
+		or position_title like 'np'
+		or position_title like '% cnp%'
+		or position_title like 'cnp'
+		or position_title like '% crnp%'
+		or position_title like 'crnp'
+	)
+		--> Make sure they are not above or below this position
+	and position_title not ilike '%clinical manager%'
+	and position_title not ilike '%nurse manager%'
+	and position_title not ilike '%case manager%'
+	and position_title not ilike '%flu%'
+	and position_title not like 'ED %'
+	and position_title not like 'ER %'
+	and position_title not like '% ED %'
+	and position_title not like '% ER %'
+	and position_title not ilike '%rehab%'
+	and position_title not ilike '%clinicals for%'
+	and position_title not ilike '%student%'
+	and position_title not ilike '%midwife%'
+	and position_title not ilike '%psych%'
+	and position_title not ilike '%intern%'
+	and position_title not ilike '%dialysis%'
+	and position_title not ilike '%emergency%'
+	and position_title not ilike '%licensed%'
+	and position_title not ilike '%lpn%'
+	and position_title not ilike '%home%'
+	and position_title not ilike '%aide%'
+	and position_title not ilike '%telemetry%'
+	and position_title not ilike '%pediatri%'
+	and position_title not ilike '%oncology%'
+	and position_title not ilike '%paralegal%'
+	and position_title not ilike '%consultant%'
+	and position_title not ilike '%extern%'
+	and position_title not ilike '%utilization%'
+	and position_title not ilike '%assistant%'
+	and position_title not ilike '%labor%'
+	and position_title not ilike '%instructor%'
+	and position_title not ilike '%educator%'
+	and position_title not ilike '%school%'		
+	and position_title not ilike '%faculty%'
+	and position_title not ilike '%nicu%'
+	and position_title not ilike '%practicum%'
+	and position_title not ilike '%coordinator%'
+) past_job_matches
+
+inner join 
+
+( select distinct on (profile_experience.profile_id) profile_id, position_title as current_title, position_description as current_description
+from profile_experience 
+order by profile_id asc, end_date desc NULLS FIRST, start_date desc NULLS LAST
+) current_job
+on (past_job_matches.profile_id = current_job.profile_id)
+
+join job on past_job_matches.job_id = job.id
+
+where 
+current_title not ilike '%clinical manager%'
+and current_title not ilike '%nurse manager%'
+and current_title not ilike '%student%'
+and current_title not ilike '%assistant%'
+and current_title not ilike '%liaison%'
+and current_title not ilike '%coordinator%'
+and current_title not ilike '%intern%'
+and current_title not ilike '%dialysis%'
+and current_title not ilike '%extern%'
+and current_title not ilike '%assistant%'
+and current_title not ilike '%nicu%'
+and current_title not ilike '%tech%'
+and current_title not ilike '%physician assistant%'
+and current_title not like 'PA %'
+and current_title not like '% PA'
+and current_title not ilike '%director%'
+and	
+	(	current_title like '%NP%'
+		or current_title ilike '%nurse%practitioner%'
+		or current_title like '% np%'
+		or current_title like 'np'
+		or current_title like '% cnp%'
+		or current_title like 'cnp'
+		or current_title like '% crnp%'
+		or current_title like 'crnp'
+	)
+and job_id not in (2, 36)",2018-07-10 07:06:08.951221+00
+5,Registered Nurse - Home Health,2017-03-07 18:18:27.175077+00,2018-07-10 07:11:11.275106+00,"The home health nurse’s duties include but are not limited to:
+Utilizes the Nursing Process by performing needs assessments, evaluating levels of care, developing and implementing appropriate plans of care for clients and families
+Coordinates skilled nurse care with primary and secondary services such as physical therapy (PT), speech therapy (ST), occupational therapy (OT), medical social services (MSS) and home health aide (HHA)
+Experience of at least one year of medical/surgical nursing as an RN especially with geriatric clients
+Supervises home health aides according to insurance guidelines
+Administers injections to clients and monitors for reactions or side effects
+Documents and monitors client’s medical information
+Uses OASIS for compiling medical data under mandated Medicare Medicaid regulations
+Performs venipuncture and administers IV fluids
+Provides intermittent skilled nursing care and prescribed treatments to clients in their homes
+Performs head to toe physical assessments and monitors vital signs
+Educates clients and caretakers
+Has knowledge of durable medical equipment (DME)
+Has knowledge of medicare, medicaid, managed care and other insurance regulations
+ 
+Requirements:	 
+Graduate of an accredited school of nursing
+Active state nursing license in good standing
+Must be able to assume responsibility and perform assigned tasks safely without direct supervision
+Valid driver’s license
+Current CPR/BLS certification
+",t,,1,,f,t,902,1,7,"with current_job as 
+(
+select distinct on (profile_experience.profile_id) profile_id, position_title as current_title, position_description as current_description
+from profile_experience 
+order by profile_id asc, end_date desc NULLS FIRST, start_date desc NULLS LAST
+)
+select distinct current_job.profile_id
+from current_job left join profile on current_job.profile_id = profile.id
+where 
+(
+	current_title ilike '%home%'
+)
+and
+(	current_title like '%RN%'
+	or current_title ilike '%nurse%'
+	or current_title like '% rn%'
+	or current_title like 'rn'
+)
+and current_title not ilike '%clinical manager%'
+and current_title not ilike '%nurse manager%'
+and current_title not ilike '%student%'
+and current_title not ilike '%assistant%'
+and current_title not ilike '%liaison%'
+and current_title not ilike '% nicu %'
+and current_title not ilike '%/nicu%'
+and current_title not ilike 'nicu %'
+and current_title not ilike '%pacu%'
+and current_title not ilike '%coordinator%'
+and current_title not ilike '%practitioner%'
+and current_title not ilike '%np%'
+and current_title not ilike '%intern%'
+and current_title not ilike '%dialysis%'
+and current_title not ilike '%extern%'
+and current_title not ilike '%assistant%'
+and current_title not ilike '%nicu%'
+and current_title not ilike '%tech%'
+and current_title not ilike '%director%'
+and current_title not ilike '%school%'
+and current_title not ilike '% icu %'
+and current_title not ilike 'icu %'
+and current_title not ilike 'icu/%'
+and current_title not ilike '%critical care%'
+and current_title not ilike '%case manager%'
+and current_title not ilike '%administrat%'
+and current_title not ilike '%flu%'
+and current_title not ilike '%rehab%'
+and current_title not ilike '%midwife%'
+and current_title not ilike '%psych%'
+and current_title not ilike '%intern%'
+and current_title not ilike '%extern%'
+and current_title not ilike '%dialysis%'
+and current_title not ilike '%aide%'
+and current_title not ilike '%oncology%'
+and current_title not ilike '%paralegal%'
+and current_title not ilike '%consultant%'
+and current_title not ilike '%utilization%'
+and current_title not ilike '%labor%'
+and current_title not ilike '%transport%'
+and current_title not ilike '%instructor%'
+and current_title not ilike '%educator%'
+and current_title not ilike '%faculty%'
+and current_title not ilike '%occupational%'
+and current_title not ilike '%office%'
+and current_title not ilike '%office%'
+and current_title not ilike '%nicu%'
+and current_title not ilike '%practicum%'
+and current_title not ilike '%coordinator%'
+and current_title not ilike '%nurse anesthetist%'
+and current_title not ilike '%crna%'
+and current_title not ilike '%post-op%'
+and current_title not ilike '%post op%'
+and current_title not ilike '%pre-op%'
+and current_title not ilike '%pre op%'
+and current_title not ilike '%peri-op%'
+and current_title not ilike '%periop%'
+and current_title not ilike '%telemetry%'
+and current_title not ilike '%pediatri%'
+and current_title not ilike '%oncology%'
+and current_title not ilike '%paralegal%'
+and current_title not ilike '%admission%'
+and current_title not ilike '%advice%'
+and current_title not ilike '%behavior%'
+and current_title not ilike '%cath%lab%'
+and current_title not ilike '%cardia%'
+and current_title not ilike '%cardio%'
+and current_title not ilike '%ccu%'
+and current_title not ilike '%corporate%'
+and current_title not ilike '%correctional%'
+and current_title not like '% ECT %'
+and current_title not like 'ECT %'
+and current_title not ilike '%Electrophysiology%'
+and job_id not in (5)",2018-07-10 07:11:11.274707+00
+48,"Registered Nurse - Cardiothoracic ICU (CTICU, CCU, CTSICU)",2018-01-29 16:37:32.520642+00,2018-02-15 06:29:40.339802+00,"The Cardiac ICU Nurse's responsibilities include:
+
+- Care for patients recovering from and preparing for a wide range of cardiothoracic or cardiovascular surgeries, as well as multiple implantable devices.
+
+- Patients admitted to the unit may have one or more of the following admitting diagnoses: coronary artery disease, congestive heart failure, acute respiratory distress syndrome, multisystem failure, cardiomyopathy, aortic insufficiency, aortic stenosis, mitral stenosis, mitral regurgitation, septal defect, endocarditis, sepsis, acute decompensated heart failure, atrial fibrillation, and/or myocardial infarction (MI) with cardiogenic shock. 
+
+- The team also treats patients needing repair of aortic aneurysms (ascending aortic, aortic root, arch, descending aortic, and thoracoabdominal aortic aneurysms), repair of aortic dissections (Type A and Type B), and aortic root reconstruction.
+
+- As part of the CT or CV team, the nurse may administering care for patients following open-heart surgery. 
+
+- The nurse is also sometimes responsible for the treatment and care of heart transplant patients. 
+
+Education: BSN Degree required. 
+License & Certifications: A current RN license. Current ACLS/CPR is required on hire",t,,1,,f,t,902,1,,,
+34,Certified Registered Nurse Anesthetist (CRNA),2017-09-18 07:54:31.115443+00,2018-03-27 19:25:22.164421+00,"The Nurse Anesthetist's job duties include but are not limited to:
+
+- As part of the anesthesia team, the CRNA is expected to engage in accurate, ongoing patient assessments, communicate with members of the healthcare team, and use resources efficiently to deliver optimal care.
+
+- Administer anesthetics to patients and monitor their care during surgery.
+
+- Attend to preoperative (pre-op) evaluations and postoperative (post-op) care of patients.
+
+- Administer epidurals, bier blocks, spinals, line placement and other blocks where appropriate.
+
+- Perform intubations and respond to emergencies outside the operating room as required. 
+
+- Document care thoroughly in the appropriate records.
+
+
+
+",t,,1,,f,t,734,1,,,
+16,Registered Nurse - Home Health 2,2017-06-01 16:59:57.064094+00,2017-08-12 22:01:32.371181+00,"The home health nurse’s duties include but are not limited to:
+
+- Utilizes the Nursing Process by performing needs assessments, evaluating levels of care, developing and implementing appropriate plans of care for clients and families
+- Coordinates skilled nurse care with primary and secondary services such as physical therapy (PT), speech therapy (ST), occupational therapy (OT), medical social services (MSS) and home health aide (HHA)
+- Experience of at least one year of medical/surgical nursing as an RN especially with geriatric clients
+- Supervises home health aides according to insurance guidelines
+- Administers injections to clients and monitors for reactions or side effects
+- Documents and monitors client’s medical information
+- Uses OASIS for compiling medical data under mandated Medicare Medicaid regulations
+- Performs venipuncture and administers IV fluids
+- Provides intermittent skilled nursing care and prescribed treatments to clients in their homes
+- Performs head to toe physical assessments and monitors vital signs
+- Educates clients and caretakers
+- Has knowledge of durable medical equipment (DME)
+- Has knowledge of medicare, medicaid, managed care and other insurance regulations
+ 
+Requirements:	 
+Graduate of an accredited school of nursing
+Active state nursing license in good standing
+Must be able to assume responsibility and perform assigned tasks safely without direct supervision
+Valid driver’s license
+Current CPR/BLS certification",f,,1,,f,t,902,1,,,
+25,Host/Hostess,2017-08-16 21:36:53.188296+00,2017-08-16 23:03:05.338409+00,"The host/hostess responsibilities include:
+- Greet incoming and departing guests warmly
+- Seat guests in the bar or dining area and ensure a smooth handoff to the service staff
+- Promptly answer incoming calls to the restaurant and provide appropriate service
+- Manage the flow of guests into the dining and bar areas, provide accurate wait times to incoming guests where appropriate
+- Tend to special guest needs and requests
+- Keep a professional, personable and bright demeanor 
+- Perform well under pressure in a fast-paced and possibly loud environment
+- Excellent communication, phone and customer service skills 
+- Highly organized, dependable and punctual",f,,2,,f,t,520,1,,,
+8,Registered Nurse - Pediatrics,2017-03-07 20:30:56.230955+00,2018-07-10 07:17:32.24668+00,"The pediatric registered nurse’s duties include but are not limited to:
+
+- Utilizing the Nursing Process in the planning and delivery of care
+- Coordinating patient care, and establishing a positive nurse-patient/family relationship
+- Applying clinical leadership and problem solving
+- Examine children regularly to assess their growth and development
+- Treating children who have minor illnesses, acute and chronic health problems, and growth and development concerns
+- Explaining procedures and discuss test results or prescribed treatments with patients and parents or guardians
+- Performing technical duties as directed by an RN/LPN, such as point of care testing, EKG’s, bladder scanning, and foley catheter insertion and care
+- Administering medications to patients and monitoring for reactions or side effects
+- Administering IV fluids and maintaining central lines, midlines, PICC lines, and conventional peripheral lines
+- Administering blood/blood product transfusions, TPN, and analgesics (PCA pumps) and monitoring patients for adverse reactions
+- Performing venipunctures and independently collecting pertinent laboratory data into the plan of care
+- Demonstrating safe practices by complying with all regulations and standards of regulatory and accrediting bodies
+
+Requirements:
+- Graduate of an accredited school of nursing
+- Active state nursing license in good standing
+- Must be able to assume responsibility and perform assigned tasks without direct supervision
+- Current CPR / BLS certification
+",f,,1,,f,t,902,1,9,"with current_job as 
+(
+select distinct on (profile_experience.profile_id) profile_id, position_title as current_title, position_description as current_description, start_date, end_date, company_name
+from profile_experience 
+order by profile_id asc, end_date desc NULLS FIRST, start_date desc NULLS LAST
+)
+select distinct profile_id
+from current_job left join profile on current_job.profile_id = profile.id
+where 
+(
+	current_title ilike '%pediatr%'
+	or current_title ilike '%peds%'
+)
+and
+(	current_title like '%RN%'
+	or current_title ilike '%nurse%'
+	or current_title like '% rn%'
+	or current_title like 'rn'
+)
+and current_title not ilike '%clinical manager%'
+and current_title not ilike '%nurse manager%'
+and current_title not ilike '%case manager%'
+and current_title not ilike '%care manager%'
+and current_title not ilike '%student%'
+and current_title not ilike '%assistant%'
+and current_title not ilike '%liaison%'
+and current_title not ilike '%pacu%'
+and current_title not ilike '%home%'
+and current_title not like '%/ER%'
+and current_title not like '% ER%'
+and current_title not like 'ER %'
+and current_title not like '%/ED%'
+and current_title not like '% ED%'
+and current_title not like 'ED %'
+and current_title not ilike '%intensive%'
+and current_title not ilike '%critical%'
+and current_title not ilike '%emergency%'
+and current_title not like '%ICU%'
+and current_title not ilike '%coordinator%'
+and current_title not ilike '%practitioner%'
+and current_title not ilike '%np%'
+and current_title not ilike '%intern%'
+and current_title not ilike '%dialysis%'
+and current_title not ilike '%extern%'
+and current_title not ilike '%assistant%'
+and current_title not ilike '%nicu%'
+and current_title not ilike '%tech%'
+and current_title not ilike '%director%'
+and current_title not ilike '%school%'
+and current_title not ilike '%case manager%'
+and current_title not ilike '%administrat%'
+and current_title not ilike '%flu%'
+and current_title not ilike '%rehab%'
+and current_title not ilike '%midwife%'
+and current_title not ilike '%psych%'
+and current_title not ilike '%intern%'
+and current_title not ilike '%extern%'
+and current_title not ilike '%dialysis%'
+and current_title not ilike '%aide%'
+and current_title not ilike '%oncology%'
+and current_title not ilike '%paralegal%'
+and current_title not ilike '%consultant%'
+and current_title not ilike '%utilization%'
+and current_title not ilike '%labor%'
+and current_title not ilike '%transport%'
+and current_title not ilike '%instructor%'
+and current_title not ilike '%educator%'
+and current_title not ilike '%faculty%'
+and current_title not ilike '%occupational%'
+and current_title not ilike '%office%'
+and current_title not ilike '%nicu%'
+and current_title not ilike '%practicum%'
+and current_title not ilike '%coordinator%'
+and current_title not ilike '%nurse anesthetist%'
+and current_title not ilike '%crna%'
+and current_title not ilike '%post-op%'
+and current_title not ilike '%post op%'
+and current_title not ilike '%pre-op%'
+and current_title not ilike '%pre op%'
+and current_title not ilike '%peri-op%'
+and current_title not ilike '%periop%'
+and current_title not ilike '%telemetry%'
+and current_title not ilike '%oncology%'
+and current_title not ilike '%paralegal%'
+and current_title not ilike '%admission%'
+and current_title not ilike '%advice%'
+and current_title not ilike '%behavior%'
+and current_title not ilike '%cath%lab%'
+and current_title not ilike '%cardia%'
+and current_title not ilike '%cardio%'
+and current_title not ilike '%ccu%'
+and current_title not ilike '%corporate%'
+and current_title not ilike '%correctional%'
+and current_title not like '% ECT %'
+and current_title not like 'ECT %'
+and current_title not ilike '%Electrophysiology%'
+and job_id not in (8)
+",2018-07-10 07:17:32.246299+00
+40,Nurse,2017-10-03 23:45:34.660626+00,2017-10-10 16:18:23.400342+00,"The registered nurse’s duties include but are not limited to:
+Utilizing the Nursing Process in the planning and delivery of care, 
+Coordinating patient care, demonstrating safe practice, developing a nurse-patient/family relationship
+Applying clinical leadership and problem solving
+Preparing and clarifying treatment schedules for patients
+Instructing individuals, families, or other groups on topics such as health education, disease prevention, or childbirth and developing health improvement programs
+Administering medications to patients and monitoring patients for reactions or side effects
+Recording and monitoring patients' medical information and vital signs
+Performing venipuncture and administering IV fluids
+Independently collects pertinent laboratory data into the plan of care 
+Complies with all regulations and standards of regulatory and accrediting bodies
+Some experience with EHR and EMR medical software is a plus.  E.g. Epic Systems, MEDITECH software, eClinicalWorks, Cerner, etc
+Current CPR / BLS certification is a plus
+
+Requirements:
+Graduate of an accredited school of nursing
+Active state nursing license in good standing
+Must be able to assume responsibility and perform assigned tasks without direct supervision",t,1,1,42,f,t,902,1,,,
+27,Line Cook,2017-08-16 21:40:58.450544+00,2017-09-13 15:28:49.894397+00,"The line cook's duty is to prepare food items in accordance with production requirements and established guest service and sustainability standards. The responsibilities include:
+
+- Operate, maintain and properly clean kitchen tools and equipment
+- Prepare food of consistent quality following recipes standards for production and portions
+- Cook and execute dishes in cooperation the kitchen team
+- Must remain calm and perform well under stressful or high volume situations
+- Must work cleanly, quickly and efficiently
+- Label and properly store prepared foods
+- Personal hygiene, dependability, and punctuality are required",f,,2,,f,t,220,1,,,
+9,Registered Nurse - Labor and Delivery,2017-03-07 21:12:55.981806+00,2018-07-10 07:18:48.222889+00,"The Labor and Delivery Nurse’s duties include but are not limited to:
+•	Monitor fetal development by listening to fetal heartbeat, taking external uterine measurements, identifying fetal position, or estimating fetal size and weight.
+•	Initiate emergency interventions to stabilize patients.
+•	Provide prenatal, intrapartum, postpartum, or newborn care to patients.
+•	Explain procedures to patients, family members, staff members or others.
+•	Develop and implement individualized plans for health care management.
+•	Order and interpret diagnostic or laboratory tests.
+•	Document findings of physical examinations.
+•	Educate patients and family members regarding prenatal, intrapartum, postpartum, newborn, or interconceptional care.
+•	Document patients' health histories, symptoms, physical conditions, or other diagnostic information.
+•	Write information in medical records or provide narrative summaries to communicate patient information to other health care providers.
+•	Provide primary health care, including pregnancy and childbirth, to women.
+•	Consult with or refer patients to appropriate specialists when conditions exceed the scope of practice or expertise.
+•	Perform physical examinations by taking vital signs, checking neurological reflexes, examining breasts, or performing pelvic examinations.
+•	Prescribe medications as permitted by state regulations.
+•	Provide patients with direct family planning services such as inserting intrauterine devices, dispensing oral contraceptives, and fitting cervical barriers including cervical caps or diaphragms.
+•	Manage newborn care during the first weeks of life.
+
+Requirements:
+Graduate of an accredited school of nursing
+Active state nursing license in good standing
+Must be able to assume responsibility and perform assigned tasks without direct supervision",t,,1,,f,t,902,1,12,"with current_job as 
+(
+select distinct on (profile_experience.profile_id) profile_id, position_title as current_title, position_description as current_description
+from profile_experience 
+order by profile_id asc, end_date desc NULLS FIRST, start_date desc NULLS LAST
+)
+select distinct profile_id
+from current_job left join profile on current_job.profile_id = profile.id
+where 
+(
+	current_title ilike '%labor and delivery%'
+	or current_title ilike '%labor delivery%'
+	or current_title ilike '%l&d%'
+	or current_description ilike '%labor and delivery%'
+	or current_description ilike '%labor delivery%'
+	or current_description ilike '%l&d%'
+)
+and
+(	current_title like '%RN%'
+	or current_title ilike '%nurse%'
+	or current_title like '% rn%'
+	or current_title like 'rn'
+)
+and current_title not ilike '%clinical manager%'
+and current_title not ilike '%nurse manager%'
+and current_title not ilike '%student%'
+and current_title not ilike '%assistant%'
+and current_title not ilike '%liaison%'
+and current_title not ilike '%pacu%'
+and current_title not ilike '%coordinator%'
+and current_title not ilike '%practitioner%'
+and current_title not ilike '%np%'
+and current_title not ilike '%intern%'
+and current_title not ilike '%dialysis%'
+and current_title not ilike '%extern%'
+and current_title not ilike '%assistant%'
+and current_title not ilike '%tech%'
+and current_title not ilike '%director%'
+and current_title not ilike '%administrat%'
+and current_title not ilike '%intern%'
+and current_title not ilike '%extern%'
+and current_title not ilike '%dialysis%'
+and current_title not ilike '%aide%'
+and current_title not ilike '%paralegal%'
+and current_title not ilike '%consultant%'
+and current_title not ilike '%transport%'
+and current_title not ilike '%instructor%'
+and current_title not ilike '%educator%'
+and current_title not ilike '%faculty%'
+and current_title not ilike '%office%'
+and current_title not ilike '%practicum%'
+and current_title not ilike '%coordinator%'
+and current_title not ilike '%nurse anesthetist%'
+and current_title not ilike '%crna%'
+and current_title not ilike '%clinical manager%'
+and current_title not ilike '%nurse manager%'
+and current_title not ilike '%paralegal%'
+and current_title not ilike '%admission%'
+and current_title not ilike '%advice%'
+and current_title not ilike '%corporate%'
+and current_description not ilike '%school%'	
+and current_description not ilike '%nicu%'
+and current_description not ilike '%practicum%'
+and current_description not ilike '%nsicu%'
+and current_description not ilike '%clinical experience%'
+and current_description not ilike 'labor and delivery transport'",2018-07-10 07:18:48.222509+00
+11,Nurse Practitioner - Family Practice,2017-05-23 19:41:09.987246+00,2018-03-19 21:17:44.024107+00,"The family nurse practitioner’s duties include but are not limited to:
+Provide direct client care as well as collaborates with a licensed physician according to state guidelines 
+Perform history and physical examination, order diagnostic tests and prescribe appropriate medication and treatment
+Treat or refer patients for primary care conditions, such as headaches, hypertension, urinary tract infections, upper respiratory infections, and dermatological conditions
+Prescribe medication dosages, routes, and frequencies based on patient characteristics such as age and gender.
+Assesses vital signs, administers injections, and performs minor procedures. 
+Order, perform, or interpret the results of diagnostic tests, such as complete blood counts (CBC), electrocardiograms (EKG), and radiographs (xray).
+Develop treatment plans based on scientific rationale, standards of care, and professional practice guidelines.
+Assists in the assessment of patients' conditions. Documents results of screenings and testing in client records. 
+Educates and advises patients on pertinent health issues and helps patients manage their well-being with vaccinations and patient education
+Regulates and monitors patient flow. Prepares patients for examination, sets up examination rooms, and assists healthcare providers with procedures. 
+Ensure patient information, visit history, refer outs, lab follow-up, phone calls, and consults are carefully and completely documented in the EMR
+Identify opportunities within local communities for development of outreach activities
+Experience with EHR / EMR medical software like Epic Systems, MEDITECH software, eClinicalWorks, Cerner, etc
+
+Requirements:
+Masters of Science in Nursing MSN degree, or doctorate degree
+Certified Registered Nurse Practitioner (CRNP) certification in good standing
+A minimum of one year of recent, verifiable experience as an advanced practice nurse",f,,7,,f,t,736,1,,,
+35,Executive Assistant,2017-09-18 07:54:56.965091+00,2018-02-01 17:36:37.934626+00,"The Executive Assistant's duties include but are not limited to:
+
+ - Provides administrative support to an executive and the department by performing a variety of administrative and secretarial duties of a complex and confidential nature. 
+
+- Works independently to maintain flow of the workday by anticipating problems, prioritizing and solving issues, and keeping up with daily workload in a professional manner. 
+
+- Prioritizes incoming mail, phone calls, requests, issues, and/or concerns addressed to the President/CEO, including those of a sensitive or confidential nature.
+
+- Orchestrates all logistics for internal and external events, meetings, conferences and presentations.
+
+- Manages and maintains extremely active and dynamic daily schedules and travel arrangements.
+
+-  Determines appropriate course of action, referral or response and follow-up ensuring that appropriate action was taken and adequate resolution of any issue was achieved.
+
+- Prepares professional presentations for the President/CEO utilizing PowerPoint, Keynote, or other applications, as well as producing information by transcribing, formatting, inputting, editing, retrieving, copying, text, data and graphics. 
+
+- Researches, prioritizes, follows up and provides recommendations regarding issues, concerns and process improvements.
+",t,,3,,f,t,351,2,,,
+29,Server - Corporate Casual,2017-08-17 20:31:22.014476+00,2017-08-25 15:43:50.947343+00,"~~~~~ This job is in a Corporate Casual restaurant setting (e.g. TGI Fridays, Texas Roadhouse, Applebee's) ~~~~~
+
+The Server position is to work as a member of team which takes orders and serves food and beverages to guests at tables in restaurant.  Responsibilities include:
+
+- Taking the guests orders, keeping them organized, and timing the course of service for your guests. 
+- Taking payment from the guests and turning in a cash-out report at the end of each shift. 
+- Maintaining a clean and organized work station, completing opening, shift change and closing duties. 
+- Servers are also need to go beyond being just an order taker, and should be well versed in the products so you can guide your guests experience and sell.
+- Must have a general proficiency with computers, with the ability to process information through the POS system
+
+A server needs to be in good physical shape to withstand long hours on his/her feet, often standing and walking on concrete or other hard surfaces.",f,,2,,f,t,1088,1,,,
+43,Custom CRNA,2017-11-16 17:42:39.384521+00,2017-11-17 03:21:09.348123+00,"The Nurse Anesthetist's job duties include but are not limited to:
+
+- As part of the anesthesia team, the CRNA is expected to engage in accurate, ongoing patient assessments, communicate with members of the healthcare team, and use resources efficiently to deliver optimal care.
+
+- Administer anesthetics to patients and monitor their care during surgery.
+
+- Attend to preoperative (pre-op) evaluations and postoperative (post-op) care of patients.
+
+- Administer epidurals, bier blocks, spinals, line placement and other blocks where appropriate.
+
+- Perform intubations and respond to emergencies outside the operating room as required. 
+
+- Document care thoroughly in the appropriate records.
+
+
+
+",t,34,1,1,f,t,734,1,,,
+30,Bartender - Corporate Casual,2017-08-17 20:34:38.56554+00,2017-09-08 16:42:44.065041+00,"~~~~~ This job is in a Corporate Casual restaurant setting (e.g. TGI Fridays, Texas Roadhouse, Applebee's) ~~~~~
+
+The bartender should demonstrate genuine hospitality and deliver exceptional guest services in the bar area. Responsibilities include:
+- Mixing, garnishing and serving alcoholic and non-alcoholic drinks according to company specifications for guests at the bar and in the restaurant 
+- Helping guests choose menu items, taking orders and making guests feel taken care of during their visit
+- Keeping the bar stocked and clean while always providing friendly and attentive service 
+- Adhering to company standards in addition to relevant local, state and federal guidelines for serving alcoholic beverages
+- Handling all guest service issues in an immediate and professional manner
+- Aid in moving and installing kegs, CO2 tanks and soda mixes
+- Balance cash register at the end of each shift 
+- Maintain clean and orderly bar and cash register
+- Must have a general proficiency with computers, with the ability to process information through the POS system
+- Must be a multitasking master
+- Assist in training staff",f,,2,,f,t,93,1,,,
+17,Server - Neighborhood/Gastropub,2017-06-16 15:34:52.273501+00,2017-08-25 14:45:31.517862+00,"~~~~~ This job is in a Neighborhood/Gastropub restaurant setting ~~~~~
+
+The Server position is to work as a member of team which takes orders and serves food and beverages to guests at tables in restaurant.  Responsibilities include:
+
+- Taking the guests orders, keeping them organized, and timing the course of service for your guests. 
+- Taking payment from the guests and turning in a cash-out report at the end of each shift. 
+- Maintaining a clean and organized work station, completing opening, shift change and closing duties. 
+- Servers are also need to go beyond being just an order taker, and should be well versed in the products so you can guide your guests experience and sell.
+- Must have a general proficiency with computers, with the ability to process information through the POS system
+
+A server needs to be in good physical shape to withstand long hours on his/her feet, often standing and walking on concrete or other hard surfaces.",t,,2,,f,t,1088,1,,,
+33,Domenica Poland ,2017-09-13 01:54:35.22617+00,2017-09-16 00:14:51.908914+00,"Duties include but are not limited to:
+- Perform emergency medical procedures, such as basic life support (BLS), advanced cardiac life support (ACLS), and other condition stabilizing interventions. 
+- Monitor patients following surgeries or other treatments
+- Administer and titrate sedatives and paralytics
+- Knowledge or familiarity with patient intubation, ventilation, extubation 
+- Diagnose medical conditions, including acute or chronic conditions that could result in rapid physiological deterioration or life-threatening instability
+- Assist physicians with bedside procedures including line placements
+- Document data related to patients' care including assessment results, interventions, medications, patient responses, or treatment changes.
+- Administer blood and blood product transfusions or intravenous infusions, monitoring patients for adverse reactions.
+- Assess urgent and emergent health conditions using both physiologically and technologically derived data.
+- Assess the impact of illnesses or injuries on patients' health, function, growth, development, nutrition, sleep, rest, quality of life, or family, social and educational relationships
+- Interpret information obtained from electrocardiograms (EKG) or radiographs (x-ray).
+- Obtain specimens or samples for laboratory work.
+- Some experience with EHR and EMR medical software is a plus.  E.g. Epic Systems, MEDITECH software, eClinicalWorks, Cerner, etc
+- Current  BLS / ACLS certification
+- Position may involve end of life or palliative care
+- Experience with dialysis is a plus
+
+Requirements:
+Graduate of an accredited school of nursing
+Active state nursing license in good standing
+Must be able to assume responsibility and perform assigned tasks without direct supervision",t,4,1,32,f,t,246,1,,,
+32,RN Job,2017-09-07 19:09:26.912963+00,2017-09-16 00:14:51.912548+00,"Duties include but are not limited to:
+- Perform emergency medical procedures, such as basic life support (BLS), advanced cardiac life support (ACLS), and other condition stabilizing interventions. 
+- Monitor patients following surgeries or other treatments
+- Administer and titrate sedatives and paralytics
+- Knowledge or familiarity with patient intubation, ventilation, extubation 
+- Diagnose medical conditions, including acute or chronic conditions that could result in rapid physiological deterioration or life-threatening instability
+- Assist physicians with bedside procedures including line placements
+- Document data related to patients' care including assessment results, interventions, medications, patient responses, or treatment changes.
+- Administer blood and blood product transfusions or intravenous infusions, monitoring patients for adverse reactions.
+- Assess urgent and emergent health conditions using both physiologically and technologically derived data.
+- Assess the impact of illnesses or injuries on patients' health, function, growth, development, nutrition, sleep, rest, quality of life, or family, social and educational relationships
+- Interpret information obtained from electrocardiograms (EKG) or radiographs (x-ray).
+- Obtain specimens or samples for laboratory work.
+- Some experience with EHR and EMR medical software is a plus.  E.g. Epic Systems, MEDITECH software, eClinicalWorks, Cerner, etc
+- Current  BLS / ACLS certification
+- Position may involve end of life or palliative care
+- Experience with dialysis is a plus
+
+Requirements:
+Graduate of an accredited school of nursing
+Active state nursing license in good standing
+Must be able to assume responsibility and perform assigned tasks without direct supervision",t,4,1,28,f,t,246,1,,,
+24,Server,2017-08-16 21:36:21.939456+00,2017-08-16 22:50:29.340727+00,"The Server position is to work as a member of team which takes orders and serves food and beverages to guests at tables in restaurant.  Responsibilities include:
+
+- Taking the guests orders, keeping them organized, and timing the course of service for your guests. 
+- Taking payment from the guests and turning in a cash-out report at the end of each shift. 
+- Maintaining a clean and organized work station, completing opening, shift change and closing duties. 
+- Servers are also need to go beyond being just an order taker, and should be well versed in the products so you can guide your guests experience and sell.
+- Must have a general proficiency with computers, with the ability to process information through the POS system
+
+A server needs to be in good physical shape to withstand long hours on his/her feet, often standing and walking on concrete or other hard surfaces.",f,,2,,f,t,1088,1,,,
+26,Bartender,2017-08-16 21:37:18.559881+00,2017-09-13 15:27:46.546013+00,"The bartender should demonstrate genuine hospitality and deliver exceptional guest services in the bar area. Responsibilities include:
+- Mixing, garnishing and serving alcoholic and non-alcoholic drinks according to company specifications for guests at the bar and in the restaurant 
+- Helping guests choose menu items, taking orders and making guests feel taken care of during their visit
+- Keeping the bar stocked and clean while always providing friendly and attentive service 
+- Adhering to company standards in addition to relevant local, state and federal guidelines for serving alcoholic beverages
+- Handling all guest service issues in an immediate and professional manner
+- Aid in moving and installing kegs, CO2 tanks and soda mixes
+- Balance cash register at the end of each shift 
+- Maintain clean and orderly bar and cash register
+- Must have a general proficiency with computers, with the ability to process information through the POS system
+- Must be a multitasking master
+- Assist in training staff",f,,2,,f,t,93,1,,,
+28,Host/Hostess - Corporate Casual,2017-08-17 20:29:54.374019+00,2017-08-25 15:27:52.084753+00,"~~~~~ This job is in a Corporate Casual restaurant setting (e.g. TGI Fridays, Texas Roadhouse, Applebee's) ~~~~~
+
+The host/hostess responsibilities include:
+- Greet incoming and departing guests warmly
+- Seat guests in the bar or dining area and ensure a smooth handoff to the service staff
+- Promptly answer incoming calls to the restaurant and provide appropriate service
+- Manage the flow of guests into the dining and bar areas, provide accurate wait times to incoming guests where appropriate
+- Tend to special guest needs and requests
+- Keep a professional, personable and bright demeanor 
+- Perform well under pressure in a fast-paced and possibly loud environment
+- Excellent communication, phone and customer service skills 
+- Highly organized, dependable and punctual",f,,2,,f,t,520,1,,,
+13,Nurse Practitioner - Adult / Geriatric,2017-05-23 19:48:13.821288+00,2018-03-19 22:07:43.653851+00,"The adult/geriatric nurse practitioner’s duties include but are not limited to:
+Provide direct client care as well as collaborates with a licensed physician according to state guidelines 
+Perform history and physical examination, order diagnostic tests and prescribe appropriate medication and treatment
+Treat or refer patients for primary care conditions, such as headaches, hypertension, urinary tract infections, upper respiratory infections, and dermatological conditions
+Prescribe medication dosages, routes, and frequencies based on patient characteristics such as age and gender.
+Assesses vital signs, administers injections, and performs minor procedures. 
+Order, perform, or interpret the results of diagnostic tests, such as complete blood counts (CBC), electrocardiograms (EKG), and radiographs (xray).
+Develop treatment plans based on scientific rationale, standards of care, and professional practice guidelines.
+Assists in the assessment of patients' conditions. Documents results of screenings and testing in client records. 
+Educates and advises patients on pertinent health issues and helps patients manage their well-being with vaccinations and patient education
+Regulates and monitors patient flow. Prepares patients for examination, sets up examination rooms, and assists healthcare providers with procedures. 
+Ensure patient information, visit history, refer outs, lab follow-up, phone calls, and consults are carefully and completely documented in the EMR
+Identify opportunities within local communities for development of outreach activities
+Experience with EHR / EMR medical software like Epic Systems, MEDITECH software, eClinicalWorks, Cerner, etc
+
+Requirements:
+Masters of Science in Nursing MSN degree, or doctorate degree
+Certified Registered Nurse Practitioner (CRNP) certification in good standing
+A minimum of one year of recent, verifiable experience as an advanced practice nurse",f,,7,,f,t,736,1,,,
+4,Registered Nurse - Critical Care,2017-02-10 22:26:17.927703+00,2018-07-10 07:15:17.111651+00,"Duties include but are not limited to:
+- Perform emergency medical procedures, such as basic life support (BLS), advanced cardiac life support (ACLS), and other condition stabilizing interventions. 
+- Monitor patients following surgeries or other treatments
+- Administer and titrate sedatives and paralytics
+- Knowledge or familiarity with patient intubation, ventilation, extubation 
+- Diagnose medical conditions, including acute or chronic conditions that could result in rapid physiological deterioration or life-threatening instability
+- Assist physicians with bedside procedures including line placements
+- Document data related to patients' care including assessment results, interventions, medications, patient responses, or treatment changes.
+- Administer blood and blood product transfusions or intravenous infusions, monitoring patients for adverse reactions.
+- Assess urgent and emergent health conditions using both physiologically and technologically derived data.
+- Assess the impact of illnesses or injuries on patients' health, function, growth, development, nutrition, sleep, rest, quality of life, or family, social and educational relationships
+- Interpret information obtained from electrocardiograms (EKG) or radiographs (x-ray).
+- Obtain specimens or samples for laboratory work.
+- Some experience with EHR and EMR medical software is a plus.  E.g. Epic Systems, MEDITECH software, eClinicalWorks, Cerner, etc
+- Current  BLS / ACLS certification
+- Position may involve end of life or palliative care
+- Experience with dialysis is a plus
+
+Requirements:
+Graduate of an accredited school of nursing
+Active state nursing license in good standing
+Must be able to assume responsibility and perform assigned tasks without direct supervision",f,,1,,f,t,246,1,8,"Select distinct past_job_matches.profile_id
+from
+( select profile_id, position_title as match_title, position_description as match_description,
+start_date as match_start, end_date as match_end 
+	from profile_experience
+	left join profile on profile.id = profile_experience.profile_id
+	where 
+	(
+		position_title ilike '%critical care%'
+		or position_title ilike '%acute care%'
+		or position_title ilike '%icu%'
+		or position_title ilike '%intensive care%'
+		or position_description ilike '%critical care%'
+		or position_description ilike '%acute care%'
+		or position_description ilike '%intensive care%'
+	)
+	and
+	(	position_title like '%RN%'
+		or position_title ilike '%nurse%'
+		or position_title like '% rn%'
+		or position_title like 'rn'
+	)
+		--> Make sure they are not above or below this position
+	and position_title not ilike '%clinical manager%'
+	and position_title not ilike '%nurse manager%'
+	and position_title not ilike '%case manager%'
+	and position_title not ilike '%nurse anesthetist%'
+	and position_title not ilike '%crna%'
+	and position_title not ilike '%practitioner%'
+	and position_title not ilike '%np%'
+	and position_title not ilike '%flu%'
+	and position_title not ilike '%tech%'
+	and position_title not ilike '%rehab%'
+	and position_title not ilike '%student%'
+	and position_title not ilike '%midwife%'
+	and position_title not ilike '%dialysis%'
+	and position_title not ilike '%licensed%'
+	and position_title not ilike '%lpn%'
+	and position_title not ilike '%licensed%nurse%'
+	and position_title not ilike '%lvn%'
+	and position_title not ilike '%aide%'
+	and position_title not ilike '%paralegal%'
+	and position_title not ilike '%consultant%'
+	and position_title not ilike '%extern%'
+	and position_title not ilike '%utilization%'
+	and position_title not ilike '%assistant%'
+	and position_title not ilike '%labor%'
+	and position_title not ilike '%school%'	
+	and position_title not ilike '%faculty%'
+	and position_description not ilike '%school%'	
+	and position_description not ilike '%practicum%'
+	and position_title not ilike '%practicum%'
+	and position_description not ilike '%clinical experience%'
+	
+	and position_title not like '% ER%'
+	and position_title not like 'ER %'
+	and position_title not like '%/ER %'
+	and position_title not like '%,ER%'
+	and position_title not like '%-ER%'
+	and position_title not like '% ED%'
+	and position_title not like 'ED %'
+	and position_title not like '%/ED %'
+	and position_title not like '%,ED%'
+	and position_title not like '%-ED%'
+	
+	and position_description not like '% ER%'
+	and position_description not like 'ER %'
+	and position_description not like '%/ER %'
+	and position_description not like '%,ER%'
+	and position_description not like '%-ER%'
+	and position_description not like '% ED%'
+	and position_description not like 'ED %'
+	and position_description not like '%/ED %'
+	and position_description not like '%,ED%'
+	and position_description not like '%-ED%'
+	and position_description not ilike '%emergency room%'
+	and position_description not ilike '%emergency department%'
+) past_job_matches
+
+inner join 
+
+( select distinct on (profile_experience.profile_id) profile_id, position_title as current_title, position_description as current_description
+from profile_experience 
+order by profile_id asc, end_date desc NULLS FIRST, start_date desc NULLS LAST
+) current_job
+on (past_job_matches.profile_id = current_job.profile_id)
+
+inner join profile on profile.id = past_job_matches.profile_id
+
+where 
+current_title not ilike '%clinical manager%'
+and current_title not ilike '%nurse manager%'
+and current_title not ilike '%student%'
+and current_title not ilike '%assistant%'
+and current_title not ilike '%liaison%'
+
+and current_title not ilike '%pacu%'
+and current_title not ilike '%coordinator%'
+and current_title not ilike '%practitioner%'
+and current_title not ilike '%np%'
+and current_title not ilike '%dialysis%'
+and current_title not ilike '%assistant%'
+and current_title not ilike '%tech%'
+and current_title not ilike '%director%'
+and current_title not ilike '%school%'
+and current_title not ilike '%case manager%'
+and current_title not ilike '%administrat%'
+and current_title not ilike '%hospice%'
+and current_title not ilike '%flu%'
+and current_title not ilike '%rehab%'
+and current_title not ilike '%midwife%'
+and current_title not ilike '%examiner%'
+and current_title not ilike '%dialysis%'
+and current_title not ilike '%licensed%'
+and current_title not ilike '%lpn%'
+and current_title not ilike '%home%'
+and current_title not ilike '%aide%'
+and current_title not ilike '%paralegal%'
+and current_title not ilike '%consultant%'
+and current_title not ilike '%utilization%'
+and current_title not ilike '%labor%'
+and current_title not ilike '%transport%'
+and current_title not ilike '%occupational%'
+and current_title not ilike '%office%'
+and current_title not ilike '%practicum%'
+and current_title not ilike '%anesthetist%'
+and current_title not ilike '%anesthesia%'
+and current_title not ilike '%crna%'
+and current_title not ilike '%post-op%'
+and current_title not ilike '%post- op%'
+and current_title not ilike '%post op%'
+and current_title not ilike '%pre-op%'
+and current_title not ilike '%pre- op%'
+and current_title not ilike '%pre op%'
+and current_title not ilike '%peri-op%'
+and current_title not ilike '%periop%'
+
+and current_description not ilike '%post-op%'
+and current_description not ilike '%post- op%'
+and current_description not ilike '%post op%'
+and current_description not ilike '%pre-op%'
+and current_description not ilike '%pre- op%'
+and current_description not ilike '%pre op%'
+and current_description not ilike '%peri-op%'
+and current_description not ilike '%periop%'
+
+and current_title not ilike '%paralegal%'
+and current_title not ilike '%admission%'
+and current_title not ilike '%advice%'
+and current_title not ilike '%behavior%'
+and current_title not ilike '%corporate%'
+and current_title not ilike '%correctional%'
+and current_title not ilike '%community%'
+and current_title not ilike '%public health%'
+and current_title not like '%OR%'
+and current_title not ilike '%advanced practice%'
+and current_title not ilike '%aprn%'
+and current_title not ilike '%emergency%'
+and current_description not ilike '%emergency%'
+and current_title not ilike '%(er)%'
+and current_title not like '%review%'
+and current_title not like '% ER%'
+and current_title not like 'ER %'
+and current_title not like '%/ER %'
+and current_title not like '%,ER%'
+and current_title not like '%-ER%'
+and current_title not like '% ED%'
+and current_title not like 'ED %'
+and current_title not like '%/ED %'
+and current_title not like '%,ED%'
+and current_title not like '%-ED%'
+and current_title not like '%health coach%'
+and current_description not like '%labor and delivery%'
+and current_description not like '%labor & delivery%'
+and current_description not like '%l&d%'
+and current_description not like '%l & d%'
+and current_description not like '%partum%'
+and current_title not like '%DON%'
+and current_description not ilike '%school%'	
+and current_description not ilike '%practicum%'
+and current_description not ilike '%clinical experience%'
+and current_description not like '% ER%'
+and current_title not ilike '%health coach%'
+and current_title not ilike '%licensed%nurse%'
+and current_title not ilike '%lpn%'
+and current_title not ilike '%home%'
+and current_title not ilike '%lvn%'
+and	
+	(
+	current_title like '%RN%'
+	or current_title ilike '%nurse%'
+	or current_title like '% rn%'
+	or current_title like 'rn%'
+	or current_title like 'rn'
+	)
+",2018-07-10 07:15:17.111201+00
+54,Certified Nursing Assistant (CNA),2018-03-16 15:58:24.449559+00,2018-07-10 07:06:26.97567+00,"The nursing assistant's duties include:
+
+- Responsible for light cleaning, as well as assisting clients with bathing, showering, grooming, and other personal hygiene tasks. 
+ 
+- Set up room for patients including linens. bedding and supplies.
+
+- Collect patient's belongings and deliver to patient rooms.
+
+- Orient patient to room.
+
+- Frequently take vital signs, and remove dressings.
+
+- Educate about diet-chart nutritional monitoring on all meals
+
+- Assist with tray delivery as needed.
+
+- Ambulate patients when appropriate.
+
+- Reports patient's status and needs to the registered nurse.
+
+- Answer call lights and attends to/reports patient needs.
+
+- Obtains urine/stool/sputum specimens.
+
+- Transfers, moves and repositions patients.",t,,5,,f,t,739,1,4,"select distinct profile_id  from
+( select distinct on (profile_experience.profile_id) profile_id, position_title as current_title, position_description as current_description
+from profile_experience 
+order by profile_id asc, end_date desc NULLS FIRST, start_date desc NULLS LAST
+) current_job
+left join profile on current_job.profile_id = profile.id
+where 
+	(
+	current_title like '%CNA%'
+	or current_title ilike '%nurs%assistant%'
+	)
+	and not current_title ilike '%registered%nurse%'	
+	and not current_title ilike '% intern%'	
+	and not current_title ilike 'intern%'	
+	and not current_title ilike '%school%'	
+	and not current_title ilike '%home%aide%'	
+	and not current_title like '%HHA%'	",2018-07-10 07:06:26.975235+00
+10,Registered Nurse - Operating Room,2017-04-25 21:02:25.926941+00,2018-07-10 07:20:51.482723+00,"The Operating Room Nurse’s duties include but are not limited to:
+
+- Assist the physician in accomplishing the plan of care for the patient and to provide continuity between the patient care unit and the Operating Room Unit
+
+- Provides pre and post surgical teaching and follow-up to patient/family, as well as psychological support as needed.
+
+- Assists in helping the surgeon and anesthesiologist accomplish a plan of care for the patient.
+
+- Recording and monitoring patients' medical information and vital signs
+
+- Circulate cases or function as a scrub nurse as assigned.
+
+- Monitor leads, anesthesia supplies. Prepare anesthesia equipment, circuits, gasses
+
+- Assist with spinals, general anesthesia intubation and extubation.
+
+- Set up and assist with injections/venipuncture, administering IV fluids, and arterial and central line placement
+
+- Some experience with EHR and EMR medical software is a plus.  E.g. Epic Systems, Cerner, etc
+",t,,1,,f,t,902,1,15,"Select distinct past_job_matches.profile_id
+from
+( select profile_id, position_title as match_title, position_description as match_description,
+start_date as match_start, end_date as match_end 
+	from profile_experience
+	left join profile on profile.id = profile_experience.profile_id
+	where 
+	(
+	position_title ilike '%operating room%'
+	or position_title like 'OR %'
+	or position_title like '% OR %'
+	or position_title like '% OR'
+	or position_title like '%/OR %'
+	or position_title ilike '%CNOR%'
+	or position_title like '%,OR%'
+	or position_description ilike '%operating room%'
+	or (
+	 position_description like '% OR %'
+	 and UPPER(position_description) <> position_description
+		)
+	or position_description like '%CNOR%'
+	)
+ 	and position_description not like '%, OR%'
+	and
+	(	position_title like '%RN%'
+		or position_title ilike '%nurse%'
+		or position_title like '% rn%'
+		or position_title like 'rn'
+	)
+		--> Make sure they are not above or below this position
+	and position_title not ilike '%clinical manager%'
+	and position_title not ilike '%nurse manager%'
+	and position_title not ilike '%case manager%'
+	and position_title not ilike '%nurse anesthetist%'
+	and position_title not ilike '%crna%'
+	and position_title not ilike '%practitioner%'
+	and position_title not ilike '%np%'
+	and position_title not ilike '%flu%'
+	and position_title not ilike '%tech%'
+	and position_title not ilike '%rehab%'
+	and position_title not ilike '%student%'
+	and position_title not ilike '%midwife%'
+	and position_title not ilike '%dialysis%'
+	and position_title not ilike '%licensed%'
+	and position_title not ilike '%lpn%'
+	and position_title not ilike '%licensed%nurse%'
+	and position_title not ilike '%lvn%'
+	and position_title not ilike '%aide%'
+	and position_title not ilike '%paralegal%'
+	and position_title not ilike '%consultant%'
+	and position_title not ilike '%extern%'
+	and position_title not ilike '%utilization%'
+	and position_title not ilike '%assistant%'
+	and position_title not ilike '%labor%'
+	and position_title not ilike '%school%'	
+	and position_title not ilike '%faculty%'
+	and position_description not ilike '%school%'	
+	and position_description not ilike '%clinical experience%'
+	
+	and position_title not like '% ER%'
+	and position_title not like 'ER %'
+	and position_title not like '%/ER %'
+	and position_title not like '%,ER%'
+	and position_title not like '%-ER%'
+	and position_title not like '% ED%'
+	and position_title not like 'ED %'
+	and position_title not like '%/ED %'
+	and position_title not like '%,ED%'
+	and position_title not like '%-ED%'
+	
+	and position_description not like '% ER%'
+	and position_description not like 'ER %'
+	and position_description not like '%/ER %'
+	and position_description not like '%,ER%'
+	and position_description not like '%-ER%'
+	and position_description not like '% ED%'
+	and position_description not like 'ED %'
+	and position_description not like '%/ED %'
+	and position_description not like '%,ED%'
+	and position_description not like '%-ED%'
+	and position_description not ilike '%emergency room%'
+		
+	and (cast(end_date as date) >= '2010-01-01' or end_date is NULL)
+) past_job_matches
+
+inner join 
+
+( select distinct on (profile_experience.profile_id) profile_id, position_title as current_title, position_description as current_description
+from profile_experience 
+order by profile_id asc, end_date desc NULLS FIRST, start_date desc NULLS LAST
+) current_job
+on (past_job_matches.profile_id = current_job.profile_id)
+
+inner join profile on profile.id = past_job_matches.profile_id
+
+where 
+current_title not ilike '%clinical manager%'
+and current_title not ilike '%nurse manager%'
+and current_title not ilike '%student%'
+and current_title not ilike '%assistant%'
+and current_title not ilike '%liaison%'
+
+and current_title not ilike '%coordinator%'
+and current_title not ilike '%practitioner%'
+and current_title not ilike '%np%'
+and current_title not ilike '%dialysis%'
+and current_title not ilike '%assistant%'
+and current_title not ilike '%tech%'
+and current_title not ilike '%director%'
+and current_title not ilike '%school%'
+and current_title not ilike '%case manager%'
+and current_title not ilike '%administrat%'
+and current_title not ilike '%hospice%'
+and current_title not ilike '%flu%'
+and current_title not ilike '%rehab%'
+and current_title not ilike '%midwife%'
+and current_title not ilike '%examiner%'
+and current_title not ilike '%dialysis%'
+and current_title not ilike '%licensed%'
+and current_title not ilike '%lpn%'
+and current_title not ilike '%home%'
+and current_title not ilike '%aide%'
+and current_title not ilike '%paralegal%'
+and current_title not ilike '%consultant%'
+and current_title not ilike '%utilization%'
+and current_title not ilike '%labor%'
+and current_title not ilike '%transport%'
+and current_title not ilike '%occupational%'
+and current_title not ilike '%office%'
+and current_title not ilike '%practicum%'
+and current_title not ilike '%anesthetist%'
+and current_title not ilike '%anesthesia%'
+and current_title not ilike '%crna%'
+
+and current_title not ilike '%paralegal%'
+and current_title not ilike '%admission%'
+and current_title not ilike '%advice%'
+and current_title not ilike '%behavior%'
+and current_title not ilike '%corporate%'
+and current_title not ilike '%correctional%'
+and current_title not ilike '%community%'
+and current_title not ilike '%public health%'
+and current_title not ilike '%advanced practice%'
+and current_title not ilike '%aprn%'
+and current_title not ilike '%emergency%'
+and current_description not ilike '%emergency%'
+and current_title not ilike '%(er)%'
+and current_title not like '%review%'
+and current_title not like '% ER%'
+and current_title not like 'ER %'
+and current_title not like '%/ER %'
+and current_title not like '%,ER%'
+and current_title not like '%-ER%'
+and current_title not like '% ED%'
+and current_title not like 'ED %'
+and current_title not like '%/ED %'
+and current_title not like '%,ED%'
+and current_title not like '%-ED%'
+and current_title not like '%health coach%'
+and current_description not like '%labor and delivery%'
+and current_description not like '%labor & delivery%'
+and current_description not like '%l&d%'
+and current_description not like '%l & d%'
+and current_description not like '%partum%'
+and current_title not like '%DON%'
+and current_description not ilike '%school%'	
+and current_description not ilike '%practicum%'
+and current_description not ilike '%clinical experience%'
+and current_description not like '% ER%'
+and current_title not ilike '%health coach%'
+and current_title not ilike '%licensed%nurse%'
+and current_title not ilike '%lpn%'
+and current_title not ilike '%travel%'
+and current_title not ilike '%home%'
+and current_title not ilike '%lvn%'",2018-07-10 07:20:51.482348+00
+39,Clinical Manager,2017-10-02 19:15:32.386006+00,2018-07-10 07:17:56.427924+00,"The Clinical Manager's responsibilities include:
+
+- Implements and provides initial and ongoing operating room clinical leadership development, training, and guidance
+- Acts as a role model in mentoring and coaching clinical leaders.
+- Promotes sound clinical standards for clinical managers, associates and educators
+- Serves as a clinical resource to service office Directors, Division Directors and clinical leaders
+- Assumes a role in assuring consistently high quality service outcomes and program delivery
+- Accountable for supporting clinical leaders in the operating room
+- Effective execution high quality clinical care
+- Ensures regulatory specific clinical compliance
+- Maintains professional development for the clinical team
+- Provides clinical oversight to Clinical Managers and Associates by observing and confirming competency with assessments and supervisory visits 
+- Provides clinical oversight to Clinical Educators by observing and confirming competency of trainings and in-services through classroom observation",t,,1,,f,t,656,1,10,"with current_job as 
+(
+select distinct on (profile_experience.profile_id) profile_id, position_title as current_title, position_description as current_description, start_date, end_date, company_name
+from profile_experience 
+order by profile_id asc, end_date desc NULLS FIRST, start_date desc NULLS LAST
+)
+select distinct profile_id
+from current_job left join profile on current_job.profile_id = profile.id
+where 
+(
+	current_title ilike '%clinical%manager%'
+	or current_title ilike '%unit%manager%'
+	or current_title ilike '% rn %manager%'
+	or current_title ilike 'rn %manager%'
+	or current_title ilike '%nurse%manager%'
+)
+and current_title not ilike '%case manager%'
+and current_title not ilike '%care manager%'
+and current_title not ilike '%student%'
+and current_title not ilike '%assistant%'
+and current_title not ilike '%liaison%'
+and current_title not ilike '%coordinator%'
+and current_title not ilike '%practitioner%'
+and current_title not ilike '%np%'
+and current_title not ilike '%intern%'
+and current_title not ilike '%dialysis%'
+and current_title not ilike '%extern%'
+and current_title not ilike '%assistant%'
+and current_title not ilike '%tech%'
+and current_title not ilike '%director%'
+and current_title not ilike '%school%'
+and current_title not ilike '%case manager%'
+and current_title not ilike '%administrat%'
+and current_title not ilike '%flu%'
+and current_title not ilike '%intern%'
+and current_title not ilike '%extern%'
+and current_title not ilike '%dialysis%'
+and current_title not ilike '%aide%'
+and current_title not ilike '%paralegal%'
+and current_title not ilike '%consultant%'
+and current_title not ilike '%labor%'
+and current_title not ilike '%transport%'
+and current_title not ilike '%instructor%'
+and current_title not ilike '%educator%'
+and current_title not ilike '%faculty%'
+and current_title not ilike '%occupational%'
+and current_title not ilike '%office%'
+and current_title not ilike '%office%'
+and current_title not ilike '%nicu%'
+and current_title not ilike '%practicum%'
+and current_title not ilike '%coordinator%'
+and current_title not ilike '%nurse anesthetist%'
+and current_title not ilike '%crna%'
+and current_title not ilike '%paralegal%'
+and current_title not ilike '%admission%'
+and current_title not ilike '%advice%'
+and current_title not ilike '%behavior%'
+and current_title not ilike '%corporate%'
+and current_title not ilike '%correctional%'
+and current_title not like '% ECT %'
+and current_title not like 'ECT %'
+and current_title not ilike '%Electrophysiology%'",2018-07-10 07:17:56.427536+00
+57,Patient Care Technician (PCT),2018-04-24 19:49:44.163752+00,2018-07-10 07:21:18.526218+00,"Patient Care Technician Responsibilities
+
+- Provide basic patient care under direction of nursing staff.
+- Support the administrative and clinical operations of the practice.
+- Prepare, update and disseminates unit reports, physician orders and patient records.
+- Provide basic therapeutic services under direction of nursing staff.
+- EKG certification is a plus, but not required
+- Phlebotomy Certification is a plus, but not required
+- Proficiency with computers and certain medical equipment
+- Strong communication skills
+- Assist with activities of daily living, personal care needs, nutrition and fluid needs
+- Measures vitals signs, interprets cardiac monitoring strips, identifies dysrhythmias, documents monitoring strips and reports information to the registered nurse. 
+- Performs ECGs, venipuncture, capillary blood glucose testing
+- Patient Transport and Environment of Care duties.
+- A high school diploma and graduation from a certified nursing assistant or paramedic program are generally required
+- Current CPR certification is required",f,,5,,f,t,739,0,16,"select distinct profile_id from
+( select distinct on (profile_experience.profile_id) profile_id, position_title as current_title, position_description as current_description
+from profile_experience 
+order by profile_id asc, end_date desc NULLS FIRST, start_date desc NULLS LAST
+) current_job
+left join profile on current_job.profile_id = profile.id
+where 
+	(
+	current_title like '%patient%care%tech%'
+	or current_title ilike '%pct%'
+	)
+and not current_title ilike '%registered%nurse%'
+and not current_title ilike '%home%health%aide%'
+and not current_title ilike '%director%'
+and not current_title like '%RN%'
+and not current_title like '%nurse%'
+",2018-07-10 07:21:18.525842+00
+37,Medical Assistant,2017-09-18 07:55:30.220964+00,2018-07-10 07:21:24.982742+00,"The Medical Assitant's duties include but are not limited to:
+
+- Interviews patients, measures vital signs (i.e., pulse rate, temperature, blood pressure, weight, and height), and records information on patients' charts and updates electronic medical records as appropriate.
+
+- Support the clinical provider (physician, advanced practice nurse or physician assistant) in documenting histories, explaining and performing treatment procedures or tests and answering questions as appropriate. 
+
+- May be required to draw and collect blood samples from patients and prepare specimens for laboratory analysis.
+
+- Collecting and processing specimens and point of care testing, preparing for exam, etc. 
+
+- Relays instructions to patients and or families. Answers calls and provides pertinent information.
+
+- Fulfills clerical responsibilities as assigned which may include: sending and receiving patient medical records; obtaining lab/x-ray reports, hospital notes, referral information, etc. Completing forms and requisitions as needed.
+
+- Managing charts to ensure information is completed and filed appropriately. These responsibilities may be carried out using the electronic medical record (EMR) system or manually as necessary.
+
+- Enters orders into the electronic medical record (EMR) system or prepares prescription refill requests on behalf of the physician for the review and approval by the ordering physician.
+
+- Provides set-up of examination room and instruments in accordance with proper sterilization techniques established by hospital and infection control policies.
+
+",t,,5,,f,t,658,3,17,"Select distinct(profile_id)
+from
+
+( select distinct on (profile_experience.profile_id) profile_id, position_title as current_title, position_description as current_description
+from profile_experience 
+order by profile_id asc, end_date desc NULLS FIRST, start_date desc NULLS LAST
+) current_job
+
+inner join profile on profile.id = current_job.profile_id
+
+where 
+
+	(
+		current_title like '% MA %'
+		or current_title like 'MA %'
+		or current_title like '% MA'
+		or current_title like '%/MA %'
+		or current_title like '%/MA'
+		
+		or current_title like '% RMA %'
+		or current_title like 'RMA %'
+		or current_title like '% RMA'
+		or current_title like '%/RMA %'
+		or current_title like '%/RMA'
+		
+		or current_title like '%CMA%'
+		or current_title ilike '%medical assistant%'
+	)
+and current_title not ilike '%clinical manager%'
+and current_title not ilike '%nurse manager%'
+and current_title not ilike '%student%'
+and current_title not ilike '%liaison%'
+and current_title not ilike '%practitioner%'
+and current_title not ilike '%nurse%'
+and current_title not ilike '%extern%'
+and current_title not ilike '%school%'
+and current_title not ilike '%case manager%'
+and current_title not ilike '%intern%'
+and current_title not ilike '%lpn%'
+and current_title not ilike '%paralegal%'
+and current_title not ilike '%consultant%'
+and current_title not ilike '%instructor%'
+and current_title not ilike '%educator%'
+and current_title not ilike '%faculty%'
+and current_title not ilike '%home%'
+and current_title not ilike '%tech%'
+and current_title not ilike '%cna%'
+and current_title not ilike '%lvn%'
+and current_title not like '%RN%'
+and current_title not ilike '%caregiver%'
+--
+and current_title not ilike '%hospitalist%'
+
+",2018-07-10 07:21:24.982374+00
+41,Physical Therapist,2017-10-11 20:14:10.421588+00,2018-07-10 07:21:34.732366+00,"The adult/geriatric home care physical therapist's duties include:
+
+- Make home visits to clients in designated geographic territories.
+
+- Perform diagnostic tests and measurements, such as the mobility and range of joints, transfer status, stability, patterns and appearance of ambulation, strength and endurance of muscles, balance testing, and safety assessments.
+
+- Develop and implement appropriate individualized care plans, including manual therapeutic exercises, gait training, balance, stimulation or massage, and other interventions.
+
+- Continually assess and revise the physical therapy care plan, and participate with nursing in the multidisciplinary care plan, as appropriate.
+
+- Educate and instruct clients, family members, or other client representatives, in rehabilitative care, exercise techniques, and activities necessary to promote the client's health, safety, and independent living.
+
+- Maintain patients records, keeping track of goals and progress. Accurately document observations, interventions, and evaluations pertaining to client care management and services provided.",t,,6,,f,t,806,2,18,"Select distinct past_job_matches.profile_id
+from
+( select profile_id, position_title as match_title, position_description as match_description
+	from profile_experience
+	left join profile on profile.id = profile_experience.profile_id
+	where 
+	(
+		position_title like '% PT %'
+		or position_title like 'PT %'
+		or position_title like '% PT'
+		or position_title like '%/PT %'
+		or position_title like '%/PT'
+		or position_title ilike '%physical therapist%'
+		or position_title ilike '%massage therapist%'
+	)
+		--> Make sure they are not above or below this position
+	and position_title not ilike '%occupational%'
+	and position_title not ilike '%assist%'
+	and position_title not ilike '%asst%'
+	and position_title not ilike '%aide%'
+	and position_title not ilike '%physical therapist office%'
+	and position_title not ilike '%midwife%'
+	and position_title not ilike '%tech%'
+	and position_title not ilike '%intern%'
+	and position_title not ilike '%case manager%'
+	and position_title not ilike '%practitioner%'
+	and position_title not ilike '%lpn%'
+	and position_title not like '%RN%'
+	and position_title not ilike '%nurse%'
+	and position_title not ilike '%clinical manager%'
+	and position_title not ilike '%instructor%'
+) past_job_matches
+
+inner join 
+
+( select distinct on (profile_experience.profile_id) profile_id, position_title as current_title, position_description as current_description
+from profile_experience 
+order by profile_id asc, end_date desc NULLS FIRST, start_date desc NULLS LAST
+) current_job
+on (past_job_matches.profile_id = current_job.profile_id)
+
+inner join profile on profile.id = past_job_matches.profile_id
+
+where 
+ current_title not ilike '%student%'
+and current_title not ilike '%liaison%'
+and current_title not ilike '%practitioner%'
+and current_title not ilike '%nurse%'
+and current_title not ilike '%occupational%'
+and current_title not ilike '%assist%'
+and current_title not ilike '%aide%'
+and current_title not ilike '%midwife%'
+and current_title not ilike '%tech%'
+and current_title not ilike '%intern%'
+and current_title not ilike '%extern%'
+and current_title not ilike '%school%'
+and current_title not ilike '%case manager%'
+and current_title not ilike '%clinical manager%'
+and current_title not ilike '%lpn%'
+and current_title not ilike '%hospitalist%'
+and	current_title not ilike '%lvn%'
+and	current_title not like '%RN%'
+and	current_title not like '%NP%'
+and	current_title not ilike '%sales%'
+and	current_title not ilike '%bartender%'
+and	current_title not ilike 'rn %'
+and	current_title not ilike '%cna%'
+and	current_title not ilike '%office%'
+and	current_title not ilike '% rn %'
+and	current_title not like '%PTA%'
+",2018-07-10 07:21:34.731978+00
+55,"Licensed Practical Nurse (LPN, LVN)",2018-03-27 20:11:53.932226+00,2018-07-10 07:18:13.034913+00,"The nurse’s duties include but are not limited to:
+- Utilizing the Nursing Process in the planning and delivery of care, 
+- Coordinating patient care, demonstrating safe practice, developing a nurse-patient/family relationship
+- Applying clinical leadership and problem solving
+- Preparing and clarifying treatment schedules for patients
+- Instructing individuals, families, or other groups on topics such as health education, disease prevention, or childbirth and developing health improvement programs
+- Administering medications to patients and monitoring patients for reactions or side effects
+- Recording and monitoring patients' medical information and vital signs
+- Performing venipuncture and administering IV fluids
+- Independently collects pertinent laboratory data into the plan of care 
+- Complies with all regulations and standards of regulatory and accrediting bodies
+- Some experience with EHR and EMR medical software is a plus.  E.g. Epic Systems, MEDITECH software, eClinicalWorks, Cerner, etc
+- Current CPR / BLS certification is a plus
+
+Requirements:
+Graduate of an accredited school of nursing
+Active state nursing license in good standing
+Must be able to assume responsibility and perform assigned tasks without direct supervision",t,,1,,f,t,589,0,11,"with current_job as 
+(
+select distinct on (profile_experience.profile_id) profile_id, position_title as current_title, position_description as current_description
+from profile_experience 
+order by profile_id asc, end_date desc NULLS FIRST, start_date desc NULLS LAST
+)
+select distinct profile_id
+from current_job left join profile on current_job.profile_id = profile.id
+where 
+
+(	current_title ilike '%LPN%'
+	or current_title ilike '%license%practical%nurse%'
+	or current_title ilike '%license%vocation%nurse%'
+	or current_title like '%LVN%'
+)
+
+and job_id <> 55",2018-07-10 07:18:13.034517+00
+42,Occupational Therapist,2017-10-11 20:22:03.871547+00,2018-07-10 07:21:43.562369+00,"The Adult/Geriatric Home Health Occupational Therapist's duties include:
+
+- Make home visits to clients in designated geographic territories.
+
+- Perform thorough evaluations of patients’ functional status, including muscle function, endurance, visual coordination, written and verbal communication skills and ADL and IADL performance.
+
+- Assess cognitive, psychological and motor aspects of performance and develop individualized intervention plans to achieve favorable outcomes.
+
+- Evaluate home environment for hazards or barriers to more independent living.
+
+- Identify equipment needs and environmental adaptations resulting in enhanced outcomes for clients.
+
+- Continually assess and revise the occupational therapy care plan, and participate with nursing in the multidisciplinary care plan, as appropriate.
+
+- Educate and instruct patients, family members, or other patient representatives, in rehabilitative care and activities necessary to promote the client's health, safety and independent living.
+
+- Accurately document observations, interventions and evaluations pertaining to patient care management and services provided.
+
+- Organizes and conducts occupational therapy programs for the agency to facilitate rehabilitation. 
+
+- Directs patient participation in selected tasks to restore, reinforce, and enhance performance. 
+",t,,6,,f,t,744,2,19,"Select distinct past_job_matches.profile_id
+from
+( select profile_id, position_title as match_title, position_description as match_description
+	from profile_experience
+	left join profile on profile.id = profile_experience.profile_id
+	where 
+	(
+		position_title like '% OT %'
+		or position_title like 'OT %'
+		or position_title like '% OT'
+		or position_title like '%/OT %'
+		or position_title like '%/OT'
+		or position_title ilike '%occupational therapist%'
+	)
+		--> Make sure they are not above or below this position
+	and position_title not ilike '%assist%'
+	and position_title not ilike '%asst%'
+	and position_title not ilike '%aide%'
+	and position_title not ilike '%physical therapist office%'
+	and position_title not ilike '%midwife%'
+	and position_title not ilike '%tech%'
+	and position_title not ilike '%intern%'
+	and position_title not ilike '%case manager%'
+	and position_title not ilike '%practitioner%'
+	and position_title not ilike '%lpn%'
+	and position_title not like '%RN%'
+	and position_title not ilike '%nurse%'
+	and position_title not ilike '%clinical manager%'
+	and position_title not ilike '%instructor%'
+) past_job_matches
+
+inner join 
+
+( select distinct on (profile_experience.profile_id) profile_id, position_title as current_title, position_description as current_description
+from profile_experience 
+order by profile_id asc, end_date desc NULLS FIRST, start_date desc NULLS LAST
+) current_job
+on (past_job_matches.profile_id = current_job.profile_id)
+
+inner join profile on profile.id = past_job_matches.profile_id
+
+where 
+ current_title not ilike '%student%'
+and current_title not ilike '%liaison%'
+and current_title not ilike '%practitioner%'
+and current_title not ilike '%nurse%'
+and current_title not ilike '%assist%'
+and current_title not ilike '%aide%'
+and current_title not ilike '%midwife%'
+and current_title not ilike '%tech%'
+and current_title not ilike '%intern%'
+and current_title not ilike '%extern%'
+and current_title not ilike '%school%'
+and current_title not ilike '%case manager%'
+and current_title not ilike '%clinical manager%'
+and current_title not ilike '%lpn%'
+and current_title not ilike '%hospitalist%'
+and	current_title not ilike '%lvn%'
+and	current_title not like '%RN%'
+and	current_title not like '%NP%'
+and	current_title not ilike '%sales%'
+and	current_title not ilike '%bartender%'
+and	current_title not ilike 'rn %'
+and	current_title not ilike '%cna%'
+and	current_title not ilike '%office%'
+and	current_title not ilike '% rn %'
+and	current_title not like '%PTA%'
+",2018-07-10 07:21:43.561958+00

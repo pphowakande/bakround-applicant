@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}
+Bakround | Welcome
+{% endblock %}
+
+{% block content %}
+<style>
+  .signup-container {
+    max-width: 75vw;
+    text-align: center;
+  }
+  .step-header {
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-weight:500;
+  }
+  .step-img {
+    padding: 10px;
+  }
+</style>
+
+<div class="wireframe-centered-column signup-font signup-container grey-font display-flex">
+  <div style="text-align: left; margin: auto;">
+    <h1 class='signup-font'>Get Started with Bakround</h1>
+    <p style='font-size:16px; max-width: 400px;'> Sign up takes less than a minute. Just enter your email below to claim your profile to see your score. </p>
+    <form method="POST">
+      {% csrf_token %}
+      <P>Email Address</P>
+      <input type="email" name="email" value="" required="true" autofocus style="display:block;width:100%;max-width:414px;">
+      {% if is_email_invalid %}
+        <div class="text-danger" style="font-size: 10px">
+          Please enter a valid e-mail address.
+        </div>
+      {% endif %}
+      {% if is_email_already_used %}
+        <div class="text-danger" style="font-size: 16px; font-weight: bold">
+          That e-mail address has already been used to create an account.
+        </div>
+      {% endif %}
+      <button type="submit" style="width: 100px; margin-top:10px;"
+            class="btn btn-default btn-round wireframe-rounded-button">next</button>
+    </form>
+
+    <hr style="border-color: #404040">
+
+    <div style="text-align: center">
+      Or <a class='primary-dark-blue' href="/accounts/login/">Sign In</a>
+    </div>
+  </div>
+</div>
+<br>
+<div class='row text-center' style='color:grey;'>
+  <div class='col-md-3'>
+      <img src="{% static 'images/folder-icon.svg' %}" alt="" class='step-img'>
+      <p class='step-header' style='color:#009bde'>Collect</p>
+      <p>Single location to store all of your employment information</p>
+  </div>
+  <div class='col-md-3'>
+      <img src="{% static 'images/check-icon.svg' %}" alt="" class='step-img'>
+      <p class='step-header' style='color:#8ad2e6'>Certify</p>
+      <p>Certify your information as legitimate so employers trust you</p>
+  </div>
+  <div class='col-md-3'>
+      <img src="{% static 'images/doc-icon.svg' %}" alt="" class='step-img'>
+      <p class='step-header' style='color:#ffc843'>Score</p>
+      <p>See where you stack up against everyone else by getting your bScore™</p>
+  </div>
+  <div class='col-md-3'>
+      <img src="{% static 'images/out-icon.svg' %}" alt="" class='step-img'>
+      <p class='step-header' style='color:#ff9e16'>Share</p>
+      <p>Invite employers to view your profile - making their lives easier and getting you to work faster</p>
+  </div>
+</div>
+
+{% endblock %}

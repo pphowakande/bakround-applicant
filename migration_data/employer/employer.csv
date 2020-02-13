@@ -1,0 +1,104 @@
+id,company_name,phone,gender,summary,street_address,city,state_id,zip_code,date_created,date_updated,can_send_email,custom_email_body,logo_file_name,job_family_id,spreadsheet_webhook,candidate_queue_enabled,auto_contact_enabled,short_company_name,industry_id,website_url,is_demo_account,show_candidates_for_different_job,company_description,external_contacting_enabled,contact_url,gh_account_name,gh_api_token
+59,Expert QA,,,,,Philadelphia,3963,,2018-02-06 19:52:04.405606+00,2018-02-06 19:52:04.405606+00,f,,,1,,f,f,Expert QA,1,,f,f,,f,,,
+2,Letitia,,,,,,,,2017-05-09 18:07:59.392095+00,2017-05-09 18:07:59.392095+00,f,,,1,,f,f,,1,,f,f,,f,,,
+51,Select Rehab,,,,,West Nyack,3956,,2017-11-09 15:42:43.505466+00,2017-11-09 15:42:43.505498+00,t,,,6,,f,f,,1,,f,f,,f,,,
+3,mjohnson,,,,,,,,2017-05-10 05:23:50.882266+00,2017-05-10 05:23:50.882266+00,f,,,1,,f,f,,1,,f,f,,f,,,
+6,Natick VNA,617-312-9371,,,,Natick,3943,,2017-08-04 20:56:59.651733+00,2017-08-04 20:56:59.651763+00,t,,,1,,f,f,,1,,f,f,,f,,,
+7,UPenn,,,,,Philadelphia,3963,,2017-08-04 21:03:48.974379+00,2017-08-04 21:03:48.974412+00,t,,,1,,f,f,,1,,f,f,,f,,,
+5,BKRND,9999999999,,,,Philadelphia,3963,,2017-08-04 05:16:51.578356+00,2017-08-04 05:16:51.578382+00,t,,,1,,f,f,,1,,f,f,,f,,,
+18,CareMore Anthem,515 306 3336,,,,Des Moines,3936,,2017-08-25 23:49:15.198945+00,2017-08-25 23:49:15.198973+00,t,,,1,,f,f,,1,,f,f,,f,,,
+4,Pub and Kitchen,,,,,,,,2017-07-20 21:53:38.511804+00,2017-07-20 22:00:38.277697+00,t,"<p class=""MsoNormal"" style=""margin: 0px; color: #222222; font-family: arial, sans-serif; font-size: 12.8px;"">We came across your resume and were immediately impressed with your experience. We think that you would be a&nbsp;great fit for the Pub &amp; Kitchen&nbsp;team, and would like to invite you to our office for an interview. Please let&nbsp;us know if&nbsp;you&rsquo;re interested, and if so, what your availability is for the&nbsp;interview. Hope to hear from you soon!</p>
+<p class=""MsoNormal"" style=""margin: 0px; color: #222222; font-family: arial, sans-serif; font-size: 12.8px;"">&nbsp;</p>
+<p><img src=""https://s3.amazonaws.com/applicant-files-prod/employer_assets/e6015852ae18411d98bb8cd539058680.jpg"" style=""max-height: 150px; max-width: 150px"" /></p>
+<div style=""color: #222222; font-family: arial, sans-serif; font-size: 12.8px;"">1946 Lombard Street</div>
+<div style=""color: #222222; font-family: arial, sans-serif; font-size: 12.8px;"">Philadelphia, PA 19146</div>
+<div style=""color: #222222; font-family: arial, sans-serif; font-size: 12.8px;""><a href=""http://www.thepubandkitchen.com"">www.thepubandkitchen.com</a></div>
+<p>&nbsp;</p>",employer_assets/e6015852ae18411d98bb8cd539058680.jpg,2,https://hooks.zapier.com/hooks/catch/1021473/5np30b/,f,f,,2,,f,f,,f,,,
+8,Cataract and Laser Center West,4138963967,,,,South Hadley,3943,,2017-08-15 00:13:28.729126+00,2017-08-15 00:13:28.729154+00,t,,,1,,f,f,,1,,f,f,,f,,,
+9,BAYADA,,,,,"",,,2017-08-16 00:31:11.439082+00,2017-08-16 00:31:11.439114+00,t,,,1,,f,f,,1,,f,f,,f,,,
+10,The Forum Group,516-270-5641,,,,New York ,3956,,2017-08-16 17:10:12.594571+00,2017-08-16 17:10:12.594602+00,t,,,1,,f,f,,1,,f,f,,f,,,
+19,ManpowerGroup,2629496623,,,,Genoa City,3977,,2017-08-28 12:00:51.624288+00,2017-08-28 12:00:51.62432+00,t,,,1,,f,f,,1,,f,f,,f,,,
+40,Kalispell Regional Medical Center,406-439-4607,,,,Whitefish,3949,,2017-09-21 02:09:45.662568+00,2017-09-21 02:09:45.662596+00,t,,,1,,f,f,,1,,f,f,,f,,,
+52,Self-Employed,7014920423,,,,Los Angeles,3924,,2017-11-17 00:27:56.836237+00,2017-11-17 00:27:56.836264+00,t,,,1,,f,f,,1,,f,f,,f,,,
+57,Angel People Placements,3234846414,,,,Los Angeles,3924,,2017-12-20 17:52:59.537944+00,2017-12-20 17:52:59.537969+00,t,,,1,,f,f,,1,,f,f,,f,,,
+53,Passages Addiction Treatment Centers,4243883046,,,,Malibu,3924,,2017-11-30 10:35:54.775077+00,2017-11-30 10:35:54.775105+00,t,,,1,,f,f,,1,,f,f,,f,,,
+12,bayada home care,,,,,"",,,2017-08-23 01:34:49.540879+00,2017-08-23 01:34:49.540911+00,t,,,1,,f,f,,1,,f,f,,f,,,
+13,Saint Patrick Hospital,4063295850,,,,Missoula,3949,,2017-08-23 14:06:54.08571+00,2017-08-23 14:06:54.085738+00,t,,,1,,f,f,,1,,f,f,,f,,,
+14,Orlando Health,321-525-6507,,,,Orlando,3930,,2017-08-24 11:42:54.279831+00,2017-08-24 11:42:54.279858+00,t,,,1,,f,f,,1,,f,f,,f,,,
+15,Fortus Group,(706)951-8590,,,,Monroe,3975,,2017-08-24 21:08:46.412674+00,2017-08-24 21:08:46.412701+00,t,,,1,,f,f,,1,,f,f,,f,,,
+16,"Veterans Administration Medical Center Hampton, VA",757-593-5615,,,,Poquoson,3974,,2017-08-24 23:17:41.09054+00,2017-08-24 23:17:41.090569+00,t,,,1,,f,f,,1,,f,f,,f,,,
+17,Swedish Medical Center ,206-320-2812,,,,Seattle,3975,,2017-08-24 23:48:14.478181+00,2017-08-24 23:48:14.478213+00,t,,,1,,f,f,,1,,f,f,,f,,,
+21,An academic healthcare organization,205-516-7482,,,,Hoover,3919,,2017-08-28 22:18:31.971027+00,2017-08-28 22:18:31.971055+00,t,,,1,,f,f,,1,,f,f,,f,,,
+22,Genex Services LLC,(702) 360-3172,,,,Las Vegas,3951,,2017-08-30 02:38:42.995658+00,2017-08-30 02:38:42.995687+00,t,,,1,,f,f,,1,,f,f,,f,,,
+23,Background,7275641811,,,,Safety Harbor,3930,,2017-08-31 00:24:36.309307+00,2017-08-31 00:24:36.309338+00,t,,,1,,f,f,,1,,f,f,,f,,,
+24,UAB Hospital,2059307268,,,,Birmingham,3919,,2017-08-31 18:05:15.236826+00,2017-08-31 18:05:15.236854+00,t,,,1,,f,f,,1,,f,f,,f,,,
+25,OSF HealthCare,309-624-4660,,,,Peoria,3934,,2017-09-01 18:00:34.9439+00,2017-09-01 18:00:34.943931+00,t,,,1,,f,f,,1,,f,f,,f,,,
+26,FieldstoneCM LLC,317-646-6636,,,,Deerfield,3977,,2017-09-04 14:09:01.479236+00,2017-09-04 14:09:01.479266+00,t,,,1,,f,f,,1,,f,f,,f,,,
+27,University of Washington,3603019867,,,,Seattle,3975,,2017-09-06 16:13:21.833435+00,2017-09-06 16:13:21.83346+00,t,,,1,,f,f,,1,,f,f,,f,,,
+29,Providence Regional Medical Center,503 806 5198,,,,Bellevue,3975,,2017-09-08 19:08:34.769601+00,2017-09-08 19:08:34.769631+00,t,,,1,,f,f,,1,,f,f,,f,,,
+28,none,6103564676,,,,broomall,3963,,2017-09-07 18:33:10.11543+00,2017-09-07 18:33:10.115459+00,f,,,1,,f,f,,1,,f,f,,f,,,
+30,Self Employed,4403763954,,,,Mentor,3959,,2017-09-11 18:06:06.019257+00,2017-09-11 18:06:06.019286+00,f,,,1,,f,f,,1,,f,f,,f,,,
+31,Healogics,7737326853,,,,Chicago,3934,,2017-09-11 23:20:44.24972+00,2017-09-11 23:20:44.249747+00,t,,,1,,f,f,,1,,f,f,,f,,,
+32,United Health Care,8622208549,,,,STANHOPE ,3953,,2017-09-13 01:45:55.100953+00,2017-09-13 01:45:55.100984+00,t,,,1,,f,f,,1,,f,f,,f,,,
+60,Doctors on Call,,,,,Philadelphia,3963,,2018-03-16 00:36:25.745458+00,2018-03-20 20:48:13.971881+00,t,,employer_assets/cb904aa27ae149f0a3c70da200bf9bea.gif,1,,t,t,Doctors on Call,1,,f,f,,f,,,
+33,Advocate Healthcare ,815-272-3777,,,,New Lenox,3934,,2017-09-13 16:07:35.319397+00,2017-09-13 16:07:35.319428+00,t,,,1,,f,f,,1,,f,f,,f,,,
+11,Schulson Collective,,,,,Philadelphia,3963,,2017-08-18 21:00:41.996784+00,2017-09-26 14:30:02.459464+00,t,"<p>We saw your resume, and we'd like to discuss your qualifications and background with you. Looking forward to hearing from you!</p>
+<p>Best,</p>
+<p>Nate Weber</p>
+<p>Director of Human Resources<br />Schulson Collective</p>
+<p><span style=""color: #333333; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;""><img src=""https://s3.amazonaws.com/applicant-files-prod/employer_assets/602dbf09ea134e17a90a67c396b6e1fd.jpg"" style=""max-height: 150px; max-width: 150px"" /></span></p>",employer_assets/602dbf09ea134e17a90a67c396b6e1fd.jpg,2,https://hooks.zapier.com/hooks/catch/1021473/rwxxrv/,f,f,,2,,f,f,,f,,,
+34,NYS Dept of Health,347-679-1770,,,,Staten Island,3956,,2017-09-14 22:55:48.375438+00,2017-09-14 22:55:48.375467+00,t,,,1,,f,f,,1,,f,f,,f,,,
+35,Self-Employed,,,,,Des Plaines,3934,,2017-09-14 23:29:18.017229+00,2017-09-14 23:29:18.017257+00,t,,,1,,f,f,,1,,f,f,,f,,,
+36,Home Health,,,,,Linden,3953,,2017-09-17 15:49:54.392107+00,2017-09-17 15:55:22.346505+00,t,"<p>We saw your profile on Bakround, and we think you'd be perfect for this position. Looking forward to hearing from you!</p>
+<p>Best,</p>
+<p>Yitzchak David<br />Home Health</p>",,1,,f,f,,1,,f,f,,f,,,
+37,The Kidz Club,,,,,Louisville,3938,,2017-09-18 16:24:23.56673+00,2017-09-18 16:24:23.566757+00,t,,,1,,f,f,,1,,f,f,,f,,,
+38,CMMC,207-240-0098,,,,Freeport,3941,,2017-09-18 22:09:17.018793+00,2017-09-18 22:09:17.018824+00,t,,,1,,f,f,,1,,f,f,,f,,,
+39,Genex Services LLC,7023603172,,,,LAs Vegas,3951,,2017-09-19 20:17:43.696036+00,2017-09-19 20:17:43.696067+00,t,,,1,,f,f,,1,,f,f,,f,,,
+41,Healthcare Partners of Nevada,7022755143,,,,Henderson,3951,,2017-09-21 12:03:59.079577+00,2017-09-21 12:03:59.079607+00,t,,,1,,f,f,,1,,f,f,,f,,,
+42,Princeton Healthcare ,,,,,Princeton,3953,,2017-10-03 23:39:38.273586+00,2017-10-03 23:39:38.273637+00,t,,,1,,f,f,,1,,f,f,,f,,,
+43,Tullysgoodtimes,7165253580,,,,North tonawanda,3956,,2017-10-04 07:12:29.070108+00,2017-10-04 07:12:29.070137+00,t,,,2,,f,f,,2,,f,f,,f,,,
+44,Penn Medicine,215-615-2669,,,,Philadelphia,3963,,2017-10-06 19:31:10.015489+00,2017-10-06 19:31:10.01552+00,t,,,1,,f,f,,1,,f,f,,f,,,
+46,Saxbys,,,,,Philadelphia,3963,,2017-10-10 14:30:16.297451+00,2017-10-10 14:30:16.29748+00,t,,,2,https://hooks.zapier.com/hooks/catch/1021473/idegq1/,f,f,,2,,f,f,,f,,,
+47,Oscar Health Insurance,9175724870,,,,Staten Island,3956,,2017-10-19 02:34:45.420417+00,2017-10-19 02:34:45.420445+00,t,,,1,,f,f,,1,,f,f,,f,,,
+48,TEST ,,,,,Philadelphia,3963,,2017-10-20 17:43:28.60969+00,2017-10-20 17:43:28.609715+00,t,,,1,,f,f,,1,,f,f,,f,,,
+50,Dartmouth,6039274446,,,,Sutton,3952,,2017-10-27 00:06:40.296452+00,2017-10-27 00:06:40.296484+00,t,,,1,,f,f,,1,,f,f,,f,,,
+49,boatyard grill  Ciao pizza/pasta,607-256-3619,,,,ithaca,3956,,2017-10-24 22:34:17.88996+00,2017-10-24 22:34:17.889992+00,t,,,2,,f,f,,2,,f,f,,f,,,
+58,Kasey's PTs,,,,,Philadelphia,3963,,2017-12-21 16:08:03.911014+00,2017-12-21 16:08:03.911046+00,f,,,6,,f,f,,1,,f,f,,f,,,
+55,Jefferson Health,,,,,Philadelphia,3963,,2017-12-13 23:15:55.083917+00,2018-01-17 19:11:46.216862+00,t,"<p>We saw your profile on Bakround, and we think you may be interested in this position. Looking forward to hearing from you!</p>&#13;
+<p> </p>&#13;
+<p>Mary Marczyk RN, MSN, CHCR</p>&#13;
+<p>Nurse Recruiter<br/>Jefferson Health</p>&#13;
+<p><img src=""https://s3.amazonaws.com/applicant-files-prod/employer_assets/fcd3e930b440419bae6324da969094a2.jpg""/></p>",employer_assets/fcd3e930b440419bae6324da969094a2.jpg,1,,t,t,Jefferson,1,http://www.jeffersonhealth.org/index.html,f,f,,f,,,
+54,Main Line Health,,,,,Philadelphia,3963,,2017-12-07 01:14:26.638259+00,2018-02-09 22:58:01.302717+00,t,"<p>We saw your profile on Bakround, and we think you'd be perfect for this position. Looking forward to hearing from you!</p><p>Best,</p><p>A N<br/>Main Line Health</p>",employer_assets/ada63661b3d443f8a0063436dfc33781.PNG,1,,f,f,Mainline,1,https://www.mainlinehealth.org/,f,f,,f,,,
+61,Boomtime,,,,,Albuquerque,3955,,2018-03-29 19:31:32.226429+00,2018-03-29 19:31:32.226458+00,t,,,1,,t,t,,1,,f,f,,f,,,
+62,boomtime,,,,,Albuquerque,3955,,2018-04-03 17:04:23.901297+00,2018-04-03 17:04:23.901325+00,t,,,1,,t,t,,1,,f,f,,f,,,
+56,Acme Health Services,,,,,Philadelphia,3963,,2017-12-19 15:56:02.326246+00,2018-05-02 14:37:27.765307+00,f,,employer_assets/f35ef6a432ee4bc6a929d4a6a28cb306.png,1,,f,f,Acme,1,,t,f,,f,,,
+1,Bakround,,,,,,,,2017-04-04 20:59:46.282422+00,2018-05-09 18:37:23.664955+00,f,"<p>We saw your profile on Bakround, and we think you'd be perfect for this position. Looking forward to hearing from you!</p>
+<p>Best,</p>
+<p>Ajay Nayak<br />Bakround</p>
+<p><img src=""https://s3.amazonaws.com/applicant-files-prod/employer_assets/6c29891321a54af194cf3c8091f70071.jpg"" style=""max-height: 150px; max-width: 150px"" /></p>",employer_assets/0a0ab716501f434a92d49b9ec1b20b9c.jpg,1,,t,t,Bakround,1,https://www.bakround.com,t,f,"<p data-ph-id=""ph-page-element-page3-ds2v1z-ds2v1z-9"">A career in home health care is a rewarding path, allowing you to make a real difference in people&rsquo;s lives every day. When you pursue a career with BAYADA, you join a nationally respected team that has been a leader in providing quality care and support inside the home since 1975.</p>
+<p data-ph-id=""ph-page-element-page3-ds2v1z-ds2v1z-11"">As a BAYADA professional, you will take advantage of support, resources, and supervision to help you develop and grow your leadership potential. From your first day of orientation through ongoing training in best practices, new protocols, state-of-the-art technologies, safety, and communication, BAYADA will nurture your success and create opportunities for you to achieve your career goals.</p>
+<p data-ph-id=""ph-page-element-page3-ds2v1z-ds2v1z-13"">We employ nearly 23,000 full-time and part-time clinical and non-clinical professionals. Choosing a career path with BAYADA will allow you to develop and use your skills in any one of our specialty practices, including, adult nursing, assistive care, pediatrics, habilitation, home health, or hospice. If you share our commitment to delivering the highest quality care and keeping clients safe at home, then join our team of compassionate professionals.</p>",f,,,
+63,Vertusa,5487589875,,,,Newark,3953,,2018-05-13 18:13:01.933721+00,2018-05-13 18:13:01.933755+00,t,,,1,,t,t,,1,,f,f,,f,,,
+64,Xenon Health ,8453006873,,,,Jersey City ,3953,,2018-05-22 12:46:03.031525+00,2018-05-22 12:46:03.031558+00,t,,,1,,t,t,,1,,f,f,,f,,,
+65,Gifted Healthcare,,,,2748 Metairie Lawn Drive,Metairie,3939,70002,2018-05-23 00:12:15.673965+00,2018-06-11 08:41:59.724116+00,t,,employer_assets/3476a098feb74b37a602215e5eedf185.jpg,1,,t,t,Gifted,1,https://www.giftedhealthcare.com/,f,f,"<p>Check out our jobs:&nbsp;<a href=""https://www.giftedhealthcare.com/jobs/"">https://www.giftedhealthcare.com/jobs/</a></p>
+<p>Learn about us:&nbsp;<a href=""https://www.linkedin.com/company/gifted-healthcare"">https://www.linkedin.com/company/gifted-healthcare</a></p>
+<p>See what people think: <a href=""https://www.glassdoor.com/Overview/Working-at-Gifted-Healthcare-EI_IE1084444.11,28.htm"">Working at Gifted Healthcare - Glassdoor</a></p>",t,,,
+66,Bakround,2123803078,,,,Bronx ,3956,,2018-06-21 01:03:18.711158+00,2018-06-21 01:03:18.711183+00,t,,,1,,t,t,,1,,f,f,,f,,,
+67,Van Petten Group,832-584-6400,,,,Chicago`,3934,,2018-07-03 02:01:09.448533+00,2018-07-03 02:01:09.448573+00,t,,,1,,t,t,,3,,f,f,,f,,,
+68,TalentCo,8155340763,,,,Atlanta,3931,,2018-07-03 18:30:59.709864+00,2018-07-03 18:30:59.709899+00,t,,,1,,t,t,,3,,f,f,,f,,,
+45,BAYADA Home Health Care,,,,740 Marne Highway S,Moorestown,3953,08057,2017-10-09 07:36:20.284485+00,2018-07-05 16:06:16.773721+00,t,"<p>I'm Bayada's first Career Navigator!  My job is to help find you a career with Bayada that you can be passionate about!  I have several opportunities in your area for management, hourly shift care, visits, and per diem!</p>&#13;
+<p>Our nurses choose their own hours, locations, and clients. Whether it be full-time, part-time, per diem, weekends, or last minute call-outs, we have a shift to meet your scheduling needs. Because we provide care for such a wide range of clients, we make every effort for our staff to select assignments that match their expertise and preference. </p>&#13;
+<p>Please connect with me at your earliest convenience to learn more about our exciting opportunities. If you are not interested at this time, please known I am here to help for future consideration.</p>&#13;
+<p>I look forward to working with you!</p>&#13;
+<p><strong>-----------------------</strong></p>&#13;
+<p><strong>Kara Lloyd</strong></p>&#13;
+<p>Sourcing Manager (RPO) | BAYADA Home Health Care</p>&#13;
+<p>4300 Haddonfield Road, East Building. Pennsauken, NJ  08109</p>&#13;
+<p>O: 856-406-0164| M: 267-453-8888 |  Cisco Ext.: 0198-19 | bayada.com</p>&#13;
+<p> </p>&#13;
+<p>Love what you do? Spread the love by referring a friend through BAYADA's Talent Scout bonus program. Click here: <a href=""http://bhhc.co/talentbonus"">http://bhhc.co/talentbonus</a></p>&#13;
+<p> </p>",employer_assets/e03a219cd61b44fa93b61e128cd81ea6.png,1,https://hooks.zapier.com/hooks/catch/1021473/idei0w/,t,t,Bayada,1,,f,t,"<p data-ph-id=""ph-page-element-page3-ds2v1z-ds2v1z-9"">A career in home health care is a rewarding path, allowing you to make a real difference in people&rsquo;s lives every day. When you pursue a career with BAYADA, you join a nationally respected team that has been a leader in providing quality care and support inside the home since 1975.</p>
+<p data-ph-id=""ph-page-element-page3-ds2v1z-ds2v1z-11"">As a BAYADA professional, you will take advantage of support, resources, and supervision to help you develop and grow your leadership potential. From your first day of orientation through ongoing training in best practices, new protocols, state-of-the-art technologies, safety, and communication, BAYADA will nurture your success and create opportunities for you to achieve your career goals.</p>
+<p data-ph-id=""ph-page-element-page3-ds2v1z-ds2v1z-13"">We employ nearly 23,000 full-time and part-time clinical and non-clinical professionals. Choosing a career path with BAYADA will allow you to develop and use your skills in any one of our specialty practices, including, adult nursing, assistive care, pediatrics, habilitation, home health, or hospice. If you share our commitment to delivering the highest quality care and keeping clients safe at home, then join our team of compassionate professionals.</p>",t,,,

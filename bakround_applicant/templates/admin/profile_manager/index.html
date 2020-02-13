@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+  Profile Manager
+{% endblock %}
+
+{% block content %}
+  <h3>
+    Profile Manager
+  </h3>
+
+  <style>
+    th, td {
+      padding: 10px;
+    }
+  </style>
+
+  <form method="POST" onsubmit="return check_for_required_arguments()">
+    {{ form.as_p }}
+    {% csrf_token %}
+    <input type="submit" value="Search"/>
+  </form>
+
+  <script>
+    function check_for_required_arguments()
+    {
+      var first_name = $("#id_first_name").val().trim();
+      var last_name = $("#id_last_name").val().trim();
+      var email = $("#id_email").val().trim();
+
+      if (first_name.length < 3 && last_name.length < 3 && email.length < 3){
+        alert("Please provide first name, last name, or email (at least 3 characters long).");
+        return false;
+      } else {
+        return true;
+      }
+    }
+  </script>
+
+  {% if show_results %}
+    <hr/>
+
+    {% if truncated %}
+      There are more than 100 matching profiles.  Showing the first 100.
+    {% else %}
+      There are {{ result_count }} matching profiles.
+    {% endif %}
+
+    <table style="border: 2px solid black">
+      <tr>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Email</th>
+        <th>Phone #</th>
+        <th>City</th>
+        <th>State</th>
+        <th>Primary Job</th>
+        <th>Profile PDF</th>
+      </tr>
+      {% for result in results %}
+        <tr style="background-color: {% cycle '#f0f0f0' '#f8f8f8' %}">
+          <td>{{ result.first_name }}</td>
+          <td>{{ result.last_name }}</td>
+          <td>{{ result.email }}</td>
+          <td>{{ result.phone|default_if_none:'' }}</td>
+          <td>{{ result.city }}</td>
+          <td>{{ result.state.state_code }}</td>
+          <td>{{ result.job.job_name }}</td>
+          <td><a href="/profile/pdf/{{ result.id }}?bkgen=1" target="_blank">Link</a></td>
+        </tr>
+      {% endfor %}
+    </table>
+  {% endif %}
+{% endblock %}

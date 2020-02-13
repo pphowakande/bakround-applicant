@@ -1,0 +1,316 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block content %}
+
+<script src="{% static 'vendor/typeahead.js/typeahead.bundle.min.js' %}"></script>
+
+<style>
+  .tt-open {
+    cursor: pointer;
+    opacity: 1.0;
+    background-color: white;
+  }
+
+  .tt-suggestion {
+    background-color: #f0f0f0;
+    border: 1px solid gray;
+  }
+</style>
+
+<h3>
+  Profile Name: {{ job.job_name }}
+</h3>
+
+<P>
+  <b>
+    Changes do not take effect until you click Save at the bottom of the page.
+  </b>
+</P>
+
+<P>
+  Job name:
+  <input type="text" id="job_name" value="{{ job.job_name }}" size="30">
+</P>
+
+<P>
+  Job description:
+  <br/>
+  <textarea id="job_description" rows="5" cols="80">{{ job.job_description }}</textarea>
+</P>
+
+<P>
+  Based on: {{ job.parent_job.job_name }}
+</P>
+
+<hr/>
+
+<div id="skill_template" style="display: none; padding: 10px">
+  <span class="skill_name"></span>
+  <input type="hidden" class="skill_id">
+  (weight
+  <select class="default_weightage">
+    {% for weight in possible_skill_weights %}
+      <option value="{{ weight }}">{{ weight }}</option>
+    {% endfor %}
+  </select>,
+  experience months
+  <input type="number" class="experience_months" value="0" min="0" max="1000" required>)
+  <a href="#!" onclick="remove_skill(this)">(remove)</a>
+</div>
+
+
+<div id="cert_template" style="display: none; padding: 10px">
+  <span class="cert_name"></span>
+  <input type="hidden" class="cert_id">
+  <a href="#!" onclick="remove_cert(this)">(remove)</a>
+</div>
+
+
+<table style="width: 100%">
+  <tr>
+    <td style="width: 50%; vertical-align: top">
+      <form id="add_skill_form" style="margin-bottom: 30px">
+        Add Skill:
+        <input type="text" id="new_skill_name">
+        <input type="button" value="Add" onclick="add_skill()">
+      </form>
+      <div id="skills_area"></div>
+    </td>
+    <td style="width: 50%; vertical-align: top">
+      <form id="add_cert_form" style="margin-bottom: 30px">
+        Add Cert:
+        <input type="text" id="new_cert_name">
+        <input type="button" value="Add" onclick="add_cert()">
+      </form>
+      <div id="certs_area"></div>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2">
+      <form id="submit_form" method="POST" action="{% url 'employer:custom_job_profile_modify' job.id %}"
+          style="margin-top: 30px">
+        {% csrf_token %}
+        <input type="button" value="Save" onclick="submit_form()">
+        <input type="hidden" name="submitted_json" id="submitted_json">
+        &nbsp;or&nbsp;
+        <a href="{% url 'employer:custom_job_profile_index' %}">Cancel and go back</a>
+      </form>
+    </td>
+  </tr>
+</table>
+
+
+
+<script>
+  function show_job_skill(job_skill){
+    var block = $("#skill_template").clone();
+    block.addClass('skill_div');
+
+    block.attr('id', 'skill_' + job_skill.skill.id);
+    block.find('.skill_name').text(job_skill.skill.skill_name);
+    block.find('.skill_id').val(job_skill.skill.id);
+    block.find('.default_weightage').val(job_skill.default_weightage);
+    block.find('.experience_months').val(job_skill.experience_months);
+
+    $("#skills_area").append(block);
+    block.show();
+  }
+
+  function show_job_cert(job_cert){
+    var block = $("#cert_template").clone();
+    block.addClass('cert_div');
+
+    block.attr('id', 'cert_' + job_cert.certification.id);
+    block.find('.cert_name').text(job_cert.certification.certification_name);
+    block.find('.cert_id').val(job_cert.certification.id);
+
+    $("#certs_area").append(block);
+    block.show();
+  }
+
+  var attached_skills = JSON.parse("{{ attached_skills_json|escapejs }}");
+  attached_skills.forEach(function (elt){
+    show_job_skill(elt);
+  });
+
+
+  var attached_certs = JSON.parse("{{ attached_certs_json|escapejs }}");
+  attached_certs.forEach(function (elt){
+    show_job_cert(elt);
+  });
+
+
+  function get_prefixes_of_string(s){
+    var prefixes = [];
+    var i, n = s.length;
+    for (i = 0; i < n - 2; i++){
+      prefixes.push(s.substring(i, n));
+    }
+    return prefixes;
+  }
+
+
+  var all_skills = JSON.parse("{{ all_skills_json|escapejs }}");
+  var skills_bloodhound = new Bloodhound({
+    datumTokenizer: function (obj){ return get_prefixes_of_string(obj.skill_name) },
+    queryTokenizer: Bloodhound.tokenizers.whitespace,
+    local: all_skills
+  });
+
+  $("#new_skill_name").typeahead({
+    hint: false,
+    highlight: true,
+    minLength: 3
+  },
+  {
+    name: 'skills',
+    source: skills_bloodhound,
+    displayKey: "skill_name"
+  });
+
+
+  var all_certs = JSON.parse("{{ all_certs_json|escapejs }}");
+  var certs_bloodhound = new Bloodhound({
+    datumTokenizer: function (obj){ return get_prefixes_of_string(obj.certification_name) },
+    queryTokenizer: Bloodhound.tokenizers.whitespace,
+    local: all_certs
+  });
+
+  $("#new_cert_name").typeahead({
+    hint: false,
+    highlight: true,
+    minLength: 3
+  },
+  {
+    name: 'certs',
+    source: certs_bloodhound,
+    displayKey: "certification_name"
+  });
+
+
+  function add_skill(){
+    var skill_name = $("#new_skill_name").val();
+    var skill = find_skill_with_name(skill_name);
+
+    if (skill == null){
+      alert("That skill is not in our system.  Please select another.");
+      return;
+    }
+
+    if (is_skill_already_chosen(skill.id)){
+      alert("That skill is already chosen.  Please select another.");
+      $("#new_skill_name").focus();
+      return;
+    }
+
+    var askill = {"skill": skill, "default_weightage": 0, "experience_months": 0};
+    show_job_skill(askill);
+
+    $("#new_skill_name").typeahead('val', '');
+    $("#new_skill_name").focus();
+  }
+
+  function find_skill_with_name(skill_name){
+    var matches = [];
+
+    all_skills.forEach(function (skill){
+      if (skill.skill_name == skill_name){
+        matches.push(skill);
+      }
+    });
+
+    return matches.length > 0 ? matches[0] : null;
+  }
+
+  function is_skill_already_chosen(skill_id){
+    return $("#skill_" + skill_id).length > 0;
+  }
+
+  function remove_skill(elt){
+    $(elt).parent(".skill_div").remove();
+  }
+
+
+  function add_cert(){
+    var cert_name = $("#new_cert_name").val();
+    var cert = find_cert_with_name(cert_name);
+
+    if (cert == null){
+      alert("That certification is not in our system.  Please select another.");
+      return;
+    }
+
+    if (is_cert_already_chosen(cert.id)){
+      alert("That certification is already chosen.  Please select another.");
+      $("#new_cert_name").focus();
+      return;
+    }
+
+    var acert = {"certification": cert};
+    show_job_cert(acert);
+
+    $("#new_cert_name").typeahead('val', '');
+    $("#new_cert_name").focus();
+  }
+
+  function find_cert_with_name(cert_name){
+    var matches = [];
+
+    all_certs.forEach(function (cert){
+      if (cert.certification_name == cert_name){
+        matches.push(cert);
+      }
+    });
+
+    return matches.length > 0 ? matches[0] : null;
+  }
+
+  function is_cert_already_chosen(cert_id){
+    return $("#cert_" + cert_id).length > 0;
+  }
+
+  function remove_cert(elt){
+    $(elt).parent(".cert_div").remove();
+  }
+
+
+  function submit_form(){
+    skills = [];
+    $(".skill_div").each(function (i, elt){
+      var obj = get_values(elt, ['skill_id', 'default_weightage', 'experience_months']);
+      skills.push(obj);
+    });
+
+    certs = [];
+    $(".cert_div").each(function (i, elt){
+      var obj = get_values(elt, ['cert_id']);
+      certs.push(obj);
+    });
+
+    var json_submission = {
+      job_name: $("#job_name").val(),
+      job_description: $("#job_description").val(),
+      skills: skills,
+      certs: certs
+    };
+
+    $("#submitted_json").val(JSON.stringify(json_submission));
+    $("#submit_form").submit();
+  }
+
+  function get_values(elt, keys){
+    var mapping = {};
+
+    elt = $(elt);
+    keys.forEach(function (key){
+      mapping[key] = elt.find('.' + key).val();
+    });
+
+    return mapping;
+  }
+</script>
+
+
+{% endblock %}

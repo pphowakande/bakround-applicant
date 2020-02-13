@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+    {% if mode == 'create' %}
+        Create Region
+    {% else %}
+        Edit Region
+    {% endif %}
+{% endblock %}
+
+{% block content %}
+
+<center>
+    <h3>
+        {% if mode == 'create' %}
+            Create Region
+        {% else %}
+            Edit Region
+        {% endif %}
+    </h3>
+</center>
+
+<br />
+
+<form
+    id="region_form"
+    action="/sme_manager/{% ifequal mode 'create'%}create_region{% endifequal %}{% ifequal mode 'edit'%}edit_region/{{region_id}}{% endifequal %}" method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="button" value="Submit" onclick="try_to_submit()"/>
+</form>
+
+<script>
+  var has_submitted_yet = false;
+
+  function try_to_submit(){
+    if (has_submitted_yet){
+      return;
+    }
+
+    var city = $("#id_city").val(), state_id = $("#id_state").val();
+    var name = $("#id_name").val();
+
+    if (!city || !state_id || !name){
+      alert("Please provide a value for each field.");
+      return;
+    }
+
+    $.ajax({
+      url: "{% url 'sme_manager:does_city_exist' %}",
+      method: "POST",
+      headers: {
+        'X-CSRFToken': "{{ csrf_token }}"
+      },
+      data: {
+        city: city,
+        state_id: state_id
+      },
+      success: function (response){
+        if (response.does_city_exist){
+          has_submitted_yet = true;
+          $("#region_form").submit();
+        } else {
+          alert("That city/state combo is not in the database.");
+        }
+      }
+    });
+  }
+</script>
+
+{% endblock %}

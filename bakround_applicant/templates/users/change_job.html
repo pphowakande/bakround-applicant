@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block title %}
+Bakround | Change Job Profile
+{% endblock %}
+
+{% block content %}
+  <h3>Change Your Job Profile</h3>
+
+  <form method="POST" action="{% url 'users:change_job' %}" id="change_job_form"
+          style="margin-top: 30px">
+    {% csrf_token %}
+    Change job profile to:
+    <select name="new_job_id"
+            onchange="document.getElementById('change_job_form').submit()">
+      {% for job in jobs %}
+          <option value="{{ job.id }}"
+                  {% if job.id == profile.job_id %}
+                    selected
+                  {% endif %}
+          >{{ job.job_name }}</option>
+      {% endfor %}
+    </select>
+    <input type="submit" style="display: none">
+  </form>
+
+  <P style="margin-top: 10px">
+    If you don't want to change your job profile, you can
+    <a href="{% url 'account_settings' %}">return to Account Settings</a>.
+  </P>
+{% endblock %}

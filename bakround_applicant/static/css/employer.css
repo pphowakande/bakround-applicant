@@ -1,0 +1,311 @@
+body {
+    background-color: #fbfbfb !important;
+    font-family: 'Roboto Slab', serif;
+    font-weight: 300;
+}
+
+.fa-star.contactIcon:hover {
+    cursor: pointer;
+    opacity: .3;
+}
+
+.applicant-card {
+    background-color: white;
+    color: grey;
+    box-shadow: 0 0 0 1px rgba(0,0,0,.1), 0 2px 3px rgba(0,0,0,.2);
+    padding: 10px;
+    margin: 10px 0px;
+}
+.search-filter-container {
+    background: #eee;
+    margin:10px 0px;
+}
+.search-bar {
+    width:100%;
+    padding: 5px;
+    min-height:50px;
+    background: white;
+    border: .5px solid #ccc;
+}
+.search-input {
+    border: none;
+    width:70%;
+}
+.filter-bar {
+    justify-content: space-around;
+    border-bottom: 1px solid #ccc;
+    border-left: 1px solid #ccc;
+    border-right: 1px solid #ccc;
+}
+.dropdown-toggle {
+    background: transparent;
+    border: none;
+}
+.filter-pill {
+    background-color:#00548b;
+    color: white;
+    border-radius: 3px;
+    float: left;
+    height: 28px;
+    line-height: 28px;
+    margin: 2px 5px;
+    padding: 0 8px 0 8px;
+    font-weight: 300;
+    white-space: nowrap;
+}
+.skill-pill {
+    display:inline-block;
+    color: grey;
+    border-radius: 8px;
+    margin: 2px 5px;
+    padding: 0 8px 0 8px;
+    font-weight: 300;
+    border: 2px solid lightgrey;
+}
+.top-skill-pill {
+    display:inline-block;
+    color: grey;
+    border-radius: 8px;
+    border: 2px solid #199ad6;
+    margin: 2px 5px;
+    padding: 0 8px 0 8px;
+    font-weight: 400;
+
+}
+.search-placeholder-text {
+    color: grey;
+}
+.remove-filter-pill {
+    color:white;
+    padding:0px 5px;
+    cursor: pointer;
+}
+.remove-filter-pill:hover {
+    color:lightblue;
+}
+.candidateTitle {
+    font-size: 20px;
+    letter-spacing: 1px;
+    color: grey;
+}
+.candidateLabel {
+    display: table-cell;
+    padding: 0px 10px 0px 0px;
+    font-weight: 500;
+    width: 100px;
+    letter-spacing: .7px;
+}
+.line {
+    padding: 3px 0;
+}
+.candidate-info-container {
+    width: 100%;
+    clear:both;
+}
+.displayTableCell {
+    display: table-cell;
+}
+.candidateContent {
+    display: table-cell;
+}
+.candidateScore {
+    font-weight: 500;
+    width: 100px;
+    display: table-cell;
+    font-size: 25px;
+    text-align: left;
+    color: #199ad6;
+}
+.loading-details-icon {
+    text-align: center;
+    color: lightgrey;
+}
+.download-profile-button {
+    cursor: pointer;
+    font-style: normal;
+    border-radius: 20px;
+    margin: 0px 2px;
+    padding: 5px 8px;
+    cursor: pointer;
+}
+
+.starred-candidate-icon {
+    color: #00548b;
+}
+
+.star-candidate-icon:hover {
+    cursor: pointer;
+    color: #00548b;
+}
+
+a, div.applicant-card  {
+    font-family: 'Roboto', sans-serif;
+}
+.scrollable-menu {
+    padding-top: 0px;
+    max-height: 200px;
+    overflow: scroll;
+}
+.recently-updated-pill {
+    float: right;
+    font-style: normal;
+    color: grey;
+    border: 2px solid #00548b;
+    padding: 5px 8px;
+    border-radius: 20px;
+    margin: 0 5px;
+}
+
+.contacted-pill {
+    float: right;
+    font-style: normal;
+    color: grey;
+    border: 2px solid #00548b;
+    padding: 5px 8px;
+    border-radius: 20px;
+    margin: 0 2px;
+}
+
+.matched-pill {
+    float: right;
+    font-style: normal;
+    color: grey;
+    border: 2px solid #00548b;
+    padding: 5px 8px;
+    border-radius: 20px;
+    margin: 0 2px;
+}
+
+.pill-accepted {
+    color: white;
+    font-weight: bold;
+    border-color: rgb(47, 196, 52);
+    background-color: rgb(47, 196, 52);
+}
+
+.pill-declined {
+    color: white;
+    font-weight: bold;
+    border-color: #fd4242;
+    background-color: #fd4242;
+}
+
+.send-intro-button {
+    border: 2px solid #00548b;
+    border-radius: 20px;
+    margin : 0px 2px;
+    padding: 5px 8px;
+    cursor: pointer;
+    background-color: #00548b;
+}
+
+.send-intro-button:hover {
+    text-decoration: none;
+}
+
+nav {
+    height: 50px;
+    line-height: 1.42857143;
+    box-shadow: none;
+    background-color: #EDF5F9;
+}
+
+.glyphicon-cog {
+    color: #337ab7;
+}
+
+
+.welcome-title h4 {
+    font-weight: 300;
+}
+
+.list-filter-dropdown {
+    background-color:rgb(248, 248, 248);
+    display: inline;
+    width: auto;
+    height: auto;
+    border: none;
+    outline: none !important;
+}
+
+.experience-item div:first-child {
+    font-weight: 400;
+}
+
+.grayed-out-link {
+    color: #c0c0c0;
+}
+
+.candidate-select-action {
+    font-weight: bold;
+    margin-right: 10px;
+}
+
+.job-status-closed {
+    color: #fd4242;
+    font-weight: bold;
+}
+
+.job-card-closed {
+    background-color: #fd4242;
+    font-weight: bold;
+    padding: 2px;
+    font-size: 14px;
+    line-height: initial !important;
+}
+
+.job-card-autopilot {
+    background-color: #4242fd;
+    font-weight: bold;
+    padding: 2px;
+    font-size: 14px;
+    line-height: initial !important;
+}
+
+.dropdown-menu {
+  overflow-x: hidden;
+}
+
+.u-slider{position:relative;display:inline-block;background-color:#ddd;border-radius:3px}
+.u-slider .value{position:absolute;background-color:#2e8ece;border-radius:3px}
+.u-slider .handle{position:absolute;width:20px;height:20px}
+.u-slider .handle:after{position:relative;display:block;content:""}
+.u-slider-x .handle:after,.u-slider-y .handle:after{width:24px;height:24px;background-color:#fff;border:3px solid #2e8ece;border-radius:50%}
+.u-slider-x{height:20px}
+.u-slider-x .handle{height:100%}
+.u-slider-x .handle:after{top:-2px;left:-12px}
+.u-slider-x .value{top:0;height:100%}
+.u-slider-y{width:20px}
+.u-slider-y .handle{width:100%}
+.u-slider-y .handle:after{top:-12px;left:-2px}
+.u-slider-y .value{left:0;width:100%}
+.u-slider-xy{position:relative;width:100%;height:100%;background-color:#2e8ece;border-radius:0}
+.u-slider-xy .handle{position:absolute}
+.u-slider-xy .handle:after{position:relative;display:block;top:-10px;left:-10px;width:20px;height:20px;background-color:transparent;border:2px solid #fff;border-radius:50%;content:""}
+
+.ReactModal__Body--open {
+  overflow-y: hidden;
+}
+
+.mce-window[aria-label="Color"] .mce-textbox {
+  min-width: 55px;
+  max-height: 30px;
+  margin-bottom: -5px;
+}
+
+.mce-window[aria-label="Insert link"] .mce-textbox {
+  min-width: 286px;
+}
+
+
+.introjs-job-detail-tour-step-2 {
+  top: 50px;
+  left: 150px !important;
+  min-width: 210px;
+  min-height: 100px;
+  background-color: #fffff8;
+}
+
+.introjs-advanced-search-step {
+  min-width: 400px;
+}

@@ -1,0 +1,30 @@
+
+<P>
+  We came across your resume and were impressed with your experience.
+  We have immediate openings for {{ employer_job.job_name }},
+  and we think that you would be a great fit for the {{ employer.company_name }} team
+  in {{ employer_job.city }}, {{ employer_job.state.state_code }}.
+  Please let us know if you’re interested.
+  Hope to hear from you soon!
+</P>
+
+<P>
+  Thanks,
+  <br/>
+  {{ employer_user.user.first_name }} {{ employer_user.user.last_name }}
+  <br/>
+
+  {% if employer_user.recruiter_title %}
+    {{ employer_user.recruiter_title }}
+    <br/>
+  {% endif %}
+
+  {{ employer.company_name }}
+</P>
+
+{% if employer.employer_news_url %}
+<P>
+  P.S. - Click <a href="{{ employer.employer_news_url }}">here</a>
+  for the latest news on {{ employer.company_name }}.
+</P>
+{% endif %}

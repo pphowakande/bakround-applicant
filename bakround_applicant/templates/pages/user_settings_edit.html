@@ -1,0 +1,43 @@
+
+<div>
+  <h3>User Settings</h3>
+  <br />
+  <a class="btn btn-primary" href="{% url 'account_email' %}" role="button" style="margin-bottom: 10px">Update Your Email</a>
+
+  <br/>
+
+  {% if not request.user.is_employer or request.user.is_staff %}
+    <a class="btn btn-primary" href="{% url 'users:change_job' %}" role="button" style="margin-bottom: 10px">
+      Change Your Job Profile
+    </a>
+    <span class="hidden-xs">
+      (Your current job profile is <span style="font-weight: bold">{{ profile.job.job_name }}</span>.)
+    </span>
+
+    <br/>
+  {% endif %}
+
+  {% if request.user.is_employer %}
+    <a class="btn btn-primary" href="{% url 'employer:email_settings' %}" style="margin-bottom: 10px">
+      Candidate Email Settings
+    </a>
+    <br/>
+    <a class="btn btn-primary" href="{% url 'employer:notification_settings' %}" style="margin-bottom: 10px">
+      Notification Settings
+    </a>
+  {% endif %}
+  <br/>
+  {% if is_employer_owner %}
+    <a class="btn btn-primary" href="{% url 'employer:manage_employer_users' %}">
+      Manage Users
+    </a>
+  {% endif %}
+
+  <br />
+  <br />
+
+  <div><b>API Key:</b> {{api_key}}</div>
+  <br />
+  <div><b>Referral Link:</b> <a href="{{referral_link}}">{{referral_link}}</a></div>
+</div>
+

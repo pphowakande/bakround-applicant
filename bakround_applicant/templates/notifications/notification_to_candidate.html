@@ -1,0 +1,26 @@
+{{ employer_user.employer.company_name }} is interested in you
+
+<P>
+  Hi {{ candidate.first_name }},
+</P>
+
+<P>
+  {{ employer_user.first_name }} from {{ employer_user.employer.company_name }}
+  is interested in you for the following position:
+</P>
+
+<P>
+  <b>{{ employer_job.job_name }}</b>
+</P>
+
+<P>
+  {% autoescape off %}
+    <a href="{{ accept_url }}">Click here to accept their request.</a>
+  {% endautoescape %}
+</P>
+
+<P>
+  Thanks,
+  <br/>
+  Bakround
+</P>

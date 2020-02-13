@@ -1,0 +1,104 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}SME Manager{% endblock %}
+
+{% block content %}
+<style>
+    table.sme-list { border-collapse: collapse; font-size: 14px }
+
+    .sme-list td + td,
+    th + th { border-left: 1px solid; }
+    .sme-list tr + tr { border-top: 1px solid; }
+
+    table.sme-list tr th, table.sme-list tr td {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+
+    table.sme-list tr td {
+        padding-top: 15px;
+        padding-bottom: 15px;
+    }
+</style>
+<center><h3>SME Manager</h3></center>
+<br />
+<input type="button" class="btn btn-default btn-primary btn-submit" value="Add" onclick="location.href='/sme_manager/create';" />
+<br /><br />
+<table width="100%" class="sme-list">
+    <tr>
+        <th><a href="?" title="sort by name">Name</a></th>
+        <th>Email</th>
+        <th><a href="?ordering=job" title="sort by job">Assigned Job</a></th>
+        <th>Review Limit</th>
+        <th>Token</th>
+        <th>Region</th>
+        <th>Linked employer_user</th>
+        <th></th>
+    </tr>
+    {% for sme in sme_list %}
+        <tr>
+            <td>{{sme.first_name}} {{sme.last_name}}</td>
+            <td>{{sme.email}}</td>
+            <td>{{sme.job.job_name}}</td>
+            <td>{{sme.review_limit}}</td>
+            <td>
+              {{sme.guid}}
+              <nobr>(<a href="/sme_feedback/?token={{sme.guid}}">feedback link</a>)</nobr>
+            </td>
+            <td>
+              {{ sme.region.name }}
+            </td>
+            <td>
+              {% if sme.employer_user %}
+                {{ sme.employer_user.user.first_name }} {{ sme.employer_user.user.last_name }}
+                <br/>
+                ({{ sme.employer_user.employer.company_name }})
+              {% endif %}
+            </td>
+            <td><a href="/sme_manager/edit/{{sme.id}}">Edit</a></td>
+            <td><form action="/sme_manager/delete/{{sme.id}}" onsubmit="return confirm('Do you really want to delete this SME?');" method="post">
+                {% csrf_token %}
+                <input value="Delete" onclick="" type="submit"/>
+            </form></td>
+        </tr>
+    {% endfor %}
+</table>
+
+
+
+<hr/>
+
+
+
+<h3>Regions</h3>
+
+<input type="button" class="btn btn-default btn-primary btn-submit" value="Add"
+       onclick="location.href='{% url 'sme_manager:create_region' %}';" />
+
+<br/><br/>
+
+<table class="sme-list">
+  <tr>
+    <th>Region Name</th>
+    <th>Center</th>
+    <th>Radius</th>
+    <th></th>
+  </tr>
+  {% for region in regions %}
+    <tr>
+      <td>{{ region.name }}</td>
+      <td>
+        {{ region.city }},
+        {{ region.state.state_code }}
+        {% if region.state.country.country_code != "US" %}
+          ({{ region.state.country.country_name }})
+        {% endif %}
+      </td>
+      <td>{{ region.radius|default_if_none:50.0 }} miles</td>
+      <td><a href="{% url 'sme_manager:edit_region' region.id %}">Edit</a></td>
+    </tr>
+  {% endfor %}
+</table>
+
+{% endblock %}

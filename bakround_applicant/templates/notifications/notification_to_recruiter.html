@@ -1,0 +1,50 @@
+{% load app_filters %}{{ candidate.first_name|subject }} {{ candidate.last_name|subject }} has accepted your request for the {{ job.job_name|subject }} job
+
+<P>
+  You can now view {{ candidate.first_name }}'s full profile and contact details.
+</P>
+<P>
+  <a href="{{ view_profile_url }}">{{ candidate.first_name }} {{ candidate.last_name }}</a>
+  <br/>
+  Job:
+  <a href="{{ website_root_url }}{% url 'employer:job' employer_job.id %}"
+    >{{ employer_job.job_name }}
+    -
+    {{ employer_job.city }},
+    {{ employer_job.state.state_code }}
+  </a>
+  <br />
+  {% if email_addresses or phone_numbers %}
+    <br />
+    {% for email in email_addresses %}
+      <a href="mailto:{{ email }}">{{ email }}</a>
+    {% endfor %}
+    <br />
+    {% for phone in phone_numbers %}
+      <p>{{ phone }}</p>
+      <br />
+    {% endfor %}
+  {% endif %}
+  <br />
+  <a href="{{ view_profile_url }}">Click here to view their resume.</a>
+</P>
+
+{% if candidate_response %}
+  Here's their response:
+  <P>
+    {{ candidate_response|linebreaksbr }}
+  </P>
+{% endif %}
+
+<P>
+  We suggest contacting the candidate right away to get them excited about the opportunity and to set up an interview!
+  <br />
+  After contacting them, <a href="{{ candidate_status_url }}">click here to update their status</a>. Once you update their status, they'll be off the market for 72 hours.
+</P>
+
+<P>
+  Thanks,
+  <br/>
+  The Bakround team
+</P>
+

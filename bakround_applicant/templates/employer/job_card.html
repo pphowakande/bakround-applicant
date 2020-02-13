@@ -1,0 +1,59 @@
+{% load app_filters %}
+<div class="col s12 m6
+            card-top
+            {% if not job.open %} hidden closed-job {% endif %}
+            {% if job.id not in my_job_ids %} hidden not-my-job {% endif %}"
+     id="job_card_{{ job.id }}">
+  <div class="card grey darken-1">
+    <div class="card-content white-text">
+      <div class="clearfix">
+        <div class="pull-left">
+          <span class="card-title">{{job.job_name}}</span>
+        </div>
+        <div class="pull-right">
+          {% if not job.open %}
+              <span class="job-card-closed">CLOSED</span>
+          {% endif %}
+          {% if job.auto_contact_enabled %}
+              <span class="job-card-autopilot">AUTOPILOT</span>
+          {% endif %}
+        </div>
+      </div>
+
+      <div class="clearfix" style="margin-bottom:10px">
+        <nobr>
+          {% for recruiter in job.recruiters %}
+            <b>{{ recruiter.user.first_name }} {{ recruiter.user.last_name }}{% if not forloop.last %}, {% endif %}</b>
+          {% endfor %}
+        &nbsp;
+        </nobr>
+      </div>
+      <div class="clearfix">
+        <div class="pull-left">
+
+          <p>{{job.city}}, {{job.state.state_code}}</p>
+
+        </div>
+        <div class="pull-right">
+          {% with job_candidates|get_item:job.id as candidate_count %}
+            {% if candidate_count is not None %}
+              <p>{{ candidate_count.total_count }} candidate{{ candidate_count.total_count|pluralize }}</p>
+              <p>{{ candidate_count.accepted_count|default_if_none:0 }} accepted</p>
+            {% else %}
+              <p>0 candidates</p>
+              <br />
+            {% endif %}
+          {% endwith %}
+        </div>
+      </div>
+
+
+    </div>
+    <div class="card-action" style="text-align: right;">
+      {% if not job.open %}
+        <a style='color: #ffa0a0' href="#!" onclick="ask_about_deleting_job({{ job.id }})">Delete</a>
+      {% endif %}
+      <a style='color: lightblue; ' href="{% url 'employer:job' employer_job_id=job.id %}">View</a>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,201 @@
+
+{% extends "base.html" %}
+{% load static %}
+{% load app_filters %}
+
+{% block title %}Bakround - New Job{% endblock %}
+
+{% block content %}
+
+<link type="text/css" rel="stylesheet" href="{% static 'vendor/materialize/css/materialize.css' %}"  media="screen,projection"/>
+<link rel="stylesheet" href="{% static 'vendor/introjs-2.4.0/intro.min.css' %}" />
+<link rel="stylesheet" href="{% static 'css/employer.css' %}" />
+<div>
+    <div style="margin-bottom: 5px;">
+      <h3 style='font-size: 24px;'>
+          Add a New Job
+      </h3>
+    </div>
+    <br />
+    <form id="formAddJob" class="col s12" action="/icims/add_job" method="post">
+          {% csrf_token %}
+            <div class="clearfix">
+              <input id="employer_job_id" name="id" type="hidden" />
+              <div class="row">
+                  <label style="padding-left: 15px">Job Profile</label>
+                <div class="input-field col s12">
+                  <select class="browser-default validate" id="job" name="job" required="">
+                      <option value="" disabled selected>Choose a Job</option>
+                      {% for job_family in job_families %}
+                        <optgroup label="{{ job_family.family_name }}">
+                          {% for job in job_family.jobs %}
+                            <option value="{{job.id}}"> {{job.job_name}} </option>
+                          {% endfor %}
+                        </optgroup>
+                      {% endfor %}
+                  </select>
+                </div>
+              </div>
+              <div class="row">
+                <div class="input-field col s12" style="margin-top: 50px">
+                  <input placeholder="Job Name" id="job_name" name="job_name" type="text" class="validate" required="true" aria-required="true">
+                  <label style="font-size: 12px; transform: translateY(-140%)">
+                    Job Name <br />
+                    Note: This is how the job will be displayed to candidates.
+                    You can modify this field if you would like to indicate a shift type
+                    (e.g. Nights/Weekends) or a specialization (e.g. Pediatrics).
+                  </label>
+                </div>
+              </div>
+              <div class="row">
+                <div class="input-field col s6">
+                  <input placeholder="City" id="city" name="city" type="text" class="validate" required="" aria-required="true">
+                  <label for="city">City</label>
+                </div>
+                <div class="input-field col s6">
+                    <select class="browser-default" id="state" name="state">
+                      <option value="" disabled selected>Choose a State</option>
+                        {% for state_list in state_lists %}
+                          <optgroup label="{{ state_list.country_name }}">
+                            {% for state in state_list.states %}
+                                <option value="{{state.id}}"> {{state.state_code}} </option>
+                            {% endfor %}
+                          </optgroup>
+                        {% endfor %}
+                    </select>
+                </div>
+              </div>
+                <div style="display: {% if can_edit_email %} block {% else %} none {% endif %};">
+                    <div style="margin-bottom: 5px;">
+                          <h3 style='font-size: 18px;'>
+                              Custom Email Body
+                          </h3>
+                        </div>
+                    <div class="row">
+                      <div class="col">
+                          <p>Use the box below to specify a custom message for all job candidates. <b>This will appear in the email sent to the candidate when you click the "Send Intro" button.</b></p>
+                          <p>If you would like to add images to the email, right click and copy an individual image, and then paste it into the editor below. You can also copy and paste blocks of content, but images included in the content will be linked to their original source.</p>
+                          {% if logo_url %}
+                            <p>Drag this image into the editor below to insert your company logo: <img src="{{logo_url}}" /></p>
+                            <p>Click <a target="_blank" href="/icims/email_settings#logo">here</a> to update your company logo.</p>
+                          {% else %}
+                            <p>Click <a target="_blank" href="/icims/email_settings#logo">here</a> to upload a company logo.</p>
+                          {% endif %}
+                          <p class="hidden"><b>Note:</b> If nothing is specified below, we'll default to the <a href="#defaultEmailModal">system-level setting.</a></p>
+                      </div>
+
+                    <div class="input-field col s12">
+                      {{form.custom_email_body}}
+
+                    </div>
+                  </div>
+                </div>
+
+                <br/>
+                <div class="row">
+                  <h3 style='font-size: 18px;'>
+                    Custom Job Description
+                  </h3>
+
+                  <div class="input-field col s12">
+                    {{ form.job_description }}
+                  </div>
+                </div>
+
+                <br />
+                <div style="margin-bottom: 5px;">
+                  <h3 style='font-size: 18px;'>
+                      Users Receiving Notifications
+                  </h3>
+                </div>
+                <div class="row">
+                    {% for user in employer_users %}
+                        <div class="input-field col s12">
+                            <input type="checkbox" id="notification_user_{{ user.id }}" name="notifications" value="{{ user.id }}" {% if user.id == employer_user_id %}checked{% endif %}>
+                            <label for="notification_user_{{ user.id }}">{{ user.user.first_name }} {{ user.user.last_name }}</label>
+                        </div>
+                    {% endfor %}
+                </div>
+                <div class="row clearfix">
+                    <div class="pull-left">
+                        <a id="btnCancel" href="/icims/jobs" class="waves-effect waves-light btn btn-secondary" style="float: none;">Cancel</a>
+                    </div>
+                    <div class="pull-right">
+                        <a id="btnAddJob" href="#" class="waves-effect waves-light btn btn-primary" style="float: none;">Add</a>
+                    </div>
+
+                </div>
+        </div>
+  </form>
+</div>
+
+<div id="defaultEmailModal" class="modal" style="padding: 20px">
+      <div class="clearfix">
+        <div class="pull-right">
+              <a id="btnEditEmailSettings" href="/icims/email_settings" class="waves-effect waves-light btn btn-primary">Edit System Message</a>
+            </div>
+    </div>
+      <div>
+          <div class="row" style="margin-top: 10px">
+              {% autoescape off %}{{ default_email_body }}{% endautoescape %}
+          </div>
+      </div>
+  </div>
+
+<div id="lowAccuracyModal" class="modal" style="padding: 20px; height: 150px">
+
+      <div>
+          <div class="row" style="margin-top: 10px">
+              <b>Note:</b> This job is currently in beta mode and the bScore values may not be accurate.
+          </div>
+      </div>
+        <div class="clearfix">
+            <div class="pull-right">
+              <a id="btnConfirmLowAccuracy" href="#" class="waves-effect waves-light btn btn-primary">Ok</a>
+            </div>
+    </div>
+  </div>
+
+<script src="{% static 'vendor/hammer/hammer.min.js' %}"></script>
+<script src="{% static 'vendor/materialize/js/materialize.js' %}"></script>
+<script>
+    window.csrf_token='{{csrf_token}}';
+
+    var lowAccuracyJobs = {{ low_accuracy_jobs|safe }};
+
+    var completeRequest = function () {
+        $("form").submit();
+    };
+
+    $('#defaultEmailModal').modal();
+
+    $('#lowAccuracyModal').modal();
+
+    $('#btnAddJob').on('click', function () {
+        {% if not is_demo_account %}
+            if ($('#job').val() != null && $.inArray(parseInt($('#job').val()), lowAccuracyJobs) != -1) {
+                $('#lowAccuracyModal').modal('open');
+            } else {
+                completeRequest();
+            }
+        {% else %}
+            completeRequest();
+        {% endif %}
+    });
+
+    $('#btnConfirmLowAccuracy').on('click', function () {
+        $('#lowAccuracyModal').modal('close');
+        completeRequest();
+    });
+
+  $("#job").on('change', function (){
+    var job_name = $("#job option:selected").text().trim();
+    $("#job_name").val(job_name);
+  });
+
+</script>
+
+{% include "icims/load_tinymce.html" with selector="textarea#id_custom_email_body" %}
+{% include "icims/load_tinymce.html" with selector="textarea#id_job_description" %}
+
+{% endblock %}

@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<P>
+  {{ message }}
+</P>
+
+{% if return_page %}
+  <P>
+    <a href="{% url return_page %}">back</a>
+  </P>
+{% endif %}
+
+{% endblock %}

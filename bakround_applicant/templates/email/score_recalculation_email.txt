@@ -1,0 +1,8 @@
+Your bScore has been updated
+
+{% if first_name %}Hi {{ first_name }},{% endif %}
+
+Your bScore has been updated based on some recent updates that you made to your profile.  Click on this link to see your latest score: {{ root_url }}/profile/
+
+Thanks,
+The Bakround Team

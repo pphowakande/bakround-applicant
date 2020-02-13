@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% load static %}
+{% load app_filters %}
+
+{% block title %}Bakround{% endblock %}
+
+{% block content %}
+    <link type="text/css" rel="stylesheet" href="{% static 'vendor/materialize/css/materialize.css' %}"  media="screen,projection"/>
+    <link rel="stylesheet" href="{% static 'css/employer.css' %}" />
+    <style>
+        nav {
+            height: 50px;
+            line-height: 1.42857143;
+            box-shadow: none;
+            background-color: #EDF5F9;
+        }
+
+        .glyphicon-cog {
+            color: #337ab7;
+        }
+
+        .welcome-title h4 {
+            font-weight: 300;
+        }
+
+        .elp-option-group td {
+            text-align: center;
+        }
+    </style>
+
+    <div class="welcome-title">
+        <h4>Bakround ICIMS Lifecycle Platform</h4>
+    </div>
+    <br />
+    <br />
+    <div>Please choose a product:</div>
+    <br />
+        <table width="100%" class="elp-option-group">
+            <tr>
+                <td>
+                    <a href="{% url 'employer:jobs' %}">
+                        <img src="{% static 'images/platform_icon_bestfit.png' %}">
+                    </a>
+                </td>
+                <td align="center">
+                    <img src="{% static 'images/platform_icon_engagement.png' %}">
+                </td>
+                <td align="right">
+                    <img src="{% static 'images/platform_icon_departure.png' %}">
+                </td>
+            </tr>
+        </table>
+
+<script src="{% static 'vendor/hammer/hammer.min.js' %}"></script>
+<script src="{% static 'vendor/materialize/js/materialize.js' %}"></script>
+{% endblock %}

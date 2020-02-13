@@ -1,0 +1,123 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+Bakround | Upload Resume
+{% endblock %}
+
+{% block content %}
+<style>
+  .drop-area {
+    min-width: 200px;
+    min-height: 200px;
+    border: 2px dashed gray;
+    position:relative;
+    font-size: 18px;
+    font-weight: 400;
+  }
+
+  input#file:hover {
+    cursor: pointer;
+  }
+</style>
+<div class="wireframe-centered-column" class="signup-font">
+  <h1 class='signup-font grey-font'>
+    Upload a Candidate Resume
+  </h1>
+
+    <div class='grey-font' style="padding: 20px">
+      Upload the candidate's resume, and we will create and populate a profile for them.
+    </div>
+
+  <form method="post" enctype="multipart/form-data" style="width: 300px" class="wireframe-center grey-font form-horizontal" id="resume_form">
+    {% csrf_token %}
+
+    <input type="hidden" name="employer_job_id" value="{{ employer_job_id }}"/>
+
+    <div id="input_area" class="clearfix">
+      <div class="drop-area">
+      <input type="file"
+             name="file"
+             id="file"
+             style="position: absolute; width: 300px; height: 200px; z-index: 0; opacity: 0"
+             onchange='show_upload_status(); $("#resume_form").submit()'
+             alt="Click here to upload or drop your resume...."
+             title="Click here to upload or drop your resume...">
+        <div style="margin-top: 90px" id="message_before">
+          Drop resume here
+        </div>
+        <div style="margin-top: 60px; display: none; color: #008000" id="message_after">
+          The resume is being uploaded.
+          <br/>
+          Please wait...
+          <br/>
+          <br/>
+          <span class="glyphicon-left glyphicon glyphicon-refresh spinning" style="color: black"></span>
+        </div>
+      </div>
+      <a class="btn btn-primary" id="btnSelectFile" href="#" style="min-width: 150px; margin: 20px 0px;">Select a file</a>
+      <br />
+
+      <div style="display: none">
+        <button type="submit">Upload Resume</button>
+      </div>
+    </div>
+
+
+  </form>
+  <br />
+  {% if form.errors %}
+    {% for field in form %}
+        {% for error in field.errors %}
+            <div class="alert alert-danger">
+                <strong>{{ error|escape }}</strong>
+            </div>
+        {% endfor %}
+    {% endfor %}
+    {% for error in form.non_field_errors %}
+        <div class="alert-danger">
+            <strong>{{ error|escape }}</strong>
+        </div>
+    {% endfor %}
+  {% endif %}
+
+  {% if uploaded_file_url %}
+    <p>File uploaded at: <a href="{{ uploaded_file_url }}">{{ uploaded_file_url }}</a></p>
+  {% endif %}
+</div>
+
+<script>
+  function show_upload_status(){
+    $("#message_before").hide();
+    $("#message_after").show();
+  }
+
+  window.onload = function() {
+    $("#btnSelectFile").on("click", function() {
+      $("#file").click();
+    });
+  }
+</script>
+
+<style>
+  .glyphicon.spinning {
+    animation: spin 1s infinite linear;
+    -webkit-animation: spin2 1s infinite linear;
+  }
+
+  @keyframes spin {
+    from { transform: scale(1) rotate(0deg);}
+    to { transform: scale(1) rotate(360deg);}
+  }
+
+  @-webkit-keyframes spin2 {
+    from { -webkit-transform: rotate(0deg);}
+    to { -webkit-transform: rotate(360deg);}
+  }
+
+  div.footer {
+    z-index: 10;
+  }
+
+</style>
+{% endblock %}

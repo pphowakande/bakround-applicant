@@ -1,0 +1,65 @@
+id,country_id,state_code,state_name
+3919,231,AL,Alabama
+3920,231,AK,Alaska
+3921,231,AZ,Arizona
+3922,231,AR,Arkansas
+3924,231,CA,California
+3926,231,CO,Colorado
+3927,231,CT,Connecticut
+3928,231,DE,Delaware
+3929,231,DC,District of Columbia
+3930,231,FL,Florida
+3931,231,GA,Georgia
+3932,231,HI,Hawaii
+3933,231,ID,Idaho
+3934,231,IL,Illinois
+3935,231,IN,Indiana
+3936,231,IA,Iowa
+3937,231,KS,Kansas
+3938,231,KY,Kentucky
+3939,231,LA,Louisiana
+3941,231,ME,Maine
+3942,231,MD,Maryland
+3943,231,MA,Massachusetts
+3945,231,MI,Michigan
+3946,231,MN,Minnesota
+3947,231,MS,Mississippi
+3948,231,MO,Missouri
+3949,231,MT,Montana
+3950,231,NE,Nebraska
+3951,231,NV,Nevada
+3952,231,NH,New Hampshire
+3953,231,NJ,New Jersey
+3955,231,NM,New Mexico
+3956,231,NY,New York
+3957,231,NC,North Carolina
+3958,231,ND,North Dakota
+3959,231,OH,Ohio
+3960,231,OK,Oklahoma
+3962,231,OR,Oregon
+3963,231,PA,Pennsylvania
+3965,231,RI,Rhode Island
+3966,231,SC,South Carolina
+3967,231,SD,South Dakota
+3969,231,TN,Tennessee
+3970,231,TX,Texas
+3972,231,UT,Utah
+3973,231,VT,Vermont
+3974,231,VA,Virginia
+3975,231,WA,Washington
+3976,231,WV,West Virginia
+3977,231,WI,Wisconsin
+3978,231,WY,Wyoming
+663,38,AB,Alberta
+664,38,BC,British Columbia
+665,38,MB,Manitoba
+666,38,NB,New Brunswick
+667,38,NL,Newfoundland and Labrador
+668,38,NT,Northwest Territories
+669,38,NS,Nova Scotia
+670,38,NU,Nunavut
+671,38,ON,Ontario
+672,38,PE,Prince Edward Island
+673,38,QC,Quebec
+674,38,SK,Saskatchewan
+675,38,YT,Yukon

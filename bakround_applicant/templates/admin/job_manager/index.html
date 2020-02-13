@@ -1,0 +1,509 @@
+
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+
+<style>
+    .requirements-section {
+        max-height: 800px;
+        overflow-y: scroll;
+    }
+
+    .section-cycle-arrow {
+        cursor: pointer;
+        cursor: hand;
+    }
+
+    #divSectionTitle {
+        text-align: center;
+        font-weight: bold
+    }
+</style>
+
+{% macro csrf() -%}
+    <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
+{%- endmacro %}
+
+
+<h2>Job Manager</h2>
+
+{% if job %}
+
+<P>
+
+  You have selected job #{{job.id}} <b>({{job.job_name}})</b>
+  <br />
+  {% if not job_skills %}
+    <form method="POST" action="{{ url('job_manager:delete_job') }}" onsubmit="return confirm('Do you really want to delete this job?');">
+      {{ csrf() }}
+     <input type="hidden" name="job_id" value="{{job.id}}">
+     <input type="submit" name="delete" value="Delete Job">
+    </form>
+  {% else %}
+    <input type="submit" name="delete" disabled value="Delete Job" title="Can't delete a job with skills and/or users assigned" />
+  {% endif %}
+</P>
+<p>
+    Application Mailbox: <b>job_{{job.id}}@applications.bakround.com</b>
+</p>
+<P>Choose the skills for this job by selecting
+them in the left panel.  Then modify the weights and experience
+in the right panel.  You can also change the job title and description.
+Click Submit when you are done.</P>
+
+<script>
+  var job_id = {{ job.id }};
+  var skills_data_old = JSON.parse("{{ skills_data_old|escapejs }}");
+  var certs_data_old = JSON.parse("{{ certs_data_old|escapejs }}");
+
+  function skill_clicked(skill_id){
+    var elt = $("#skill_" + skill_id + "_selected");
+    if (elt.is(":checked")){
+      show_param_block("skill", skill_id, true);
+    } else {
+      show_param_block("skill", skill_id, false);
+    }
+  }
+
+  function cert_clicked(cert_id){
+    var elt = $("#cert_" + cert_id + "_selected");
+    if (elt.is(":checked")){
+      show_param_block("cert", cert_id, true);
+    } else {
+      show_param_block("cert", cert_id, false);
+    }
+  }
+
+  function show_param_block(type, id, should_show){
+    var elt = $("#" + type + "_" + id + "_parameters");
+    elt.css('display', should_show ? "block" : "none");
+
+    if (should_show){
+      elt.addClass('is_active');
+    } else {
+      elt.removeClass('is_active');
+    }
+  }
+
+  function make_new_skills_data(){
+    var skills = {};
+    $(".skill_parameters_div.is_active").each(function (i, elt){
+      var skill_id         = $(elt).find(".skill_id").val();
+      var skill_weight     = $(elt).find(".skill_weight").val();
+      var skill_experience = $(elt).find(".skill_experience").val();
+      skills[skill_id] = {"weight": skill_weight, "experience_months": skill_experience};
+    });
+    return skills;
+  }
+
+  function make_new_certs_data(){
+    var certs = {};
+    $(".cert_parameters_div.is_active").each(function (i, elt){
+      var cert_id     = $(elt).find(".cert_id").val();
+      var cert_weight = $(elt).find(".cert_weight").val() || null;
+      certs[cert_id]  = {"weight": cert_weight};
+    });
+    return certs;
+  }
+
+  function prepare_form_for_submission(){
+    var skills_data_new = make_new_skills_data();
+    $(".skills_data_old").val(JSON.stringify(skills_data_old));
+    $(".skills_data_new").val(JSON.stringify(skills_data_new));
+
+    var certs_data_new = make_new_certs_data();
+    $(".certs_data_old").val(JSON.stringify(certs_data_old));
+    $(".certs_data_new").val(JSON.stringify(certs_data_new));
+
+    var job_attributes = {"job_name": $("#txtJobName").val(),
+                          "job_description": $("#txtJobDescription").val(),
+                          "job_visible": $("#txtEditJobVisibility").is(":checked")};
+    $(".job_attributes").val(JSON.stringify(job_attributes));
+  }
+
+  function fill_in_initial_parameters_for_skill(skill_id){
+    var dict = skills_data_old[skill_id] || {"weight": 0, "experience_months": 0};
+    var div = $("#skill_" + skill_id + "_parameters");
+
+    $(div).find(".skill_weight").val(dict.weight);
+    $(div).find(".skill_experience").val(dict.experience_months);
+
+    if (skills_data_old[skill_id]){
+      $(div).css('display', 'block').addClass('is_active');
+    }
+  }
+
+  function fill_in_initial_parameters_for_skills(){
+    $(".skill_parameters_div.initially_active").find(".skill_id").each(function (i, elt){
+      var skill_id = $(elt).val();
+      fill_in_initial_parameters_for_skill(skill_id);
+    });
+  }
+
+  function fill_in_initial_parameters_for_cert(cert_id){
+    var dict = certs_data_old[cert_id] || {"weight": ""};
+    var div = $("#cert_" + cert_id + "_parameters");
+
+    $(div).find(".cert_weight").val(dict.weight);
+
+    if (certs_data_old[cert_id]){
+      $(div).css('display', 'block').addClass('is_active');
+    }
+  }
+
+  function fill_in_initial_parameters_for_certs(){
+    $(".cert_parameters_div.initially_active").find(".cert_id").each(function (i, elt){
+      var cert_id = $(elt).val();
+      fill_in_initial_parameters_for_cert(cert_id);
+    });
+  }
+
+  function cycle_requirements() {
+    var divs = [ { id: 'divSkills', title: 'Skills' }, { id: 'divCertifications', title: 'Certifications' } ]
+
+    if ($('#' + divs[0].id).css('display') == 'none') {
+        $('#' + divs[1].id).hide();
+        $('#' + divs[0].id).show();
+
+        $('#divSectionTitle').text(divs[0].title);
+    } else {
+        $('#' + divs[0].id).hide();
+        $('#' + divs[1].id).show();
+
+        $('#divSectionTitle').text(divs[1].title);
+    }
+  }
+</script>
+
+
+<form method="POST">
+  {{ csrf() }}
+
+  Job name: <input id="txtJobName" type="text" name="new_job_name" size="50" maxlength="100"
+                value="{{ job.job_name }}">
+  <br>
+  Job description:
+  <br>
+  <textarea id="txtJobDescription" name="new_job_description"
+                             maxlength="10000" rows="2" cols="60"
+          >{{ job.job_description or '' }}</textarea>
+  <br>
+  Job family: <select name='job_family'>
+            {% for family in job_families %}
+                <option value='{{ family.id }}' {% if family.id == job.job_family_id %} selected {% endif %}>{{ family.family_name }}</option>
+            {% endfor %}
+        </select>
+  <br/>
+    Visible:
+    &nbsp;&nbsp;<input type="checkbox" id="txtEditJobVisibility" name="new_job_visibility" value="1" {% if job.visible %}checked{% endif %}>
+  <br />
+
+  Accuracy:
+  <select name="accuracy">
+    <option value="">---------</option>
+    {% for accuracy_value in accuracy_values %}
+      <option value="{{ accuracy_value }}"
+              {% if accuracy_value == job.accuracy %} selected {% endif %}
+          >{{ accuracy_value }}</option>
+    {% endfor %}
+  </select>
+
+  <br/>
+
+  <P>
+    ONET position:
+    <select name="onet_position">
+      <option value="0"
+              {% if not job.onet_position_id %}selected{% endif %}>(none)</option>
+      {% for onet_position in onet_positions %}
+        <option value="{{ onet_position.id }}"
+                {% if job.onet_position_id == onet_position.id %}selected{% endif %}
+          >{{ onet_position.title }} ({{ onet_position.id }})</option>
+      {% endfor %}
+    </select>
+  </P>
+
+  <hr>
+    <div class="clearfix">
+        <div class="pull-left section-cycle-arrow"><span class="glyphicon glyphicon-chevron-left"></span></div>
+        <div id="divSectionTitle">Skills</div>
+        <div class="pull-right section-cycle-arrow"><span class="glyphicon glyphicon-chevron-right"></span></div>
+    </div>
+    <br />
+    <div id="divCertifications" class="requirements-section" style="display: None">
+        <table>
+        <tr>
+          <td>ALL CERTIFICATIONS</td>
+          <td></td>
+          <td>SELECTED CERTIFICATIONS</td>
+        </tr>
+        <tr>
+          <td>
+            {% for cert in certifications %}
+              <label style="display: block">
+                  <input type="checkbox" id="cert_{{ cert.id }}_selected"
+                         {% if cert.id in job_certs %}checked{% endif %}
+                         onchange="cert_clicked({{ cert.id }})"
+                  >
+                #{{ cert.id }}: {{ cert.certification_name }}
+              </label>
+            {% endfor %}
+          </td>
+          <td style="width: 100px"></td>
+          <td valign="top">
+    {% for cert in certifications %}
+            <P id="cert_{{ cert.id }}_parameters"
+               class="cert_parameters_div {% if cert.id in job_certs %} initially_active {% endif %}"
+               style="display: none">
+              #{{ cert.id }}: {{ cert.certification_name }}
+              (weight: <input type="number" name="" min="0" max="5" class="cert_weight" value="">)
+              <input type="hidden" class="cert_id" value="{{ cert.id }}">
+            </P>
+    {% endfor %}
+          </td>
+        </tr>
+      </table>
+    </div>
+    <div id="divSkills" class="requirements-section">
+        <table>
+        <tr>
+          <td>ALL SKILLS</td>
+          <td></td>
+          <td>SELECTED SKILLS</td>
+        </tr>
+        <tr><td valign="top">
+    {% for skill in skills %}
+        <label style="display: block">
+            <input type="checkbox" id="skill_{{ skill.id }}_selected"
+                   {% if skill.id in job_skills %}checked{% endif %}
+                   onchange="skill_clicked({{ skill.id }})"
+            >
+          #{{ skill.id }}: {{ skill.skill_name }}
+        </label>
+    {% endfor %}
+        </td>
+        <td style="width: 100px"></td>
+        <td valign="top">
+    {% for skill in skills %}
+            <P id="skill_{{ skill.id }}_parameters"
+               class="skill_parameters_div {% if skill.id in job_skills %} initially_active {% endif %}"
+               style="display: none">
+              #{{ skill.id }}: {{ skill.skill_name }}
+              (weight: <input type="number" name="" min="0" max="5" class="skill_weight" value="0"
+                        required>,
+              experience: <input type="number" name="" min="0" max="1000" class="skill_experience" value="0"
+                        required> months)
+              <input type="hidden" class="skill_id" value="{{ skill.id }}">
+            </P>
+    {% endfor %}
+        </td></tr>
+      </table>
+    </div>
+
+
+  <hr>
+
+<input type="submit" value="Submit" onclick="prepare_form_for_submission(); return true"
+        style="margin-right: 30px">
+<input type="button" value="Cancel" onclick="window.location = window.location">
+
+  <input type="hidden" name="job_id" value="{{ job.id }}">
+
+  <input type="hidden" name="job_attributes" class="job_attributes" value="">
+
+  <input type="hidden" name="skills_data_old" class="skills_data_old" value="">
+  <input type="hidden" name="skills_data_new" class="skills_data_new" value="">
+
+  <input type="hidden" name="certs_data_old" class="certs_data_old" value="">
+  <input type="hidden" name="certs_data_new" class="certs_data_new" value="">
+
+</form>
+
+
+<script>
+  fill_in_initial_parameters_for_skills();
+  fill_in_initial_parameters_for_certs();
+
+  $('.section-cycle-arrow').on('click', cycle_requirements);
+</script>
+
+
+<br>
+
+<P>
+  <a href="?">Return to list of jobs</a>
+</P>
+
+
+{% if after_change %}
+<span style="color: green" id="success_notice"><i>Your changes were saved successfully.</i></span>
+<script>
+setTimeout(function(){
+              $("#success_notice").fadeOut(1000);
+           }, 1000);
+</script>
+{% endif %}
+
+{% if after_no_change %}
+<span style="color: green" id="success_notice"><i>You did not make any changes.</i></span>
+<script>
+setTimeout(function(){
+              $("#success_notice").fadeOut(1000);
+           }, 1000);
+</script>
+{% endif %}
+
+
+{% else %}
+
+<P>Please select a job from the following list.</P>
+
+<table class='table table-hover'>
+    <tr>
+        <th>Name</th>
+        <th>Job Family</th>
+        <th>Total Review Count</th>
+        <th>Unique Review Count</th>
+        <th>Visible</th>
+        <th>Accuracy</th>
+        <th></th>
+    </tr>
+{% for job in jobs %}
+  <tr>
+    <td>
+      <a href="?job_id={{ job.id }}">{{ job.job_name }} (#{{ job.id }})</a>
+    </td>
+    <td>
+      {{ job.job_family.family_name }}
+    </td>
+      <td>
+          {% if job.id in job_review_count %}
+            {{ job_review_count[job.id] }}
+          {% else %}
+            0
+          {% endif %}
+      </td>
+      <td>
+          {% if job.id in unique_job_review_count %}
+            {{ unique_job_review_count[job.id] }}
+          {% else %}
+            0
+          {% endif %}
+      </td>
+      <td>{{ job.visible }}</td>
+      <td>{{ '' if job.accuracy == None else job.accuracy }}</td>
+    <td>
+      <form method="POST" action="{{ url('job_manager:rescore_profiles') }}">
+        {{ csrf() }}
+       <input type="hidden" name="job_id" value="{{job.id}}">
+       <input type="submit" name="rescore" value="Rescore">
+      </form>
+    </td>
+  </tr>
+{% endfor %}
+</table>
+
+<hr>
+
+<P>Or, add a new job to the system:</P>
+
+<form method="POST" action="{{ url('job_manager:add_job') }}" onsubmit="return validateAddForm();">
+  {{ csrf() }}
+  Job name: <input id="txtJobName" type="text" name="name_for_new_job" size="50" maxlength="100">
+  <br>
+  Job description:
+  <br>
+  <textarea id="txtJobDescription" name="description_for_new_job"
+                             maxlength="10000" rows="3" cols="60"></textarea>
+    <br>
+    Job family: <select name='job_family'>
+            {% for family in job_families %}
+                <option value='{{ family.id }}' {% if family.family_name == 'Nursing' %} selected {% endif %}>{{ family.family_name }}</option>
+            {% endfor %}
+        </select>
+    <br>
+    Visible:
+    &nbsp;&nbsp;<input type="checkbox" id="jobVisibility" name="visibility_for_new_job" value="1" checked>
+    <br>
+
+    Accuracy:
+    <select name="accuracy">
+      <option value="">---------</option>
+      {% for accuracy_value in accuracy_values %}
+        <option value="{{ accuracy_value }}"
+                {% if accuracy_value == job.accuracy %} selected {% endif %}
+            >{{ accuracy_value }}</option>
+      {% endfor %}
+    </select>
+
+    <br/>
+
+    ONET position:
+      <select name="onet_position">
+        <option value="0">(none)</option>
+        {% for onet_position in onet_positions %}
+          <option value="{{ onet_position.id }}">{{ onet_position.title }} ({{ onet_position.id }})</option>
+        {% endfor %}
+      </select>
+  <br /><br />
+  <input type="submit">
+</form>
+
+<hr>
+
+<h3>Job Families</h3>
+
+<table class='table table-hover'>
+    <tr>
+        <th>Name</th>
+        <th>Industries</th>
+        <th></th>
+    </tr>
+{% for job_family in job_families %}
+  <tr>
+    <td>
+      {{ job_family.family_name }} (#{{ job_family.id }})
+    </td>
+    <td>
+      {{ job_family.industries }}
+    </td>
+    <td>
+      <form method="POST" action="{{ url('job_manager:rescore_job_family') }}">
+        {{ csrf() }}
+       <input type="hidden" name="job_family_id" value="{{job_family.id}}">
+       <input type="submit" name="rescore" value="Rescore Job Family">
+      </form>
+    </td>
+  </tr>
+{% endfor %}
+</table>
+
+{% endif %}
+
+<script>
+  function validateAddForm(form) {
+      var val = $("#txtJobName").val()
+      if (val == null || val.trim() == '') {
+          alert('Please enter a valid job name');
+          return false;
+      }
+
+      return true;
+  }
+
+  function getParameterByName(name, url) {
+      if (!url) {
+        url = window.location.href;
+      }
+      name = name.replace(/[\[\]]/g, "\\$&");
+      var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+          results = regex.exec(url);
+      if (!results) return null;
+      if (!results[2]) return '';
+      return decodeURIComponent(results[2].replace(/\+/g, " "));
+  };
+
+  var rescore_delay = getParameterByName('rescore_delay'),
+      rescore_type = getParameterByName('rescore_type');
+  if (rescore_delay && rescore_type) {
+    alert('You\'ll need to wait ' + rescore_delay + ' before attempting to rescore the same ' + rescore_type + '.');
+  };
+</script>

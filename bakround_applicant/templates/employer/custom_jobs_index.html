@@ -1,0 +1,85 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h3>Your custom job profiles</h3>
+<p>
+  Custom job profiles enable you to take a system profile and modify it to meet your organization's hiring requirements.
+</p>
+<table width="100%" class="table table-hover">
+  <tr>
+    <th>Profile Name</th>
+    <th>Parent Job Profile</th>
+    <th></th>
+    <th></th>
+  </tr>
+  {% for job in custom_jobs %}
+    <tr>
+      <td>{{ job.job_name }}</td>
+      <td>{{ job.parent_job.job_name }}</td>
+      <td>
+        <a href="{% url 'employer:custom_job_profile_edit' job.id %}">Edit</a>
+      </td>
+      <td>
+        {% if job.can_delete %}
+          <form method="POST" action="{% url 'employer:custom_job_profile_delete' job.id %}"
+              onsubmit="return confirm_deletion()">
+            <input type="submit" value="Delete">
+            {% csrf_token %}
+          </form>
+        {% endif %}
+      </td>
+    </tr>
+  {% endfor %}
+</table>
+
+<hr/>
+
+<h3>Create a custom job profile</h3>
+
+<form method="POST" action="{% url 'employer:custom_job_profile_create' %}">
+  Profile Name: <input type="text" name="new_job_name" required>
+
+  <br/>
+
+  Based on job profile:
+  <select id="parent_job_id" name="parent_job_id" required onchange="set_job_description_from_parent()">
+    {% for job in standard_jobs %}
+      <option value="{{ job.id }}">{{ job.job_name }}</option>
+    {% endfor %}
+  </select>
+
+  <br/>
+
+  <P>
+    Job profile description:
+    <br/>
+    <textarea id="job_description" name="job_description" rows="5" cols="80"
+        onkeypress="change_description_automatically=false"></textarea>
+  </P>
+
+  <br/>
+
+  <input type="submit" value="Create">
+  {% csrf_token %}
+</form>
+
+<script>
+function confirm_deletion(){
+    return confirm("Do you really want to delete this custom job profile?");
+}
+
+var job_descriptions = JSON.parse("{{ job_descriptions_json|escapejs }}");
+var change_description_automatically = true;
+
+function set_job_description_from_parent(){
+  if (change_description_automatically){
+    var parent_job_id = $("#parent_job_id").val();
+    $("#job_description").val(job_descriptions[parent_job_id]);
+  }
+}
+
+$(set_job_description_from_parent);
+</script>
+
+{% endblock %}

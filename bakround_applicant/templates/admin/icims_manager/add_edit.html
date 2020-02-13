@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+    {% if mode == 'add' %}
+        Add Scraping Job
+    {% else %}
+        Edit Scraping Job
+    {% endif %}
+{% endblock %}
+
+{% block content %}
+
+<center>
+    <h3>
+        {% if mode == 'add' %}
+            Start iCIMS candidate scraping process
+        {% endif %}
+    </h3>
+</center>
+
+<br />
+
+<form action="/icims_manager/{% ifequal mode 'add'%}add{% endifequal %}{% ifequal mode 'edit'%}edit/{{scraper_job_id}}{% endifequal %}" method="post"
+      onsubmit="return prevent_duplicate_form_submission('form')">
+    {% csrf_token %}
+
+    {{ form.as_p }}
+    <p>When you click on submit button, it will start getting candidates from icims from last scraped date</p>
+    <input type="submit" value="Submit" />
+</form>
+
+{% endblock %}

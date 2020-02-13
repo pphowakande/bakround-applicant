@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block title %}
+Clear Cache
+{% endblock %}
+
+{% block content %}
+<P>
+  The cache has been cleared.
+</P>
+
+<P>
+  Entries before: {{ entries_before }}
+</P>
+
+<P>
+  Entries after: {{ entries_after }}
+</P>
+{% endblock %}

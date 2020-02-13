@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+    {% if mode == 'add' %}
+        Add Scraper Login
+    {% else %}
+        Edit Scraper Login
+    {% endif %}
+{% endblock %}
+
+{% block content %}
+
+<center>
+    <h3>
+        {% if mode == 'add' %}
+            Add Scraper Login
+        {% else %}
+            Edit Scraper Login #{{ scraper_login_id }}
+        {% endif %}
+    </h3>
+</center>
+
+<br />
+
+<form action="/scraping_manager/logins/{% ifequal mode 'add'%}add{% endifequal %}{% ifequal mode 'edit'%}edit/{{scraper_login_id}}{% endifequal %}"
+      method="post"
+      onsubmit="return prevent_duplicate_form_submission('form')">
+    {% csrf_token %}
+
+    {{ form.as_p }}
+    <input type="submit" value="Submit" />
+</form>
+
+{% endblock %}

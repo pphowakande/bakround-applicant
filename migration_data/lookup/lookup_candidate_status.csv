@@ -1,0 +1,9 @@
+id,status,order
+1,Phone Screened,3
+2,Interviewed,4
+3,Rejected,5
+4,Made Offer,6
+5,Offer Accepted,7
+6,Offer Rejected,8
+7,Called Candidate,1
+8,Emailed Candidate,2

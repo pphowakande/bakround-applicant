@@ -1,0 +1,247 @@
+{% extends "base.html" %}
+
+{% block title %}
+Bakround | Account Settings
+{% endblock %}
+
+{% block inline_css %}
+<style>
+.admin-row {
+    display: flex;
+    flex-flow: column nowrap;
+    margin-bottom: 10px;
+}
+
+.admin-row > div {
+    display: flex;
+    flex-flow: row wrap;
+}
+
+.admin-row > div > * {
+    margin: 2.5px;
+}
+
+.admin-row > span {
+
+}
+</style>
+{% endblock %}
+
+{% block content %}
+  <h3>Account Settings</h3>
+
+  <div class="tab-pane-top">
+    <div style="display: flex; flex-direction: column;">
+      <div>
+        <div class="tabs-left" style="min-height: 350px">
+          <ul class="nav nav-tabs" style="min-height: 350px">
+            <li class="active"><a href="#a" data-toggle="tab">User Settings</a></li>
+            <li><a href="#d" data-toggle="tab">Sign Out</a></li>
+            {% if user.is_superuser or user.is_staff %}
+              <li><a href="#e" data-toggle="tab">Admin</a></li>
+            {% endif %}
+          </ul>
+          <div class="tab-content">
+            <div class="tab-pane active" id="a" style="min-width: 700px">
+              {% include "pages/user_settings_edit.html" %}
+            </div>
+            <div class="tab-pane wide-pane" id="d">
+              <h3>Are you sure?</h3>
+              <P>You are signed in as {{ space_separated_email }}.</P>
+              <P>Click to sign out.</P>
+              <form method="post" action="/accounts/logout/">
+                  {% csrf_token %}
+                  <button class="btn btn-danger" type="submit">Sign Out</button>
+              </form>
+            </div>
+            {% if user.is_superuser or user.is_staff %}
+              <div class="tab-pane" id="e" style="min-width: 600px">
+                <h3>Admin</h3>
+                <div>
+                  <div class="admin-row">
+                    <span>People</span>
+                    <div>
+                      <a class="btn btn-primary" href="/sme_manager" role="button">SME Manager</a>
+                      <a class="btn btn-primary" href="/profile_manager" role="button">Profile Search</a>
+                      <a class="btn btn-primary" href="/scraping_manager" role="button">Scraping</a>
+                      <a class="btn btn-primary" href="/manual_verifier" role="button">Manual Profile Verif.</a>
+                    </div>
+                  </div>
+                  <div class="admin-row">
+                    <span>Job Profiles</span>
+                    <div>
+                      <a class="btn btn-primary" href="/job_manager" role="button">Job Mngr.</a>
+                      <a class="btn btn-primary" href="/skill_manager" role="button">Skill Mngr.</a>
+                      <a class="btn btn-primary" href="/cert_manager" role="button">Cert Mngr.</a>
+                      <a class="btn btn-primary"
+                         href="{% url 'profile_remap_manager:index' %}"
+                         role="button">Profile Remap Manager</a>
+                    </div>
+                  </div>
+                  <div class="admin-row">
+                    <span>Misc.</span>
+                    <div>
+                        <a class="btn btn-primary" href="{% url 'stats_manager:index' %}" role="button">Stats Manager</a>
+                        <a class="btn btn-primary" href="{% url 'staff:scheduler_tool' %}" role="button">Scheduler Tool</a>
+                        <a class="btn btn-primary" href="{% url 'staff:test_scoring' %}" role="button">Test Scoring</a>
+                        {% if user.is_superuser %}
+                        <a class="btn btn-danger" href="/admin/clear_cache/" role="button"
+                           oncck="return confirm('Are you sure you want to clear the entire application cache?');"
+                          >Clear Cache</a>
+                        {% endif %}
+                    </div>
+                  </div>
+                </div>
+                
+              </div>
+            {% endif %}
+          </div><!-- /tab-content -->
+        </div><!-- /tabbable -->
+      </div><!-- /col -->
+    </div><!-- /row -->
+  </div><!-- /container -->
+
+  <script>
+var tabsFn = (function() {
+
+  function init() {
+    setHeight();
+  }
+
+  function setHeight() {
+    var $tabPane = $('.tab-pane'),
+        tabsHeight = $('.nav-tabs').height();
+
+    $tabPane.css({
+      height: tabsHeight
+    });
+  }
+
+  $(init);
+})();
+  </script>
+
+
+
+{# http://www.bootply.com/74926 #}
+<style>
+
+.tabs-below > .nav-tabs,
+.tabs-right > .nav-tabs,
+.tabs-left > .nav-tabs {
+  border-bottom: 0;
+}
+
+.tab-content > .tab-pane,
+.pill-content > .pill-pane {
+  display: none;
+}
+
+.tab-content > .active,
+.pill-content > .active {
+  display: block;
+}
+
+.tabs-below > .nav-tabs {
+  border-top: 1px solid #ddd;
+}
+
+.tabs-below > .nav-tabs > li {
+  margin-top: -1px;
+  margin-bottom: 0;
+}
+
+.tabs-below > .nav-tabs > li > a {
+  -webkit-border-radius: 0 0 4px 4px;
+     -moz-border-radius: 0 0 4px 4px;
+          border-radius: 0 0 4px 4px;
+}
+
+.tabs-below > .nav-tabs > li > a:hover,
+.tabs-below > .nav-tabs > li > a:focus {
+  border-top-color: #ddd;
+  border-bottom-color: transparent;
+}
+
+.tabs-below > .nav-tabs > .active > a,
+.tabs-below > .nav-tabs > .active > a:hover,
+.tabs-below > .nav-tabs > .active > a:focus {
+  border-color: transparent #ddd #ddd #ddd;
+}
+
+.tabs-left > .nav-tabs > li,
+.tabs-right > .nav-tabs > li {
+  float: none;
+}
+
+.tabs-left > .nav-tabs > li > a,
+.tabs-right > .nav-tabs > li > a {
+  min-width: 74px;
+  margin-right: 0;
+  margin-bottom: 3px;
+}
+
+.tabs-left > .nav-tabs {
+  float: left;
+  margin-right: 19px;
+  border-right: 1px solid #ddd;
+}
+
+.tabs-left > .nav-tabs > li > a {
+  margin-right: -1px;
+  -webkit-border-radius: 4px 0 0 4px;
+     -moz-border-radius: 4px 0 0 4px;
+          border-radius: 4px 0 0 4px;
+}
+
+.tabs-left > .nav-tabs > li > a:hover,
+.tabs-left > .nav-tabs > li > a:focus {
+  border-color: #eeeeee #dddddd #eeeeee #eeeeee;
+}
+
+.tabs-left > .nav-tabs .active > a,
+.tabs-left > .nav-tabs .active > a:hover,
+.tabs-left > .nav-tabs .active > a:focus {
+  border-color: #ddd transparent #ddd #ddd;
+  *border-right-color: #ffffff;
+}
+
+.tabs-right > .nav-tabs {
+  float: right;
+  margin-left: 19px;
+  border-left: 1px solid #ddd;
+}
+
+.tabs-right > .nav-tabs > li > a {
+  margin-left: -1px;
+  -webkit-border-radius: 0 4px 4px 0;
+     -moz-border-radius: 0 4px 4px 0;
+          border-radius: 0 4px 4px 0;
+}
+
+.tabs-right > .nav-tabs > li > a:hover,
+.tabs-right > .nav-tabs > li > a:focus {
+  border-color: #eeeeee #eeeeee #eeeeee #dddddd;
+}
+
+.tabs-right > .nav-tabs .active > a,
+.tabs-right > .nav-tabs .active > a:hover,
+.tabs-right > .nav-tabs .active > a:focus {
+  border-color: #ddd #ddd #ddd transparent;
+  *border-left-color: #ffffff;
+}
+
+@media screen and (min-width: 500px) {
+  .wide-pane {
+    min-width: 500px;
+  }
+}
+
+@media screen and (max-width: 499px) {
+  .tab-pane-top {
+    margin-left: -15px;
+  }
+}
+</style>
+
+{% endblock %}

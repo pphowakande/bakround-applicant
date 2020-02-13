@@ -1,0 +1,8 @@
+id,scale_id,scale_name,category,category_description
+1,FT,Frequency of Task (Categories 1-7),1,Yearly or less
+2,FT,Frequency of Task (Categories 1-7),2,More than yearly
+3,FT,Frequency of Task (Categories 1-7),3,More than monthly
+4,FT,Frequency of Task (Categories 1-7),4,More than weekly
+5,FT,Frequency of Task (Categories 1-7),5,Daily
+6,FT,Frequency of Task (Categories 1-7),6,Several times daily
+7,FT,Frequency of Task (Categories 1-7),7,Hourly or more

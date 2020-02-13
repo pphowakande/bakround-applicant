@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<style>
+p label { width: 90px; }
+</style>
+
+<form method="POST">
+
+  <P>
+    Enter information for the user.
+  </P>
+  <P>
+    Note: Ownership means that the user has privileges to manage users and modify the global email template and logo.
+  </P>
+
+  {{ form.as_p }}
+
+  <input type="submit" class="btn btn-primary" value="{{ submit_label }}">
+  {% csrf_token %}
+
+</form>
+
+<br/>
+
+<a href="{% url 'employer:manage_employer_users' %}">
+  back to Manage Users
+</a>
+
+{% endblock %}

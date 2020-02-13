@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Job Manager{% endblock %}
+
+{% block content %}
+
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+
+<P>Job = {{job.job_name}}</P>
+
+<P>Select a job in the left box.  Then choose the skills for that job by selecting
+them in the right box.  To select more than one skill, use Control+click
+(or Command+click on Mac).</P>
+
+<script>
+  var skills_by_job = {{ skills_by_job }};
+
+  function show_skills_for_chosen_job(){
+    var job_id = $("#job_control").val();
+    $("#skill_control").find("option").prop('selected', false);
+
+    var i;
+    var skills_array = skills_by_job[job_id] || [];
+    for (i = 0; i < skills_array.length; i++){
+      var skill_id = skills_array[i];
+      $("#skill_control option[value='" + skill_id + "']").prop('selected', true);
+    }
+
+    $("#skill_control").focus();
+  }
+</script>
+
+<table>
+  <tr>
+
+   <td>
+    Skills:<br>
+    <select id="skill_control" size="10" multiple="multiple">
+      {% for skill in skills %}
+        <option value="{{ skill.id }}">#{{ skill.id }}: {{ skill.skill_name }}</option>
+      {% endfor %}
+    </select>
+  </td></tr>
+</table>
+
+{% endblock %}

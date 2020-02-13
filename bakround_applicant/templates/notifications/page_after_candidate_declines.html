@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block content %}
+<p>Thank you for letting us know.</p>
+
+
+<form method="POST" action="/candidate/decline_reason/{{ employer_candidate.guid }}">
+  <fieldset style="border: 2px groove; padding: 10px">
+    <legend style="font-size: 16px; margin: 5px; width: auto; border-bottom: none">
+      Primary Reason for Declining:
+    </legend>
+
+    <table><tr>
+      <td>
+        {% for decline_reason in decline_reasons %}
+          <label>
+            <input type="radio" name="decline_reason" value="{{ decline_reason.id }}">
+            {{ decline_reason.reason }}
+          </label>
+          <br/>
+        {% endfor %}
+      </td>
+      <td style="min-width: 100px"></td>
+      <td>
+        Comments:
+        <br/>
+        <textarea name="decline_reason_comments" rows="7" cols="50"
+          maxlength="1000"></textarea>
+      </td>
+    </tr></table>
+
+    <input type="submit" value="Submit"/>
+  </fieldset>
+
+  {% csrf_token %}
+</form>
+
+{% endblock %}

@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Notification Settings{% endblock %}
+
+{% block content %}
+
+<h3>
+  Notification Settings
+</h3>
+
+<form method="POST">
+  {% csrf_token %}
+  I would like to receive the:
+  <br/>
+
+  <label>
+    <input type="checkbox"
+           name="daily_summary_email_enabled"
+           value="1"
+           {% if employer_user.daily_summary_email_enabled %} checked {% endif %}
+           />
+    Daily Activity Summary email
+  </label>
+
+  <br/>
+
+  <label>
+    <input type="checkbox"
+           name="weekly_stats_email_enabled"
+           value="1"
+           {% if employer_user.weekly_stats_email_enabled %} checked {% endif %}
+           />
+    Weekly Job Stats email
+  </label>
+
+  <br/>
+  <input type="submit" value="Submit">
+</form>
+
+{% endblock %}

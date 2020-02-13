@@ -1,0 +1,110 @@
+{% extends "base.html" %}
+{% load static %}
+{% load app_filters %}
+{% block content %}
+
+<style>
+    .scraping-table {
+        width: 100%;
+    }
+
+    .scraping-table tr td, .scraping-table tr th {
+        min-width: 100px;
+        padding: 10px;
+        text-align: center;
+    }
+
+    .url {
+        word-break: break-all;
+    }
+
+    .pagination-container {
+        display: flex;
+        justify-content: center;
+    }
+
+    .pagination-button {
+        float: left;
+        padding: 6px 12px;
+    }
+</style>
+
+<link rel="stylesheet" href="{% static 'vendor/jquery-ui-1.12.1/jquery-ui.min.css' %}">
+<script src="{% static 'vendor/jquery-ui-1.12.1/jquery-ui.min.js' %}"></script>
+
+<div>
+    <h3>Scraping Manager</h3>
+    <p>Nota Bene: When you're not sure if jobs are running as they should be, click "<i class="fa fa-refresh" aria-hidden="true"></i> Queue". It will re-create the RabbitMQ queue for the scraping service.</p>
+</div>
+<div style="text-align: right">
+    {% if paginated %}
+    <a href="?depaginate=true" class="pagination-button">view as one page</a>
+    {% else %}
+    <a href="/scraping_manager/" class="pagination-button">view paginated</a>
+    {% endif %}
+    <a href="/scraping_manager/stop_all" class="btn btn-default btn-danger">Stop All</a>
+    <a href="/scraping_manager/requeue_all" class="btn btn-default btn-info"><i class="fa fa-refresh" aria-hidden="true"></i> Queue</a>
+    <a href="/scraping_manager/add" class="btn btn-default btn-primary">
+<i class="fa fa-plus" aria-hidden="true"></i> Scraper Job</a>
+    <a href="/scraping_manager/logins" class="btn btn-default btn-primary">Manage Logins</a>
+</div>
+<div style="margin-top: 10px;">
+    <table class="scraping-table" cellpadding="5" border="1px">
+        <tr>
+            <th>ScraperJob ID</th>
+            <th>Crawling Start URL</th>
+            <th>Job</th>
+            <th>Current Resume # in Scrape</th>
+            <th>New Resumes Scraped</th>
+            <th>Resumes Re-Scraped</th>
+            <th>Last Activity</th>
+        </tr>
+        {% for job in scraper_jobs %}
+            <tr>
+                <td>
+                    {{ job.id }}
+                    <br />
+                    <a href="/scraping_manager/start_stop/{{ job.id }}">{%if job.running%}Stop{%else%}Start{%endif%}</a>
+                    <br />
+                    <a href="/scraping_manager/edit/{{ job.id }}">Edit</a>
+                </td>
+                <td><p class="url">{{ job.start_url }}</p></td>
+                <td>{{ job.job.job_name }}</td>
+                <td>
+                    {{ job.start_offset }}
+                    <br />
+                    <a href="/scraping_manager/reset/{{ job.id }}">Reset</a>
+                </td>
+                <td>{{ job.new_resumes_scraped }}</td>
+                <td>{{ job.resumes_rescraped }}</td>
+                <td>{{ job.date_updated }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+</div>
+
+{% if paginated and scraper_jobs.has_other_pages %}
+  <div class="pagination-container">
+      <ul class="pagination">
+        {% if scraper_jobs.has_previous %}
+          <li><a href="?page={{ scraper_jobs.previous_page_number }}">&laquo;</a></li>
+        {% else %}
+          <li class="disabled"><span>&laquo;</span></li>
+        {% endif %}
+        {% for i in scraper_jobs.paginator.page_range %}
+          {% if scraper_jobs.number == i %}
+            <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+          {% else %}
+            <li><a href="?page={{ i }}">{{ i }}</a></li>
+          {% endif %}
+        {% endfor %}
+        {% if scraper_jobs.has_next %}
+          <li><a href="?page={{ scraper_jobs.next_page_number }}">&raquo;</a></li>
+        {% else %}
+          <li class="disabled"><span>&raquo;</span></li>
+        {% endif %}
+      </ul>
+  </div>
+{% endif %}
+
+{% endblock %}

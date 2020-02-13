@@ -1,0 +1,3 @@
+id,plan_name,action_name,limit
+2,bestfit-trial,employer_job_candidate_contact,15
+1,bestfit-trial,employer_user_create,0

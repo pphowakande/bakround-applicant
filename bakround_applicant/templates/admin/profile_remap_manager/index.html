@@ -1,0 +1,101 @@
+{% extends "base.html" %}
+{% load static app_filters %}
+
+{% block title %}
+  Profile Remap Manager
+{% endblock %}
+
+{% block content %}
+  <h3>
+    Profile Remap Manager
+  </h3>
+
+  <style>
+    th, td {
+      padding: 10px;
+    }
+  </style>
+
+  <table border="1">
+    <tr>
+      <th>Order</th>
+      <th>Job</th>
+      <th>Last Run</th>
+      <th style="text-align: center">
+        # Mapped Profiles
+      </th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+    {% for job in jobs_with %}
+      <tr>
+        <td style="text-align: right">
+          <form method="POST"
+                action="{% url 'profile_remap_manager:change_order' job.id %}"
+                onchange="this.submit()">
+            {% csrf_token %}
+            <select name="new_order">
+              {% for order in all_orders %}
+                <option value="{{ order }}"
+                        {% if order == job.remap_order %} selected {% endif %}>{{ order }}</option>
+              {% endfor %}
+            </select>
+          </form>
+        </td>
+        <td>{{ job.job_name }} (#{{ job.id }})</td>
+        <td>{{ job.last_remap_date }}</td>
+        <td style="text-align: right">{{ counts|get_item:job.id|default_if_none:0 }}</td>
+        <td>
+          <a href="#"
+             onclick="alert('Query for job {{ job.id }}:' + '\n\n' + '{{ job.remap_query|default_if_none:''|escapejs }}')"
+             >Quick View</a>
+        </td>
+        <td><a href="{% url 'profile_remap_manager:edit_job' job.id %}">Edit</td>
+        <td>
+          <form method="POST"
+                action="{% url 'profile_remap_manager:remap_job_now' job.id %}"
+                onsubmit="return confirm('Are you sure you want to remap this job?')">
+            {% csrf_token %}
+            <input type="submit" value="Remap Now"/>
+          </form>
+        </td>
+        <td>
+          <form method="POST"
+                action="{% url 'profile_remap_manager:remove_job' job.id %}"
+                onsubmit="return confirm('Are you sure you want to remove this remapping?')">
+            {% csrf_token %}
+            <input type="submit" value="Remove"
+              style="background-color: #ffa0a0"/>
+          </form>
+        </td>
+      </tr>
+    {% endfor %}
+  </table>
+
+  <br/>
+
+  <form method="POST" action="{% url 'profile_remap_manager:clean_up_order' %}">
+    {% csrf_token %}
+    <input type="submit" value="Clean up ordering"/>
+  </form>
+
+  <br/><br/>
+
+  <h4>Add remap for job:</h4>
+
+  <form id="add_job_form"
+        method="POST"
+        action="{% url 'profile_remap_manager:add_job' %}">
+    {% csrf_token %}
+
+    <select name="job_id" onchange="$('#add_job_form').submit()">
+      <option value="">---------</option>
+      {% for job in jobs_without %}
+        <option value="{{ job.id }}">{{ job.job_name }} (#{{ job.id }})</option>
+      {% endfor %}
+    </select>
+  </form>
+
+{% endblock %}

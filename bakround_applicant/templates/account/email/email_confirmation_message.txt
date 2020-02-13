@@ -1,0 +1,10 @@
+{% load account %}{% user_display user as user_display %}{% load i18n %}{% autoescape off %}{% blocktrans with site_name=current_site.name site_domain=current_site.domain %}Hello from {{ site_name }}!
+
+You're receiving this e-mail because someone (hopefully you) has created a Bakround account using your e-mail address.
+
+If you created the account, please go to {{ activate_url }} to activate it.
+
+If you did not create the account, you may ignore this message.
+{% endblocktrans %}{% endautoescape %}
+{% blocktrans with site_name=current_site.name site_domain=current_site.domain %}Thank you from {{ site_name }}!
+{% endblocktrans %}

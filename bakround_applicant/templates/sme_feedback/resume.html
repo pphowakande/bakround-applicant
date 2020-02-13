@@ -1,0 +1,68 @@
+<div class="resume">
+  <h1>{{ resume_data.first_name }}{% if resume_data.middle_name %}&nbsp;{{ resume_data.middle_name }}{% endif %}{% if resume_data.last_name %}&nbsp;{{ resume_data.last_name }}{% endif %}</h1>
+
+  <h3>
+      {% if resume_data.city %}
+         {{ resume_data.city }}{% if resume_data.state %},{% endif %}
+      {% endif %}
+      
+      {% if resume_data.state %}
+         {{ resume_data.state }}
+      {% endif %}
+  </h3>
+
+  {% if resume_data.summary %}
+      <p>{{ resume_data.summary }}</p>
+  {% endif %}
+
+  {% if resume_data.experience|length > 0 %}
+      <h2>Experience</h2>
+  {% endif %}
+  <ul>
+  {% for e in resume_data.experience %}
+      <li class="experience">
+        <h3>{{ e.company_name }}</h3>
+        <h4>{{ e.job_title }} ({% if e.start_date %}{{ e.start_date }}{% if e.end_date or e.is_current_position %}&nbsp;-&nbsp;{% endif %}{% endif %}{% if e.end_date %}{{ e.end_date }}{% elif e.is_current_position %}Now{% endif %})</h4>
+        <h5>
+          {% if e.city_name %}{{ e.city_name }}{% endif %}
+          {% if e.state_code %}, {{ e.state_code }}{% endif %}
+          {% if e.country_code and e.country_code != 'US' %}, {{ e.country_code }}{% endif %}
+        </h5>
+        <p>{{ e.job_description }}</p>
+      </li>
+  {% endfor %}
+  </ul>
+
+  {% if resume_data.education|length > 0 %}
+      <h2>Education</h2>
+  {% endif %}
+  <ul>
+  {% for e in resume_data.education %}
+      <li class="education">
+        <h3>
+        {% if e.degree_name  %}
+            {{ e.degree_name }} 
+        {% else %}
+            Other
+        {% endif %}
+
+        {% if e.degree_date %}
+            (since {{ e.degree_date }})
+        {% endif %}
+        </h3>
+        <h4>
+          {% if e.start_date %}
+              ({{ e.start_date }}&nbsp;-&nbsp;{{ e.end_date }})
+          {% endif %}
+          {{ e.school_name }}
+          {% if e.city_name %}
+              , {{ e.city_name }}, {{ e.state_code }}
+              {% if e.country_code and e.country_code != "US" %}
+                  , {{ e.country_code }}
+              {% endif %}
+          {% endif %}
+        </h4>
+      </li>
+  {% endfor %}
+  </ul>
+</div>

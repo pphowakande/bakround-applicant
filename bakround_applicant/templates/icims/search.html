@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% load static %}
+{% load app_filters %}
+{% load render_bundle from webpack_loader %}
+{% block title %}{{job.job_title}} - Add Candidates{% endblock %}
+
+{% block content %}
+<link type="text/css" rel="stylesheet" href="{% static 'vendor/materialize/css/materialize.css' %}" media="screen,projection"/>
+<link rel="stylesheet" href="{% static 'css/employer.css' %}" />
+
+<div id="react"></div>
+
+<script>
+window.csrf_token='{{csrf_token}}';
+// make sure to escape your props to prevent XSS! See here for the source for the json filter: https://gist.github.com/pirate/c18bfe4fd96008ffa0aef25001a2e88f
+{% autoescape off %}
+window.props = '{{props|escapejs}}';
+{% endautoescape %}
+window.react_mount = document.getElementById('react');
+
+window.scoring_scale_src = "{% static 'images/scoring_scale_2_transparent.png' %}";
+
+if (navigator.platform === 'MacIntel' || navigator.platform === 'MacPPC') {
+    $('head').append('<link rel="stylesheet" type="text/css" href="{% static 'css/employer_osx.css' %}" />');
+}
+</script>
+
+{% render_bundle 'icims_search' %}
+{% endblock %}

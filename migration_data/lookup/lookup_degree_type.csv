@@ -1,0 +1,21 @@
+id,degree_type_name,degree_type_sovren,visible
+1,Special Education,specialeducation,f
+3,Some High School,some high school or equivalent,f
+4,GED,ged,t
+5,Secondary,secondary,f
+6,High School,high school or equivalent,t
+7,Certification,certification,t
+8,Vocational,vocational,t
+9,Some College,some college,f
+10,HND/HNC,HND/HNC or equivalent,f
+11,Associates,associates,t
+12,International,international,f
+13,Bachelors,bachelors,t
+14,Some Post-Graduate,some post-graduate,f
+15,Masters,masters,t
+16,Intermediate Graduate,intermediategraduate,f
+17,Professional,professional,t
+18,Post-Professional,postprofessional,f
+19,Doctorate,doctorate,t
+20,Post-Doctorate,postdoctorate,t
+2,Grade School,lessThanHighSchool,f

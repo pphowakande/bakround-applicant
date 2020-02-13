@@ -1,0 +1,93 @@
+{% extends "base.html" %}
+{% load static %}
+{% load app_filters %}
+{% block content %}
+
+<style>
+    .scraping-table {
+        width: 100%;
+    }
+
+    .scraping-table tr td, .scraping-table tr th {
+        min-width: 100px;
+        padding: 10px;
+        text-align: center;
+    }
+
+    .url {
+        word-break: break-all;
+    }
+
+    .pagination-container {
+        display: flex;
+        justify-content: center;
+    }
+
+    .pagination-button {
+        float: left;
+        padding: 6px 12px;
+    }
+</style>
+
+<link rel="stylesheet" href="{% static 'vendor/jquery-ui-1.12.1/jquery-ui.min.css' %}">
+<script src="{% static 'vendor/jquery-ui-1.12.1/jquery-ui.min.js' %}"></script>
+
+<div>
+    <h3>ICIMS Manager</h3>
+</div>
+<div style="text-align: right">
+    {% if paginated %}
+    <a href="?depaginate=true" class="pagination-button">view as one page</a>
+    {% else %}
+    <a href="/icims_manager/" class="pagination-button">view paginated</a>
+    {% endif %}
+    <a href="/icims_manager/add" class="btn btn-default btn-primary">
+<i class="fa fa-plus" aria-hidden="true"></i> Ranking Job</a>
+
+</div>
+<div style="margin-top: 10px;">
+    <table class="scraping-table" cellpadding="5" border="1px">
+        <tr>
+            <th>RankingJob ID</th>
+            <th>New Candidates Scored</th>
+            <th>Ranking Process Start Date</th>
+        </tr>
+        {% for job in ranking_jobs %}
+            <tr>
+                <td>
+                    {{ job.id }}
+                    <br />
+                    <a href="/icims_manager/start_stop/{{ job.id }}">{%if job.running%}Stop{%else%}Start{%endif%}</a>
+                </td>
+                <td>{{ job.resumes_rescraped }}</td>
+                <td>{{ job.date_updated }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+</div>
+
+{% if paginated and ranking_jobs.has_other_pages %}
+  <div class="pagination-container">
+      <ul class="pagination">
+        {% if ranking_jobs.has_previous %}
+          <li><a href="?page={{ ranking_jobs.previous_page_number }}">&laquo;</a></li>
+        {% else %}
+          <li class="disabled"><span>&laquo;</span></li>
+        {% endif %}
+        {% for i in ranking_jobs.paginator.page_range %}
+          {% if ranking_jobs.number == i %}
+            <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+          {% else %}
+            <li><a href="?page={{ i }}">{{ i }}</a></li>
+          {% endif %}
+        {% endfor %}
+        {% if ranking_jobs.has_next %}
+          <li><a href="?page={{ ranking_jobs.next_page_number }}">&raquo;</a></li>
+        {% else %}
+          <li class="disabled"><span>&raquo;</span></li>
+        {% endif %}
+      </ul>
+  </div>
+{% endif %}
+
+{% endblock %}

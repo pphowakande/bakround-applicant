@@ -1,0 +1,24 @@
+
+<div id="contact_dialog" style="display: none">
+  <P>
+    Job:
+    {{ contact_form.employer_job }}
+    (<a href="{% url 'employer:add_job' %}" target="_blank" style="color: blue">add job</a>)
+    (<a href="#" onclick="refresh_job_dropdown()" style="color: blue">refresh job list after adding new job</a>)
+  </P>
+
+  <P>
+    Current message to candidate:
+    (<a href="#" target="_blank" style="color: blue" id="edit_link"
+        onclick="return this.href.indexOf('job_settings') >= 0">edit message</a>)
+    (<a href="#" style="color: blue"
+        onclick="show_message_for_selected_job()">refresh message after edit</a>)
+
+    <div id="current_message"
+         style="width: 670px; height: 300px; border: 2px solid black; padding: 5px; overflow: auto"></div>
+  </P>
+</div>
+
+<script>
+  add_handler_to_dropdown();
+</script>

@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+    {% if mode == 'create' %}
+        Create SME
+    {% else %}
+        Edit SME
+    {% endif %}
+{% endblock %}
+
+{% block content %}
+
+<center>
+    <h3>
+        {% if mode == 'create' %}
+            Create SME
+        {% else %}
+            Edit SME
+        {% endif %}
+    </h3>
+</center>
+
+<br />
+
+<form action="/sme_manager/{% ifequal mode 'create'%}create{% endifequal %}{% ifequal mode 'edit'%}edit/{{sme_id}}{% endifequal %}" method="post"
+      onsubmit="return prevent_duplicate_form_submission('form')">
+    {% csrf_token %}
+
+    {% if sme %}
+    <P>
+      <b>Date Added:</b>
+      {{ sme.date_created }}
+    </P>
+    {% endif %}
+
+    {{ form.as_p }}
+    <input type="submit" value="Submit" />
+</form>
+
+{% endblock %}

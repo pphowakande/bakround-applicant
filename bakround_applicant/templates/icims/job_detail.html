@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% load static %}
+{% load app_filters %}
+{% load render_bundle from webpack_loader %}
+{% block title %}{{job.job_title}}{% endblock %}
+
+{% block content %}
+<link type="text/css" rel="stylesheet" href="{% static 'vendor/materialize/css/materialize.css' %}" media="screen,projection"/>
+<link rel="stylesheet" href="{% static 'css/employer.css' %}" />
+
+<div id="react"></div>
+
+<script>
+    window.csrf_token='{{csrf_token}}';
+{% autoescape off %}
+    window.props = '{{props|escapejs}}';
+{% endautoescape %}
+    window.react_mount = document.getElementById('react');
+</script>
+{% render_bundle 'icims_job' %}
+
+{% endblock %}

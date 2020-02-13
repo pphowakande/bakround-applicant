@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h3>Congratulations!</h3>
+
+<P>
+  You have claimed your profile!  Your profile page will now have the entries
+  for experience, education, etc., that we have found in our database.
+</P>
+
+<P>
+  Before continuing to use Bakround, you must verify your email address.
+  Please look for an email from us in your inbox.
+</P>
+
+<script>
+  $.ajax({
+    "url": "/accounts/logout/",
+    "method": "POST",
+    "headers": {
+      "X-CSRFToken": "{{ csrf_token|escapejs }}"
+    }
+  });
+</script>
+
+{% endblock %}

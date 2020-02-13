@@ -1,0 +1,181 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Manage Users{% endblock %}
+
+{% block content %}
+
+<link rel="stylesheet" href="{% static 'vendor/jquery-ui-1.12.1/jquery-ui.min.css' %}">
+<script src="{% static 'vendor/jquery-ui-1.12.1/jquery-ui.min.js' %}"></script>
+
+<style>
+    table.sme-list { border-collapse: collapse; font-size: 14px }
+
+    .sme-list td + td,
+    th + th { border-left: 1px solid; }
+    .sme-list tr + tr { border-top: 1px solid; }
+
+    table.sme-list tr th, table.sme-list tr td {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+
+    table.sme-list tr td {
+        padding-top: 15px;
+        padding-bottom: 15px;
+    }
+</style>
+<h3>Manage Users</h3>
+
+<P>
+  <br/>
+  Click "Add" to add a new user.  Each new user will receive an email that explains how they can log in
+  to the site.
+</P>
+<P>
+    Note: Ownership means that the user has privileges to manage users and modify the global email template and logo.
+</P>
+<br />
+<input type="button" class="btn btn-primary" value="Add" onclick="location.href='/employer/add_user';" />
+<br /><br />
+<table width="100%" class="sme-list">
+    <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Owner?</th>
+        {% if employer.auto_contact_enabled %}
+          <th>Autopilot</th>
+        {% endif %}
+        <th>Headshot</th>
+        <th>Edit</th>
+        <th>Re-send invite</th>
+        <th>Delete</th>
+    </tr>
+    {% for eu in employer_user_list %}
+        <tr>
+            <td>{{eu.user.first_name}} {{eu.user.last_name}}</td>
+            <td>{{eu.user.email}}</td>
+            <td>{{eu.is_owner}}</td>
+            {% if employer.auto_contact_enabled %}
+              <td>{{eu.auto_contact_enabled|yesno:'ON,off'}}</td>
+            {% endif %}
+            <td>
+              <a href="#!" onclick="open_headshot_modal({{ eu.id }})">View/Edit</a>
+            </td>
+            <td><a href="/employer/edit_user/{{ eu.id }}">Edit</a></td>
+            <td>
+              {% if eu.user.initial_login_token %}
+                <form method="POST" action="{% url 'employer:resend_login_token' eu.id %}">
+                  <input type="submit" value="Re-send">
+                  {% csrf_token %}
+                </form>
+              {% endif %}
+            </td>
+            <td>
+              {% if eu.can_delete %}
+                <form method="POST"
+                      action="{% url 'employer:delete_employer_user' eu.id %}"
+                      onsubmit="return confirm_deletion()">
+                  <input type="submit" value="Delete">
+                  {% csrf_token %}
+                </form>
+              {% endif %}
+            </td>
+        </tr>
+    {% endfor %}
+</table>
+
+<div id="headshot_modal" style="display: none">
+  The headshot for <span id="recruiter_name_span"></span> is shown below.
+  <br/>
+  <br/>
+  Current:
+  <br/>
+  <img id="headshot_img" src=""/>
+  <br/>
+  <br/>
+  <form id="headshot_upload_form" onsubmit="return false">
+      Change:
+      <input type="file" name="file" id="headshot_file" onchange="upload_headshot()"/>
+      <input type="hidden" name="employer_user_id" id="headshot_employer_user_id"/>
+  </form>
+  <br/>
+  <br/>
+  <input type="button" value="Remove headshot" onclick="ask_to_remove_headshot()"/>
+</div>
+
+<script>
+function confirm_deletion(){
+    return confirm("Do you really want to delete this user?");
+}
+
+function close_modal(){
+    $("#headshot_modal").dialog("close");
+}
+
+function open_headshot_modal(eu_id){
+    $("#headshot_employer_user_id").val(eu_id);
+    $("#headshot_file")[0].value = "";
+    show_headshot(eu_id);
+}
+
+function show_headshot(eu_id){
+    $.ajax({
+        method: "GET",
+        url: "/employer/get_headshot_url/" + eu_id
+    }).then(function (response){
+        $("#recruiter_name_span").text(response.name || "");
+        $("#headshot_img").attr("src", response.url || "");
+
+        $("#headshot_modal").dialog({
+            dialogClass: "no-close",
+            closeOnEscape: false,
+            resizable: false,
+            height: "auto",
+            width: 400,
+            modal: true,
+            buttons: {
+              "Close": close_modal
+            }
+        });
+    });
+}
+
+function upload_headshot(){
+    var eu_id = $("#headshot_employer_user_id").val();
+
+    var formData = new FormData();
+    formData.append("file", $("#headshot_file")[0].files[0]);
+
+    $.ajax({
+        method: "POST",
+        url: "/employer/upload_headshot/" + eu_id,
+        headers: {
+            'X-CSRFToken': "{{ csrf_token }}"
+        },
+        data: formData,
+        processData: false,
+        contentType: false,
+        cache: false
+    }).then(function (){
+        show_headshot(eu_id);
+    });
+}
+
+function ask_to_remove_headshot(){
+  if (confirm("Are you sure you want to remove this headshot?")){
+    var eu_id = $("#headshot_employer_user_id").val();
+
+    $.ajax({
+      method: "POST",
+      url: "/employer/remove_headshot/" + eu_id,
+      headers: {
+          'X-CSRFToken': "{{ csrf_token }}"
+      }
+    }).then(function (){
+      show_headshot(eu_id);
+    });
+  }
+}
+</script>
+{% endblock %}

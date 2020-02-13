@@ -1,0 +1,34 @@
+id,name,city,state_id,radius
+5,"Chicago, IL",Chicago,3934,30
+7,"Stockton, CA",Stockton,3924,30
+10,"Orlando, FL",Orlando,3930,30
+8,"Charleston, SC",Charleston,3966,30
+6,"Tampa, FL",Tampa,3930,30
+18,"Peoria, IL",Peoria,3934,30
+21,"Sutton, NH",Sutton,3952,30
+4,"San Jose, CA",San Jose,3924,30
+3,"New York, NY",New York,3956,30
+15,"Missoula, MT",Missoula,3949,50
+13,"Seattle, WA",Seattle,3975,50
+9,"Madison, WI",Madison,3977,50
+22,New Jersey Shore,Seaside Heights,3953,30
+16,"Springfield, MA",Springfield,3943,20
+2,"Avalon, NJ",Avalon,3953,20
+14,"Las Vegas, NV",Las Vegas,3951,35
+11,"Harrisburg, PA",Harrisburg,3963,35
+17,"Little Rock, AR",Little Rock,3922,40
+19,"Portland, ME",Portland,3941,40
+20,"Louisville, KY",Louisville,3938,40
+12,"Indianapolis, IN",Indianapolis,3935,80
+1,Philadelphia,Philadelphia,3963,35
+23,"West Palm Beach, FL",West Palm Beach,3930,30
+24,"Miami, FL",Miami,3930,40
+25,"Medford, OR",Medford,3962,70
+26,"Oklahoma City, OK",Oklahoma City,3960,60
+27,"Charlotte, NC",Charlotte,3957,60
+28,"Denver, CO",Denver,3926,60
+29,"San Francisco, CA",San Francisco,3924,25
+30,Boston,Boston,3943,30
+31,Penn State Med,Hershey,3963,30
+32,Piscataway,Piscataway,3953,50
+33,The Bronx,Bronx,3956,30

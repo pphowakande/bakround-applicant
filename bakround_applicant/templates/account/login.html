@@ -1,0 +1,120 @@
+{% extends "account/base.html" %}
+
+{% load i18n %}
+{% load account socialaccount %}
+{% load crispy_forms_tags %}
+{% load staticfiles %}
+
+{% block head_title %}
+Bakround | Sign In
+{% endblock %}
+
+{% block inner %}
+<style>
+  .third-party-sign-in-btn {
+    margin: 10px 0px;
+  }
+  .third-party-sign-in-btn:first-of-type {
+    margin: 0px 0px;
+  }
+  i.fa-linkedin {
+    float:left;
+    font-size: 21px;
+    line-height: 21px;
+    padding-right:10px;
+  }
+  .linkedin-btn {
+    color:white;
+    background-color: #0076b4;
+  }
+  .linkedin-btn:hover {
+    color:white !important;
+    background-color: #0076b4 !important;
+  }
+  .google-btn img {
+    float: left;
+    height:20px;
+  }
+  .google-btn:hover {
+     background-color: white !important;
+  }
+
+  .textinput {
+    align: center;
+    max-width: 300px;
+  }
+  hr {
+    margin: 5px 0px;
+  }
+  .form-control-label {
+    text-align: left;
+    display: block;
+  }
+  label {
+    font-weight: 300;
+  }
+</style>
+
+<div class="wireframe-centered-column grey-font">
+<h1 class='signup-font grey-font'>Welcome back</h1>
+
+{% get_providers as socialaccount_providers %}
+
+{% if socialaccount_providers %}
+<p>{% blocktrans with site.name as site_name %} Sign in with your
+  {{ site_name }} account. {% endblocktrans %}</p>
+
+{% include "socialaccount/snippets/login_extra.html" %}
+
+{% else %}
+<p>If you have not created an account yet, then please
+<a href="{% url 'employer_signup' %}">sign up</a> first.</p>
+{% endif %}
+
+<div style="width: 300px; align: center; margin: auto">
+    <a onclick="sendPageView('linkedin')" href="/accounts/linkedin_oauth2/login/?process=login" class="btn btn-default btn-round third-party-sign-in-btn linkedin-btn" style="width: 300px;">
+      <i class='fa fa-linkedin'></i>
+      <span>Sign in with LinkedIn</span>
+    </a>
+    <a onclick="sendPageView('google')" class="btn btn-default btn-round third-party-sign-in-btn google-btn" href='/accounts/google/login/?process=login' style="width: 300px; color:grey;">
+      <img src="{% static 'images/g-logo.png' %}">
+      <span>Sign in with Google</span>
+    </a>
+    <hr/>OR<hr/>
+  <form class="login grey-font" method="POST" action="{% url 'account_login' %}"
+        onsubmit="return prevent_duplicate_form_submission('login_form')">
+    {% csrf_token %}
+    {{ form|crispy }}
+    {% if redirect_field_value %}
+    <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+    {% endif %}
+    <a class="button secondaryAction" href="{% url 'account_reset_password' %}">
+      {% trans "(Forgot Password?)" %}</a>
+    <div>
+      <button class="primaryAction btn btn-default btn-round create-account-btn" type="submit">sign in</button>
+    </div>
+  </form>
+</div>
+  <div style='clear:both;'>Don't have an account? <a href="{% url 'employer_signup' %}">Sign up</a></div>
+</div>
+
+<script>
+  function sendPageView(provider) {
+    {% if settings.USE_GOOGLE_ANALYTICS %}
+      ga('send', 'pageview', '/login-' + provider + '-start');
+    {% endif %}
+    return true;
+  }
+
+  $(".checkbox").addClass('pull-left').css('margin-top', '0px');
+
+  {% if request.appl_login_email %}
+    var email = "{{ request.appl_login_email | escapejs }}";
+    $("#id_login").val(email);
+    $(function (){
+      $("#id_password").focus();
+    });
+  {% endif %}
+</script>
+
+{% endblock %}

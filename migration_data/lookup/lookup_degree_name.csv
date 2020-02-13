@@ -1,0 +1,371 @@
+id,degree_type_id,degree_name,degree_abbreviation
+1,10,Associate of Applied Business,AAB
+2,10,Associate of Applied Science,AAS
+3,10,Associate of Applied Technology,AAT
+4,10,Associate of Arts,AA
+5,10,Associate of Arts in Teaching,AAT
+6,10,Associate of Business Administration,ABA
+7,10,Associate of Electrical Engineering Technology,AEET
+8,10,Associate of Electronics,AE
+9,10,Associate of Engineering,AE
+10,10,Associate of Engineering Technology,AET
+11,10,Associate of Forestry,AF
+12,10,Associate of General Studies,AGS
+13,10,Associate of Industrial Technology,AIT
+14,10,Associate of Nursing,AN
+15,10,Associate Degree in Nursing,ADN
+16,10,Associate of Occupational Studies,AOS
+17,10,Associate of Science,AS
+18,10,Associate of Science in Computer Assisted Design,ASCAD
+19,10,Associate of Technology,AT
+20,12,Bachelor of Architecture,BArch
+21,12,Bachelor of Arts,BA
+22,12,Artium Baccalaureus,AB
+23,12,Bachelor of Business,BB
+24,12,Bachelor of Business Administration,BBA
+25,12,Bachelor of Science in Business,BSB
+26,12,Bachelor of Canon Law,BCL
+27,12,Bachelor of Computer Science,BCS
+28,12,Bachelor of Science in Computer Science,BSCS
+29,12,Bachelor of Criminal Justice,BCJ
+30,12,Bachelor of Science in Criminal Justice,BSCJ
+31,12,Bachelor of Divinity,BD
+32,12,Bachelor of Education,BEd
+33,12,Bachelor of Science in Education,BSEd
+34,12,Bachelor of Wireless Engineering,BWE
+35,12,Bachelor of Engineering,BE
+36,12,Bachelor of Science in Engineering,BSE
+37,12,Bachelor of Science in Aerospace Engineering,BSAE
+38,12,Bachelor of Science in Agricultural Engineering,BSAE
+39,12,Bachelor of Science in Biological Systems,BSBS
+40,12,Bachelor of Science in Biosystems and Agricultural Engineering,BSBAE
+41,12,Bachelor of Science in Biological Engineering,BSBE
+42,12,Bachelor of Biomedical Engineering,BBmE
+43,12,Bachelor of Science in Biomedical Engineering,BSBME
+44,12,Bachelor of Science in Chemical Engineering,BSChE
+45,12,Bachelor of Science in Chemical and Biomolecular Engineering,BSChBE
+46,12,Bachelor of Science in Chemical and Materials Engineering,BSCME
+47,12,Bachelor of Civil Engineering,BCE
+48,12,Bachelor of Science in Civil Engineering,BSCE
+49,12,Bachelor of Science in Civil and Infrastructure Engineering,BSCIE
+50,12,Bachelor of Computer Engineering,BCompE
+51,12,Bachelor of Science in Computer Engineering,BSCE
+52,12,Bachelor of Science in Computer Science and Engineering,BSCSE
+53,12,Bachelor of Science in Electrical and Computer Engineering,BSECE
+54,12,Bachelor of Electrical Engineering,BEE
+55,12,Bachelor of Science in Electrical Engineering,BSEE
+56,12,Bachelor of Science in Engineering Management,BSEMgt
+57,12,Bachelor of Science in Environmental Engineering,BSEnE
+58,12,Bachelor of Fiber Engineering,BFE
+59,12,Bachelor of Science in Industrial Engineering,BSIE
+60,12,Bachelor of Science in Manufacturing Engineering,BSMfgE
+61,12,Bachelor of Science in Manufacturing Systems Engineering,BSMSE
+62,12,Bachelor of Science in Materials Science and Engineering,BSMSE
+63,12,Bachelor of Science in Materials Engineering,BSMAE
+64,12,Bachelor of Mechanical Engineering,BME
+65,12,Bachelor of Science in Mechanical Engineering,BSME
+66,12,Bachelor of Science in Metallurgical Engineering,BSMtE
+67,12,Bachelor of Science in Mining Engineering,BSMIE
+68,12,Bachelor of Science in Systems,BSSYST
+69,12,Bachelor of Software Enginerring,BSWE
+70,12,Bachelor of Science in Software Engineering,BSSE
+71,12,Bachelor of Systems Engineering,BSE
+72,12,Bachelor of Science in Systems Engineering,BSSE
+73,12,Bachelor of Engineering Technology,BET
+74,12,Bachelor of Science in Engineering Technology,BSET
+75,12,Bachelor of Science in Civil Engineering Technology,BSCET
+76,12,Bachelor of Science in Computer Engineering Technology,BSCET
+77,12,Bachelor of Science in Construction Engineering Technology,BSConET
+78,12,Bachelor of Science in Drafting Design Technology,BSDDT
+79,12,Bachelor of Science in Electronics Technology,BSET
+80,12,Bachelor of Science in Electrical Engineering Technology,BSEET
+81,12,Bachelor of Science in Electro-Mechanical Engineering Technology,BSEMET
+82,12,Bachelor of Science in Mechanical Engineering Technology,BSMET
+83,12,Bachelor of Fine Arts,BFA
+84,12,Bachelor of Forestry,BF
+85,12,Bachelor of Science in Forest Research,BSForRes
+86,12,Bachelor of Hebrew Letters,BHL
+87,12,Bachelor of Journalism,BJ
+88,12,Bachelor of Laws,LLB
+89,12,Bachelor of Liberal Studies,BLS
+90,12,Bachelor of Literature,BLit
+91,12,Bachelor of Marine Science,BMS
+92,12,Bachelor of Music,BM
+93,12,Bachelor of Nursing,BN
+94,12,Bachelor of Science in Nursing,BSN
+95,12,Bachelor of Pharmacy,BPharm
+96,12,Bachelor of Philosophy,BPhil
+97,12,Bachelor of Religious Education,BRE
+98,12,Bachelor of Science,BS
+99,12,Scientiae Baccalaureus,SB
+100,12,Bachelor of Science in Chemistry,BSCh
+101,12,Bachelor of Technology,BT
+102,14,Master of Accounting,MAcc
+103,14,Master of Agricultural Economics,MAE
+104,14,Master of Agricultural Extension,MAExt
+105,14,Master of Agriculture,MAg
+106,14,Master of Applied Anthropology,MAA
+107,14,Master of Architecture,MArch
+108,14,Master of Science in Architecture,MSArch
+109,14,Master of Arts,MA
+110,14,Artium Magister,AM
+111,14,Master of Arts in Art Education,MAAE
+112,14,Master of Arts in Art Therapy,MAAT
+113,14,Master of Arts in Arts Administration,MAAA
+114,14,Master of Arts in Behavioral Science,MABS
+115,14,Master of Arts in College Teaching,MACT
+116,14,Master of Arts in Communications,MAC
+117,14,Master of Arts in Community Psychology,MACP
+118,14,Master of Arts in Computer Education,MACE
+119,14,Master of Arts,MAC
+120,14,Master of Science in Counseling,MSC
+121,14,Master of Arts,MACP
+122,14,Master of Science in Counseling Psychology,MSCP
+123,14,Master of Arts in Cross-Cultural Studies,MACCS
+124,14,Master of Arts,MAEd
+125,14,Master of Science in Education,MSEd
+126,14,Master of Arts in Family Counseling,MAFC
+127,14,Master of Arts in the Humanities,MAH
+128,14,Master of Arts,MAT
+129,14,Master of Science in Teaching,MST
+130,14,Master of Bioinformatics,MB
+131,14,Master of Business Administration,MBA
+132,14,Master of Science in Business Administration,MSBA
+133,14,Executive Master of Business Administration,EMBA
+134,14,Master of City Planning,MCP
+135,14,Master of City and Regional Planning,MCRP
+136,14,Master of Regional Planning,MRP
+137,14,Master of Clinical Medical Science,MCMS
+138,14,Master of Community Health,MCH
+139,14,Master of Computer Science,MCS
+140,14,Master of Criminal Justice,MCJ
+141,14,Master of Arts,MACJ
+142,14,Master of Science in Criminal Justice,MSCJ
+143,14,Master of Design,MDes
+144,14,Master of Divinity,MDiv
+145,14,Master of Education,MEd
+146,14,Master of Engineering,ME
+147,14,Master of Science in Engineering,MSE
+148,14,Master of Science in Aeronautics and Astronautics,MSAA
+149,14,Master of Aerospace Engineering,MAE
+150,14,Master of Architectural Engineering,MAE
+151,14,Master of Science in Artificial Intelligence,MSAI
+152,14,Master of Science in Biomedical Engineering,MSBE
+153,14,Master of Science in Ceramic Engineering,MSCerE
+154,14,Master of Chemical Engineering,MCE
+155,14,Master of Civil Engineering,MCE
+156,14,Master of Computer Engineering,MCE
+157,14,Master of Electrical and Computer Engineering,MECE
+158,14,Master of Electrical Engineering,MEE
+159,14,Master of Engineering Management,MEM
+160,14,Master of Engineering Science,MES
+161,14,Master of Science in Environmental Engineering,MSEnvE
+162,14,Master of Geological Engineering,MGE
+163,14,Master of Industrial Engineering,MIE
+164,14,Master of Manufacturing Engineering,MME
+165,14,Master of Materials Science,MMS
+166,14,Master of Materials Science and Engineering,MMSE
+167,14,Master of Mechanical Engineering,MME
+168,14,Master of Science in Metallurgical Engineering,MSMetE
+169,14,Master of Science in Nuclear Engineering,MSNE
+170,14,Master of Science in Petroleum Engineering,MSPetE
+171,14,Master of Engineering Technology,MET
+172,14,Master of Environmental Design,MED
+173,14,Master of Environmental Design Studies,MEDS
+174,14,Master of Environmental Planning,MEP
+175,14,Master of Environmental Science,MES
+176,14,Master of Family Therapy,MFT
+177,14,Master of Marriage and Family Therapy,MMFT
+178,14,Master of Fine Arts,MFA
+179,14,Master of Forestry,MF
+180,14,Master of Science in Forestry,MSF
+181,14,Master of Forest Engineering,MFE
+182,14,Master of Forest Resources,MFR
+183,14,Master of Health Administration,MHA
+184,14,Master of Health Care Administration,MHCA
+185,14,Master of Health Care Management,MHCM
+186,14,Master of Health Services Administration,MHSA
+187,14,Master of Science in Health Administration,MSHA
+188,14,Master of Science in Health Care Administration,MSHCA
+189,14,Master of Hebrew Letters,MHL
+190,14,Master of Heritage/Historical Preservation,MHP
+191,14,Master of Home Economics,MHE
+192,14,Master of Hospitality Management,MHM
+193,14,Master of Human Resources,MHR
+194,14,Master of Human Resource Development,MHRD
+195,14,Master of Science in Human Resources,MSHR
+196,14,Master of Individualized/Interdisciplinary Studies,MIS
+197,14,Master of Information Resources Management,MIRM
+198,14,Master of Information Technology,MIT
+199,14,Master of International Affairs,MIA
+200,14,Master of International Business,MIB
+201,14,Master of Business Administration,MIBA
+202,14,Master of Industrial Design,MID
+203,14,Master of Journalism,MJ
+204,14,Master of Arts,MAJ
+205,14,Master of Science in Journalism,MSJ
+206,14,Master of Justice Administration,MJA
+207,14,Master of Landscape Architecture,MLA
+208,14,Master of Laws,LLM
+209,14,Master of Comparative Law,MCL
+210,14,Master of Liberal Studies,MLS
+211,14,Master of Arts in Liberal Studies,MALS
+212,14,Master of Library Science,MLS
+213,14,Master of Science in Library Science,MSLS
+214,14,Master of Library and Information Science,MLIS
+215,14,Master of Law Librarianship,MLL
+216,14,Master of Management,MM
+217,14,Master of Manufacturing Management,MMM
+218,14,Master of Marine Affairs,MMA
+219,14,Master of Mass Communications,MMC
+220,14,Master of Music,MM
+221,14,Master of Music Education,MMEd
+222,14,Master of Music Therapy,MMT
+223,14,Master of Nursing,MN
+224,14,Master of Science in Nursing,MSN
+225,14,Master of Nursing Administration,MNA
+226,14,Master of Science in Nursing Administration,MSNA
+227,14,Master of Occupational Therapy,MOT
+228,14,Master of Science in Occupational Therapy,MSOT
+229,14,Master of Pharmacy,MPharm
+230,14,Master of Philosophy,MPhil
+231,14,Master of Physical Education,MPE
+232,14,Master of Physical Therapy,MPT
+233,14,Master of Arts,MAPT
+234,14,Master of Science in Physical Therapy,MSPT
+235,14,Master of Planning,MP
+236,14,Master of Professional Accounting,MPA
+237,14,Master of Public Administration,MPA
+238,14,Master of Science in Public Administration,MSPA
+239,14,Master of Public Health,MPH
+240,14,Master of Science in Public Health,MSPH
+241,14,Master of Public Health Education,MPHE
+242,14,Master of Public and International Affairs,MPIA
+243,14,Master of Public Management,MPM
+244,14,Master of Public Policy,MPP
+245,14,Master of Recreation Administration,MRA
+246,14,Master of Rehabilitation Counseling,MRC
+247,14,Master of Real Estate Development,MRED
+248,14,Master of Recreation and Parks Administration,MRPA
+249,14,Master of Rehabilitation Medicine,MRM
+250,14,Master of Religious Education,MRE
+251,14,Master of Sacred Music,MSM
+252,14,Master of Liturgical Music,MLitM
+253,14,Master of Sacred Theology,STM
+254,14,Master of Science,MS
+255,14,Master of Science in Dentistry,MSD
+256,14,Master of Science in Economics,MSE
+257,14,Master of Science in Exercise and Sport Studies,MSESS
+258,14,Master of Science in Finance,MSF
+259,14,Master of Science in Forensic Science,MSFS
+260,14,Master of Science in Genetic Counseling,MSGC
+261,14,Master of Science in Gerontology,MSG
+262,14,Master of Science in Information Science/Systems,MSIS
+263,14,Master of Science in Management,MSM
+264,14,Master of Science in Mass Communications,MSMC
+265,14,Master of Science in Medical Illustration,MSMI
+266,14,Master of Science in Medical Technology,MSMT
+267,14,Master of Science in Natural Science,MSNS
+268,14,Master of Science in Nurse Anesthesia,MSNA
+269,14,Master of Science in Orthodontics,MSO
+270,14,Master of Science in Pharmaceutical Sciences,MSPS
+271,14,Master of Social Work,MSW
+272,14,Master of Taxation,MT
+273,14,Master of Technology,MTech
+274,14,Master of Science in Textiles,MSText
+275,14,Master of Theology,ThM
+276,14,Master of Tourism Management,MTM
+277,14,Master of Urban Planning,MUP
+278,14,Master of Urban and Regional Planning,MURP
+279,14,Master of Urban Design,MUD
+280,14,Master of Urban Planning and Policy,MUPP
+281,14,Master of Urban Studies,MUS
+282,14,Master of Veterinary Science,MVS
+283,14,Master of Women’s Studies,MWS
+284,18,Doctor of Acupuncture,DAc
+285,18,Doctor of Acupuncture and Oriental Medicine,DAOM
+286,18,Doctor of Anesthesia Practice,DrAP
+287,18,Doctor of Applied Science,DAS
+288,18,Doctor of Architecture,DArch
+289,18,Doctor of Arts,DA
+290,18,Doctor of Athletic Training,DAT
+291,18,Doctor of Audiology,AuD
+292,18,Doctor of Behavioral Health,DBH
+293,18,Doctor of Business Administration,DBA
+294,18,Doctor of Canon Law,JCD
+295,18,Doctor of Chemistry,DChem
+296,18,Doctor of Chiropractic,DC
+297,18,Doctor of Clinical Nutrition,DCN
+298,18,Doctor of Clinical Science in Speech-Language Pathology,CScD
+299,18,Doctor of Comparative Law,DCL
+300,18,Doctor of Civil Law,DCL
+301,18,Doctor of Computer Science,DCS
+302,18,Doctor of Criminal Justice,DCJ
+303,18,Doctor of Criminology,DCrim
+304,18,Doctor of Divinity,DD
+305,18,Doctor of Dental Medicine,DMD
+306,18,Doctor of Dental Surgery,DDS
+307,18,Doctor of Design,DDes
+308,18,Doctor of Education,EdD
+309,18,Doctor of Engineering,DEng
+310,18,Doctor of Engineering Science,DES
+311,18,Doctor of Environmental Science and Engineering,DEnv
+312,18,Doctor of Fine Arts,DFA
+313,18,Doctor of Forestry,DF
+314,18,Doctor of Geological Science,DGS
+315,18,Doctor of Health Administration,DHA
+316,18,Doctor of Health and Safety,DHS
+317,18,Doctor of Health Education,DHEd
+318,18,Doctor of Hebrew Literature/Letters,DHL
+319,18,Doctor of Health Science,DHS
+320,18,Doctor of Hebrew Studies,DHS
+321,18,Doctor of Humane Letters,DHumLitt
+322,18,Doctor of Industrial Technology,DIT
+323,18,Doctor of Information Technology,DIT
+324,18,Doctor of Juridical Science,SJD
+325,18,Doctor of Jurisprudence,JD
+326,18,Doctor of Law and Policy,DLP
+327,18,Doctor of Library Science,DLS
+328,18,Doctor of Management,Dmgt
+329,18,Doctor of Medical Humanities,DMH
+330,18,Doctor of Medical Science,DMSc
+331,18,Doctor of Medicine,MD
+332,18,Doctor of Ministry,DM
+333,18,Doctor of Missiology,DMiss
+334,18,Doctor of Modern Languages,DML
+335,18,Doctor of Music,DMus
+336,18,Doctor of Musical Arts,DMA
+337,18,Doctor of Musical Education,DME
+338,18,Doctor of Music Therapy,DMT
+339,18,Doctor of Naprapathic Medicine,DN
+340,18,Doctor of Naturopathic Medicine,ND
+341,18,Doctor of Nursing Practice,DNP
+342,18,Doctor of Occupational Therapy,DOT
+343,18,Doctor of Optometry,OD
+344,18,Doctor of Oriental Medicine,DOM
+345,18,Doctor of Osteopathic Medicine,DO
+346,18,Doctor of Pastoral Counseling,DPC
+347,18,Doctor of Pharmacy,PharmD
+348,18,Doctor of Philosophy,PhD
+349,18,Doctor of Physical Education,DPE
+350,18,Doctor of Physical Therapy,DPT
+351,18,Doctor of Podiatric Medicine,DPM
+352,18,Doctor of Practical Theology,DPT
+353,18,Doctor of Professional Studies,DPS
+354,18,Doctor of Psychology,PsyD
+355,18,Doctor of Public Administration,DPA
+356,18,Doctor of Public Health,DPH
+357,18,Doctor of Recreation,DR
+358,18,Doctor of Rehabilitation,RhD
+359,18,Doctor of Sacred Theology,STD
+360,18,Doctor of Science,DS
+361,18,Doctor of Science in Dentistry,DScD
+362,18,Doctor of Science and Hygiene,DScH
+363,18,Doctor of Science in Veterinary Medicine,DScVM
+364,18,Doctor of the Science of Law,JSD
+365,18,Doctor of Social Science,DSSc
+366,18,Doctor of Social Work,DSW
+367,18,Doctor of Sacred Music,DSM
+368,18,Doctor of Theology,ThD
+369,18,Doctor of Transformational Leadership,DTL
+370,18,Doctor of Veterinary Medicine,DVM

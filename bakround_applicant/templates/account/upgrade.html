@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+
+{% load static %}
+{% load app_filters %}
+
+{% block head_title %}
+Bakround | Upgrade
+{% endblock %}
+
+{% block content %}
+<link type="text/css" rel="stylesheet" href="{% static 'vendor/materialize/css/materialize.css' %}"  media="screen,projection"/>
+<link rel="stylesheet" href="{% static 'css/employer.css' %}" />
+<div id="upgradePanel">
+    <h4>Upgrade</h4>
+    <h6>Please answer the questions below to start the upgrade process.</h6>
+    <br />
+    <form id="upgradeForm" action="https://formbox.es/GwjC621QGuxf2Qi9TAx9e2Z2" method="POST">
+        <input id="userId" name="userId" value={{request.user.id}} type="hidden" />
+        <div class="row">
+            <div class="input-field col s6">
+                <input type="number" id="hiresPerMonth" name="hiresPerMonth" placeholder="5">
+                <label for="hiresPerMonth">What is the expected number of hires per month?</label>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="input-field col s6">
+                <label class="active">How many user accounts will you need?</label>
+                <br />
+                <select class="browser-default" id="numberOfUsers" name="numberOfUsers">
+                  <option value="less_than_five">Less than 5</option>
+                  <option value="five_to_ten">5 to 10</option>
+                  <option value="more_than_ten">More than 10</option>
+                </select>
+            </div>
+        </div>
+
+    </form>
+    <br />
+    <div>
+        <button name="button" id="btnSubmit" class="modal-action modal-close waves-effect waves-light btn btn-primary" style="float: none;">Submit</button>
+    </div>
+</div>
+<div id="thanksPanel" style="display: none;">
+    <center>
+        <h4>Thank You!</h4>
+        <h6>A member of our staff will contact you shortly.</h6>
+    </center>
+</div>
+<script src="{% static 'vendor/hammer/hammer.min.js' %}"></script>
+<script src="{% static 'vendor/materialize/js/materialize.js' %}"></script>
+<script>
+    $("#btnSubmit").on("click", function(e) {
+        $.ajax({
+               type: "POST",
+               url: "https://formbox.es/GwjC621QGuxf2Qi9TAx9e2Z2",
+               data: $("#upgradeForm").serialize(),
+               success: function(data)
+               {
+                    $("#upgradePanel").hide();
+                    $("#thanksPanel").show();
+               }
+         });
+
+        return false;
+    });
+</script>
+{% endblock %}

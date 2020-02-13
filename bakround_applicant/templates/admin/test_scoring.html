@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+{% if results %}
+  {% for result in results %}
+    <P>
+      Profile #{{ result.profile_id }} (job_id {{ result.job_id }}): {{ result.score_json }}
+    </P>
+  {% endfor %}
+  <hr/>
+{% endif %}
+
+<form method="POST">
+  Click the button to test scoring.
+  <br/>
+  <input type="submit">
+  {% csrf_token %}
+</form>
+
+{% endblock %}

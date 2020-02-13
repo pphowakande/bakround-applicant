@@ -1,0 +1,149 @@
+{% load app_filters %}{% if employer.short_company_name %}{{employer.short_company_name|subject}}{% else %}{{ employer.company_name }}{% endif %} is interested in you!
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=3DUTF-8">
+    <style>
+    .content {
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        font-size: 14px;
+        background-color: #f2f4f7;
+        display: flex;
+        align-items: center;
+        justify-content: space-evenly;
+        flex-flow: column nowrap;
+    }
+
+    .white-card {
+        border-bottom-width:1px;
+        border-bottom-color:#d4dce3;
+        border-bottom-style:solid;
+        background-color:#fff;
+        border-radius:8px;
+        padding:28px 35px;
+        margin: 0 14px 21px;
+        max-width: 600px;
+    }
+
+    .employer-logo {
+        background-color: #fff;
+        border-radius: 9px;
+        padding: 7px;
+        border: 1px solid #d4dce3;
+        margin: 10px;
+        max-width: 200px;
+    }
+
+    .bold {
+        font-weight: 700;
+        color: #28313c;
+    }
+
+    #we-interested {
+        margin: 14px 0;
+        letter-spacing: -0.5px;
+        font-size: 24px;
+    }
+
+    .cta-button {
+        text-align:center;
+        background-color:#0074fc;
+        border-radius:5px;
+        color:#fff;
+        font-size:15px;
+        font-weight:600;
+        letter-spacing:-0.2px;
+        display:inline-block;
+        text-decoration:none;
+        margin-bottom:7px;
+        padding:14px 28px;
+    }
+
+    .cta-button-inverted {
+        background-color:#fff;
+        color:#0074fc;
+        padding:13px 27px;
+        border:1px solid #0074fc
+    }
+
+    </style>
+</head>
+<body>
+    <div class="content">
+        <a href="{{employer_website_url}}">
+            <img class="employer-logo" src="{{employer_logo_url}}">
+        </a>
+        <div class="white-card">
+            <div id="we-interested" class="bold">
+                We're interested in you!
+            </div>
+    
+            <div style="line-height:21px;font-size:14px;color:#616e80;margin-top:0;margin-bottom:14px;display:table-cell">
+                <p style="font-size:inherit;line-height:inherit;color:inherit;margin-bottom:14px;margin-top:0">Hi {{candidate.first_name}},</p>
+                {% autoescape off %}{{email_body}}{% endautoescape %}
+            </div>
+    
+            <div style="line-height:21px;font-size:14px;margin-top:14px;margin-bottom:14px;" class="bold">
+                Are you interested in discussing this career opportunity? Please choose below.
+            </div>
+    
+            <div style="margin:21px auto 7px" align="center">
+                <a class="cta-button" href="{{accept_url}}" target="_blank">Yes, I'm interested</a>
+                <a class="cta-button cta-button-inverted" href="{{decline_url}}" target="_blank">No, not interested</a>
+            </div>
+            
+            <div style="padding-top:21px;margin-top:28px;border-top-width:1px;border-top-color:#d4dce3;border-top-style:solid; display: flex; flex-flow: row wrap;">
+                <div style="padding-right:21px">
+                    {% if employer_logo_url %}
+                        <div>
+                            <a href="{{employer_website_url}}"><img style="margin: 0; height:70px;" class='employer-logo' src="{{employer_logo_url}}"></a>
+                        </div>
+                    {% endif %}
+                </div>
+                <div style="display: flex; flex-flow: column nowrap;">
+                    <div style="font-size:15px;font-weight:600;margin-bottom:7px; display: flex; flex-flow: column nowrap; justify-content: center;">
+                        {{employer.company_name}}
+                        <br>
+                        {% if employer.website_url %}
+                        <a style="color:#0074fc;font-weight:600;text-decoration:none"
+                           rel="nofollow noopener noreferrer"
+                           href="{{employer_website_url}}"
+                           target="_blank">{{employer.website_url}}</a>
+                        {% endif %}
+                    </div>
+                    {% if employer.company_description %}
+                    <div style="font-size:14px;color:#28313c;margin-bottom:3.5px">
+                        {% autoescape off %}{{employer.company_description}}{% endautoescape %}
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+            {% if employer_job.job_description %}
+            <div style="padding-top:14px;margin-top:28px;border-top-width:1px;border-top-color:#d4dce3;border-top-style:solid">
+                <div style="display:table;padding-top:7px" class="bold">
+                    {{employer_job.job_name}}
+                </div>
+                <div style="display:table;padding-top:7px">
+                    {% autoescape off %}{{employer_job.job_description}}{% endautoescape %}
+                </div>
+            </div>
+            {% endif %}
+        </div>
+        <div id="footer" style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:14px">
+            <div style="margin-top:30px;font-size:11px;line-height:1.5;color:#999;margin-bottom:10px" align="center">
+                You're receiving this notification because you're being considered for employment by {% firstof employer.short_company_name employer.company_name %}. <a href="[unsubscribe]">Unsubscribe</a>
+                <br>
+                If you need assistance or have questions, please <a href="mailto:kbingham@bakround.com">email</a> or <a href="tel:617-312-9371">call</a> Kate Bingham, our VP of Engagement here at Bakround.
+                <br>
+                <br>
+                © 2018 {% if employer.short_company_name %}{{employer.short_company_name}}{% else %}{{ employer.company_name }}{% endif %}, {% if employer.street_address %}{{employer.street_address}}, {% endif %}{{employer.city}}, {{employer.state.state_code}}{% if employer.zip_code %} {{employer.zip_code}}{% endif %}.
+                <br />
+                <b>Powered by Bakround © 2018</b>
+                <br>
+                <a href="https://www.bakround.com"><img src="https://bakround.com/wp-content/uploads/2017/12/bkrnd-logo.png" width="100" height="25"></a>
+                <br/>
+            </div>
+        </div>
+    </body>
+</html>
+

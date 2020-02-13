@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+{% load staticfiles i18n %}
+{% load static app_filters %}
+{% load app_tags %}
+<html lang="en">
+    <head>
+        {% relative_base %}
+        <meta charset="UTF-8">
+        <title>Bakround Profile - {{ name }}</title>
+        <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700" rel="stylesheet">
+        <style>
+          span.category-name {
+            font-weight: bold;
+          }
+    
+          body {
+            padding-left: 0.5in;
+            padding-right: 0.5in;
+            font-family: 'Roboto', sans-serif;
+            font-weight: 300;
+          }
+    
+          h3 {
+            padding-top: 0.3in;
+          }
+    
+          .clearfix:after {
+            content: "";
+            display: table;
+            clear: both;
+          }
+    
+          .header div {
+            display: inline-block;
+            vertical-align: middle;
+            text-align: center;
+          }
+    
+          .header span {
+            font-size: 24px;
+          }
+    
+          .header div img {
+            position: relative;
+            top: -10px;
+          }
+        </style>
+    </head>
+    <body>
+        <div style="width: 100%" class="clearfix">
+          <div style="float: left; max-width: 500px">
+              <P>
+                <span class="category-name" style="font-size: 28px">
+                {{ name }}
+                </span>
+              </P>
+        
+              {% if profile.city %}
+              <P>
+                <span class="category-name">Location:</span>
+                {{ profile.city }}{% if profile.state %}, {{ profile.state.state_code }}{% endif %}
+              </P>
+              {% endif %}
+        
+              {% if emails %}
+              <P>
+                <span class="category-name">Email:</span>
+                {{ emails|join:", " }}
+              </P>
+              {% endif %}
+        
+              {% if phones %}
+              <p>
+                  <span class="category-name">Phones:</span>
+                  {{ phones|join:", " }}
+              </p>
+              {% endif %}
+        
+              {% if last_updated_date_display %}
+                <strong>Profile last updated on {{ last_updated_date_display }}</strong>
+              {% endif %}
+          </div>
+        
+            <div align="center" style="float: right;">
+              <div class="header">
+                <img src="{% static 'images/logo_horizontal.png' %}" width="150">
+              </div>
+              <br />
+              <div class="header">
+                {% if score %}
+                  <div style="padding-bottom: 5px">
+                    <span>
+                    bScore: <b style="color: {{score|convert_bscore_to_hex_color}}">{{ score }}</b>
+                    </span>
+                  </div>
+                <br />
+                  <div>
+                    <img width="250px" src="{% static 'images/scoring_scale_2.png' %}" />
+                  </div>
+                {% endif %}
+                {% if show_profile_id %}
+                  <div>
+                    Profile #{{ profile.id }}
+                  </div>
+                {% endif %}
+              </div>
+              {% if job_name %}
+              <span style="font-size: 20px;"><b>{{ job_name }}</b></span>
+              {% endif %}
+            </div>
+        </div>
+        
+        <div style="width: 100%" class="clearfix">
+          <div style="float: left; text-overflow: wrap; width: 540px; padding-right:20px">
+            {% if profile.summary %}
+            <h3>Summary</h3>
+            <hr>
+            <P>
+              {{ profile.summary|reformat_job_description|linebreaksbr }}
+            </P>
+            {% endif %}
+        
+            {% if experience_set %}
+            <h3>Experience</h3>
+            <hr>
+            {% for exp in experience_set %}
+            <P>
+              <strong>
+                <b>{{ exp.company_name }}</b>
+                <br/>
+                {{ exp.position_title }}
+                <br/>
+                {% if exp.start_date %}
+                  {% if exp.is_current_position or exp.end_date is None %}
+                    {{ exp.start_date|show_date_as_month_and_year }} &mdash; Present
+                    <br/>
+                  {% elif exp.end_date %}
+                    {{ exp.start_date|show_date_as_month_and_year }}
+                    &mdash;
+                    {{ exp.end_date|show_date_as_month_and_year }}
+                    <br/>
+                  {% endif %}
+                {% endif %}
+                {% if exp.city and exp.state %}
+                  {{ exp.city }}, {{ exp.state.state_code }}
+                {% endif %}
+              </strong>
+            </P>
+            <P>
+              {{ exp.position_description|reformat_job_description|linebreaksbr }}
+            </P>
+            {% endfor %}
+            {% endif %}
+        
+            {% if education_set %}
+              <h3>Education</h3>
+              <hr>
+              {% for edu in education_set %}
+                {% if edu.school_name %}
+                  <p>
+                    <strong>
+                      <b>{{ edu.school_name }}</b>
+                    </strong>
+                    {% if edu.degree_date %}
+                      (completed {{ edu.degree_date|show_date_as_month_and_year }})
+                    {% endif %}
+              
+                    {% if edu.degreetype %}
+                      <br/>
+                      <span style="margin-left: 0.3in">
+                        Degree Type: {{ edu.degreetype }}
+                      </span>
+                    {% endif %}
+              
+                    {% if edu.degreename %}
+                      <br/>
+                      <span style="margin-left: 0.3in">
+                        Degree Name: {{ edu.degreename }}
+                      </span>
+                    {% endif %}
+              
+                    {% if edu.major %}
+                      <br/>
+                      <span style="margin-left: 0.3in">
+                        Major: {{ edu.major }}
+                      </span>
+                    {% endif %}
+                  </p>
+                {% endif %}
+              {% endfor %}
+            {% endif %}
+          </div>
+          {% if certification_set %}
+          <div style="float: left; text-overflow: wrap; width: 220px;">
+            <h3>Certifications</h3>
+            <hr>
+            {% for cert in certification_set %}
+              <p>
+              <span style="font-weight: 600">
+                {{ cert.certification_name }}
+              </span>
+              {% if cert.issued_date %}
+                (issued {{ cert.issued_date|show_date_as_month_and_year }})
+              {% endif %}
+              </p>
+            {% endfor %}
+          </div>
+          {% endif %}
+        </div>
+        
+        <footer style="text-align: center; width: 100%">
+            Bakround &copy; {% now "Y" %}
+        </footer>
+    </body>
+</html>

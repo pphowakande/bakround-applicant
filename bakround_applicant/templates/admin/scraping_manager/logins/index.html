@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{% load static %}
+{% load app_filters %}
+{% block content %}
+
+<style>
+    .scraping-table tr td, .scraping-table tr th {
+        min-width: 100px;
+        padding: 10px;
+        text-align: center;
+    }
+
+    .url {
+        word-break: break-all;
+    }
+</style>
+
+<link rel="stylesheet" href="{% static 'vendor/jquery-ui-1.12.1/jquery-ui.min.css' %}">
+<script src="{% static 'vendor/jquery-ui-1.12.1/jquery-ui.min.js' %}"></script>
+
+<div>
+    <h3>ScraperLogin Manager</h3>
+    <p>These are the accounts with which the scraper can scrape. These are used on an as-needed basis, when performing scrapes that need to scrape privileged information. We never use these to scrape URLs during crawling.</p>
+</div>
+<div style="text-align: right">
+    <a href="/scraping_manager/logins/add" class="btn btn-default btn-primary">Add New ScraperLogin</a>
+</div>
+<div style="margin-top: 10px;">
+    <table class="scraping-table" cellpadding="5" border="1px">
+        <tr>
+            <th>ID</th>
+            <th>Enabled</th>
+            <th>Username</th>
+            <th>Password</th>
+            <th>Source</th>
+            <th>Adjusted Failure Count</th>
+        </tr>
+        {% for login in scraper_logins %}
+            <tr>
+                <td>
+                    {{ login.id }}
+                    <br />
+                    <a href="/scraping_manager/logins/edit/{{ login.id }}">edit</a>
+                    <br />
+                    <a href="/scraping_manager/logins/edit/{{ login.id }}/toggle">{% if login.enabled %}disable{% else %}enable{% endif %}</a>
+                </td>
+                <td>{{ login.enabled }}</td>
+                <td>{{ login.user_name }}</td>
+                <td>{{ login.password }}</td>
+                <td>{{ login.source }}</td>
+                <td>{{ login.adjusted_failure_count }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+</div>
+
+{% endblock %}

@@ -1,0 +1,109 @@
+{% extends "account/base.html" %}
+{% load static crispy_forms_tags %}
+
+
+{% block title %}
+Bakround | Apply for Job
+{% endblock %}
+
+
+{% block content %}
+
+<script src="{% static 'vendor/URI.min.js' %}"></script>
+
+{% if employer_logo_file %}
+  <P style="text-align: center">
+    <img src="{{ employer_logo_file }}">
+  </P>
+{% endif %}
+
+<P style="font-size: 24px">
+  Application for
+  <b>{{ employer_job.job_name }}</b>
+  at
+  <b>{{ employer.company_name }}</b>
+</P>
+
+<P>
+  We have a job opening for a {{employer_job.job_name}}
+  in {{employer_job.city}}, {{employer_job.state.state_code}}
+  working for {{employer.company_name}} and think you would be a great fit.
+  {{employer.company_name}} offers a competitive salary and wonderful career opportunities.
+</P>
+
+<P>
+  <b>
+    To apply for this job, enter your information, and then click Apply.
+    <br/>
+    Please note that you must provide your resume by uploading it
+    in the field labeled "Resume file"
+    OR by pasting
+    its text in the field labeled "Text resume."  Uploading it is preferred.
+  </b>
+</P>
+
+<script>
+  function validate_form(){
+    var upload_field = $("#id_file");
+    var text_field = $("#id_text_resume");
+
+    if (upload_field.val() || text_field.val()){
+      return true;
+    } else {
+      alert("Please provide your resume by uploading a file or by pasting it in the text area.");
+      return false;
+    }
+  }
+
+  function set_initial_values(){
+    var components = URI.parse(document.location.href);
+    var query = URI.parseQuery(components.query);
+
+    var field_names = ["first_name", "last_name", "city", "email", "phone"];
+    field_names.forEach(function (field_name){
+      if (query[field_name]){
+        $("#id_" + field_name).val(query[field_name]);
+      }
+    });
+
+    if (query.state){
+      $("#id_state option").filter(function (idx, elt){
+        return elt.text == query.state;
+      }).attr("selected", "selected");
+    }
+  }
+
+  $(set_initial_values);
+
+  function mark_submission(){
+    window.submitting_form = true;
+    return true;
+  }
+
+  window.onbeforeunload = function (){
+    if (!window.submitting_form){
+      return "Are you sure you wish to leave this page?";
+    }
+  }
+
+  $(function (){
+    $("#id_file").addClass("btn").addClass("btn-primary").css('font-size', '16px');
+  });
+</script>
+
+<form method="POST"
+      enctype="multipart/form-data"
+      onsubmit="return validate_form() && prevent_duplicate_form_submission('form') && mark_submission()">
+  {% csrf_token %}
+  {{form|crispy}}
+  <br/>
+  When you are done filling out the form, click the button below to submit your application.
+  <br/>
+  <br/>
+  <input type="submit"
+         value="Apply"
+         class="btn btn-primary"
+         style="font-size: 16px"/>
+</form>
+
+{% endblock %}

@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Stats Manager{% endblock %}
+
+{% block content %}
+
+<h3>Stats Manager</h3>
+
+<P>
+  Choose an employer from the list below.
+</P>
+
+{% for employer in employers %}
+  <P>
+    <a href="{% url 'stats_manager:employer' employer.id %}">{{ employer.company_name }}</a>
+  </P>
+{% endfor %}
+
+{% endblock %}

@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% load static %}
+{% load app_filters %}
+
+{% block title %}Preview Candidate Intro{% endblock %}
+
+{% block content %}
+
+<link type="text/css" rel="stylesheet" href="{% static 'vendor/materialize/css/materialize.css' %}"  media="screen,projection"/>
+<link rel="stylesheet" href="{% static 'vendor/introjs-2.4.0/intro.min.css' %}" />
+<link rel="stylesheet" href="{% static 'css/employer.css' %}" />
+
+<div>
+    <div class='subject-container' style='display: flex; flex-flow: column nowrap;'>
+        <h4>{{ subject }}</h4>
+    </div>
+    <div class='body-container'>
+        {{ body | safe }}
+    </div>
+    <div class='metadata-container'>
+        <small>
+            {{ metadata | pprint }}
+        </small>
+    </div>
+</div>
+
+{% endblock %}

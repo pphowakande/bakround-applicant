@@ -1,0 +1,13 @@
+id,reason,order
+1,Underqualified,1
+2,Overqualified,2
+3,Communication skills,3
+4,Salary expectation,4
+5,Education level,5
+6,Availability,6
+7,Location,7
+8,Not actively looking for a job,8
+9,Other (please specify in comments),100
+10,Did not return calls,9
+11,Did not show up for interview,10
+12,Commute time,11

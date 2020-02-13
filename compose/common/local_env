@@ -1,0 +1,50 @@
+# General settings
+DJANGO_ADMIN_URL=
+DJANGO_SETTINGS_MODULE=bakround_applicant.settings.local
+DJANGO_SECRET_KEY=vje+u2mkudzpl^w7uoqxbxwr(-=+s%_1u&xmr#(chjrotetr(@
+
+# AWS Settings
+DJANGO_AWS_ACCESS_KEY_ID=AKIAI6OG75T2AQJKM2WQ
+DJANGO_AWS_SECRET_ACCESS_KEY=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
+DJANGO_AWS_MEDIA_BUCKET=applicant-files-local
+
+# Used with email
+DJANGO_SERVER_EMAIL=
+
+# django-allauth
+DJANGO_ACCOUNT_ALLOW_REGISTRATION=True
+
+# 
+INDEED_IMAP_EMAIL=admin@bakround.com
+INDEED_IMAP_PASSWORD=Bakround2017!
+
+# PostgreSQL
+POSTGRES_PASSWORD=root
+POSTGRES_USER=root
+POSTGRES_DB=bakround
+POSTGRES_HOST=db
+POSTGRES_PORT=5432
+
+# PIPL
+PIPL_API_KEY=BUSINESS-PREMIUM-3jo4cn84ko96qxjea8q5t8qu
+
+# RabbitMQ
+RABBITMQ_HOST=rabbitmq
+RABBITMQ_USER=admin
+RABBITMQ_PASSWORD=mypass
+RABBITMQ_PORT=5672
+
+# It is a pain to access the host from within Docker.  See
+#    https://forums.docker.com/t/access-host-not-vm-from-inside-container/11747/10
+SCORING_URL=http://172.16.123.1:5000/api/score_applicant
+
+# Redis
+REDIS_HOST=redis
+REDIS_PORT=6379
+
+# Pusher settings (websockets)
+PUSHER_APP_ID=283138
+PUSHER_APP_KEY=2c39a0200d258926ec2e
+PUSHER_APP_SECRET=23d5ef6d5b96d8f87111
+
+WEBSITE_ROOT_URL=http://localhost:8000

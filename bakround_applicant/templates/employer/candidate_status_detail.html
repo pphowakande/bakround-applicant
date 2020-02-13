@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Candidate Status{% endblock %}
+
+{% block content %}
+
+<div style="margin: auto; width: 50%">
+    <h4>Candidate: <b>{{candidate_name}}</b></h4>
+    <h4>Job: <a href="/employer/job/{{job_id}}">{{job_name}}</a></h4>
+    <br />
+    <span><b>Status history:</b></span>
+    <div style="max-height: 200px; overflow-y: scroll">
+        {% if records %}
+            {% for record in records %}
+                <div style="margin-top: 15px; margin-bottom: 15px">
+                    {{record.status}}
+                    <br/>
+                    <i>(set at {{record.date}} by {{record.employer_user_name}})</i>
+                    {% if record.notes %}
+                        <div style="max-width: 500px"><b>Notes: </b> {{record.notes}}</div>
+                    {% endif %}
+                </div>
+            {% endfor %}
+        {% else %}
+            None
+        {% endif %}
+    </div>
+    <br />
+    <div>
+        <form id="statusForm" action="/employer/candidate_status_detail/{{employer_candidate_id}}" method="post">
+            {% csrf_token %}
+            <b>New status:</b>
+            <select id="new_status" name="new_status" class="form-control" style="max-width: 300px">
+                <option value="" selected>
+                    Select...
+                </option>
+                {% for status in statuses %}
+                    <option value="{{status.id}}">{{status.status}}</option>
+                {% endfor %}
+            </select>
+            <br/>
+            <b>Notes (optional):</b>
+            <br/>
+            <textarea id="new_status_notes" name="new_status_notes" rows="5" cols="40"></textarea>
+            <br/>
+            <input type="button"
+                   value="Change"
+                   onclick="validateForm();"
+                   />
+        </form>
+    </div>
+</div>
+<script>
+    function validateForm() {
+        if ($("#new_status option:selected").val() != "") {
+            $("#statusForm").submit();
+        } else {
+            alert("Please select a valid status");
+        }
+
+        return;
+    }
+</script>
+{% endblock %}

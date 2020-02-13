@@ -1,0 +1,215 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+
+{% load staticfiles i18n %}
+
+<style>
+    .navbar { display: none !important; }
+
+    .no-close .ui-dialog-titlebar-close {
+      display: none;
+    }
+</style>
+
+<link rel="stylesheet" href="{% static 'vendor/jquery-ui-1.12.1/jquery-ui.min.css' %}">
+<script src="{% static 'vendor/jquery-ui-1.12.1/jquery-ui.min.js' %}"></script>
+
+<center><h3>SME Feedback</h3></center>
+
+{% if error %}
+
+ERROR: {{ error }}
+
+{% else %}
+
+  {% if submitted %}
+
+    <P>
+      Thank you for your submission!
+      You have performed {{ number_of_reviews_so_far }}
+      resume review{{ number_of_reviews_so_far|pluralize }}
+      so far.
+      {% if resume %} Here is the next resume. {% endif %}
+    </P>
+
+  {% else %}
+    <center>
+    <P>
+      Greetings, {{ sme.first_name }} {{ sme.last_name }}.
+      You have performed {{ number_of_reviews_so_far }}
+      resume review{{ number_of_reviews_so_far|pluralize }}
+      so far.
+      <br/>
+      (To see your review totals by month,
+      <a href="{% url 'sme_feedback:tallies' %}?token={{ sme.guid }}" target="_blank"
+          >click here</a>.)
+    </P>
+    </center>
+    <br />
+    <br />
+  {% endif %}
+
+
+  {% if resume %}
+ 
+<script>
+  var ask_about_low_scores = {{ ask_about_low_scores }};
+  var csrf_token = "{{ csrf_token }}";
+  var sme_guid = "{{ sme.guid }}";
+  var sme_id = {{sme.id}};
+  var resume_id = {{resume.id}};
+
+  var do_not_ask_again_url = "{% url 'sme_feedback:do_not_ask_again' %}";
+  var contact_endpoint = "{% url 'sme_feedback:sme_contact_candidate' %}";
+  var job_dropdown_endpoint = "{% url 'sme_feedback:job_dropdown' %}";
+  var job_message_endpoint = "{% url 'sme_feedback:load_contact_message' %}";
+</script>
+<script src="{% static 'js/sme_feedback.js' %}"></script>
+
+<div style="display: flex; flex-flow: row wrap; justify-content: top; justify-content: space-between;">
+  <div>
+    <div
+      id="slider_marker"
+      style="width: 8px; height: 18px; background-color: white; opacity: 1.0;
+             display: none; position: absolute; border: 1px solid black; border-radius: 10px;
+             cursor: pointer">
+    </div>
+    
+    <form method="POST"
+          id="main_form"
+          onsubmit="return validate_form() && prevent_duplicate_form_submission('form')">
+      {% csrf_token %}
+
+      <input type="hidden" name="resume_id" value="{{ resume.id }}">
+    
+      <h4>Your feedback on resume #{{ resume.id }}
+      <a href="{{ resume_url }}" onclick="track_resume_open();" target="_blank">(link, opens in new tab)</a>:</h4>
+
+      {% if sme.employer_user %}
+        {% if already_contacted_candidate %}
+          (This candidate was contacted for the {{ already_contacted_candidate.employer_job.job_name }}
+          job at {{ already_contacted_candidate.employer.company_name }} on {{ already_contacted_candidate.contacted_date.date }}.)
+        {% else %}
+          (<span style="color: red; font-size: 24px; line-height: initial;">&#8594;</span>
+          If this person would be a good fit for one of your jobs, you may <a href="#" onclick="show_contact_dialog()">contact them</a>)
+        {% endif %}
+        <br />
+      {% endif %}
+    
+      <br />
+      What score would you give this resume (in the range 300&ndash;850)?
+      <input type="number" name="bscore_value" id="bscore_value" min="300" max="850">
+    
+      <br />
+      <i>Type a number or click the score bar.</i>
+    
+      <br />
+      <img style="width: 575px; padding-left: 10px; padding-right: 10px; margin: 0px; cursor: pointer"
+           src="{% static 'images/scoring_scale_2.png' %}"
+           onclick="set_score_from_click(event, this)"/>
+      <br />
+
+      <br />
+      Do you recommend interviewing this person?
+      <label>
+        Yes
+        <input type="radio" name="should_interview" id="should_interview_yes" value="1">
+      </label>
+      <label>
+        No
+        <input type="radio" name="should_interview" id="should_interview_no" value="">
+      </label>
+        <br />
+      <br>
+      General comments (minimum 30 characters):
+      <br>
+      <textarea name="comment" rows="5" cols="60" id="comment"></textarea>
+      <br/><br/>
+    
+      Check any that apply:<br/>
+        <label>
+          <input type="checkbox" name="column_wrong_job" value="1" id="column_wrong_job">
+          Application does not make sense for this position
+        </label>
+        <br/>
+        <label>
+          <input type="checkbox" name="column_wrong_language" value="1" id="column_wrong_language">
+          Non-English resume
+        </label>
+        <br/>
+        <label>
+          <input type="checkbox" name="column_incomplete" value="1" id="column_incomplete">
+          Incomplete resume
+        </label>
+        <br/>
+        <label>
+          <input type="checkbox" name="column_insuff_exp" value="1">
+          Insufficient work experience
+        </label>
+        <br/>
+        <label>
+          <input type="checkbox" name="column_insuff_skills" value="1">
+          Insufficient skills
+        </label>
+        <br/>
+        <label>
+          <input type="checkbox" name="column_insuff_certs" value="1">
+          Insufficient certification(s)
+        </label>
+        <br/>
+        <label>
+          <input type="checkbox" name="column_unknown_employers" value="1">
+          Unrecognized previous employer(s)
+        </label>
+        <br/>
+        <label>
+          <input type="checkbox" name="column_unknown_schools" value="1">
+          Unrecognized school(s)
+        </label>
+    
+      <br/><br/>
+      <input type="Submit">
+      <input type="hidden" name="token" value="{{ token }}">
+      <input type="hidden" name="feedback_guid" value="{{ feedback_guid }}">
+    </form>
+  </div>
+  <div style="min-width: 260px; max-width: 400px; border: 2px dashed gray; padding: 10px; margin: 10px;">
+    <h3 style="margin-top: 0">You're evaluating <strong>{{ sme.job.job_name }}</strong> resumes.</h3>
+    {{ sme.job.job_description|linebreaksbr }}
+  </div>
+<div>
+
+
+<div id="low_score_dialog" style="display: none">
+  Are you certain you want to score this resume so low?
+  A score below 400 means there is little to no overlap in previous experience and skills.
+  For instance, a school teacher should definitely score 300 for a Nurse Manager position,
+  but no registered nurses should score 300 because they have at least some relevant overlap.
+  <br/>
+</div>
+
+<div id="do_not_ask_again_div" style="display: none">
+  <br/>
+  <label>
+    <input type="checkbox" id="do_not_ask_again"/>
+    Don't ask me again
+  </label>
+</div>
+
+{% include "pages/sme_contact_modal.html" with contact_form=contact_form %}
+
+  {% elif has_limit_been_reached %}
+
+    Thanks for your reviews!  Our team will contact you shortly.
+
+  {% else %}
+
+    There are no more resumes for you to check right now.  Please try again later!
+
+  {% endif %}
+
+{% endif %}
+
+{% endblock %}

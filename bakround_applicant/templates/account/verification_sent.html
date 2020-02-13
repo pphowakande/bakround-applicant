@@ -1,0 +1,27 @@
+{% extends "account/base.html" %}
+
+{% load i18n %}
+
+{% block head_title %}{% trans "Verify Your E-mail Address" %}{% endblock %}
+
+{% block inner %}
+<div class="wireframe-centered-column">
+    <h1>{% trans "Verify Your E-mail Address" %}</h1>
+
+    <p>{% blocktrans %}We have sent an e-mail to you for verification. Follow the link provided to finalize the signup process. Please contact us if you do not receive it within a few minutes.{% endblocktrans %}</p>
+</div>
+<br />
+<div>
+    <h3>Getting Started</h3>
+
+    <p>After you verify your email address, here's how you can get started with recruiting candidates:</p>
+    <p>1. <b>Create a job</b>. You can create a new job on the Jobs page, which will create a new page for your job and allow you to start finding candidates.</p>
+    <p>2. <b>Search for candidates</b>. After you navigate to your new job page, you can click the "Search" button to view potential candidates. You can filter and sort to target a specific group of profiles.</p>
+    <p>3. <b>Add and contact candidates</b>. If you find any candidates that you like on the Search page, you can either add them to your list of candidates by clicking on the star icon, or contact them and express interest by clicking on the "Send Intro" button. If you star a candidate, you can contact them later by going to your job page and clicking "Send Intro".</p>
+    <p>4. <b>Interview candidates</b>. Once a candidate accepts your invitation, you'll get a notification with their contact details so that you can setup an interview. You can use the candidate status dropdown on the candidate's card on the job page to add notes and log which step of the recruiting pipeline the candidate is currently in.</p>
+</div>
+
+<div><b>If you need help at any point, please don't hesitate to contact us via the in-app chat box, or send an email to <a href="mailto:support@bakround.com">support@bakround.com</a>. We're here to make sure that you're successful.</b></div>
+
+{% endblock %}
+

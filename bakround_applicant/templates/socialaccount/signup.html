@@ -1,0 +1,79 @@
+{% extends "socialaccount/base.html" %}
+
+{% load i18n %}
+
+{% block head_title %}
+Bakround | Sign Up
+{% endblock %}
+
+{% block content %}
+<style>
+  .textinput, .select, .form-control {
+    align: center;
+    max-width: 300px;
+    margin: auto;
+  }
+
+  label {
+    text-align: left;
+    display: block;
+  }
+
+  #signup_form {
+    display: inline-block;
+    font-size: 18px;
+  }
+
+  #id_email {
+    display: none;
+  }
+</style>
+
+<div class="wireframe-centered-column signup-font" style="min-width: 550px">
+  <h1>{% trans "Sign Up" %}</h1>
+
+  <p>{% blocktrans with provider_name=account.get_provider.name site_name=site.name %}You are about to use your {{provider_name}} account to sign up for
+  {{site_name}}. As a final step, please complete the following form:{% endblocktrans %}</p>
+
+  <div style="align: center; margin: auto">
+    <form class="signup" id="signup_form" method="post" action="{% url 'socialaccount_signup' %}"
+          onsubmit="return prevent_duplicate_form_submission('signup')">
+      {% csrf_token %}
+
+      <P style="text-align: left">
+        <span class="form-leading-text">My name is</span>
+        {{ form.first_name }} {{ form.last_name }}
+      </P>
+
+      <P style="text-align: left; white-space: nowrap">
+        <span class="form-leading-text">I am a(n)</span>
+        {{ form.primary_occupation }}
+        in {{ form.city }}, {{ form.state }}
+      </P>
+
+      {{ form.email }}
+
+      {% if redirect_field_value %}
+      <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+      {% endif %}
+      <button class="btn btn-default btn-round wireframe-rounded-button"
+        type="submit"
+        style="min-width: 140px">sign up</button>
+    </form>
+  </div>
+</div>
+
+<script>
+  document.getElementById('id_email').className += " form-control textinput textInput";
+  document.getElementById('id_email').readOnly = true;
+
+  var email = "{{ request.session.appl_email|escapejs }}";
+  if (email != "None"){
+    document.getElementById('id_email').value = email;
+  }
+
+  $('#id_primary_occupation').addClass('form-control');
+  $('#id_primary_occupation').focus();
+</script>
+
+{% endblock %}

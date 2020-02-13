@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<style>
+  @import url(https://fonts.googleapis.com/css?family=Roboto);
+</style>
+
+
+<body style=" max-width: 600px; font-family: sans-serif; font-size: 14px">
+
+<p>
+  <h4>Weekly Stats (last 7 days)</h4>
+</p>
+<p>
+    # of jobs created: {{ count_jobs_created_last_week }} <br />
+    # of candidates added: {{ count_candidates_added_last_week }} <br />
+    # of candidates contacted: {{ count_candidates_contacted_last_week }} <br />
+    # of candidates accepted: {{ count_candidates_accepted_last_week }} <br />
+    # of candidates declined: {{ count_candidates_declined_last_week }} <br />
+</p>
+<p>
+  <h4>Job Stats (all time, open jobs only)</h4>
+</p>
+
+{% for job in job_data %}
+    <p>
+        Job: {{ job.job_name }} <br />
+        Location: {{ job.location }} <br />
+        # of candidates: {{ job.candidate_count }} <br />
+        # of candidates accepted: {{ job.accepted_candidate_count }} <br />
+        # of candidates declined: {{ job.declined_candidate_count }} <br />
+        Pipeline: <br />
+        {% for status in job.candidate_status_groups %}
+            {{ status.status }}: {{ status.count }} candidate{{status.count|pluralize}} <br />
+        {% endfor %}
+    </p>
+{% endfor %}
+<center>
+  <a href="http://www.bakround.com"><img src="https://bakround.com/wp-content/uploads/2017/12/bkrnd-logo.png" width="180" height="43"></a>
+  <br/>
+  Bakround © 2018 | <a href="https://my.bakround.com/legal/">Legal</a> | <a href="mailto:support@bakround.com">Contact Us</a>
+</center>
+
+</body>
+</html>

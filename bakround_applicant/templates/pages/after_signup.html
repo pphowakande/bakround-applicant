@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block title %}
+Just a moment...
+{% endblock %}
+
+{% block content %}
+
+<h3>Just a moment...</h3>
+
+<P>
+  We are putting the finishing touches on your account.
+  Please wait a moment.
+</P>
+
+{% if redirect %}
+<meta http-equiv="refresh"
+      content="3;{{ redirect.url }}">
+{% endif %}
+
+{% endblock %}

@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% load static %}
+{% load render_bundle from webpack_loader %}
+{% load app_filters %}
+{% block title %}Manual Verifier{% endblock %}
+
+{% block content %}
+
+<link type="text/css" rel="stylesheet" href="{% static 'vendor/materialize/css/materialize.css' %}"  media="screen,projection"/>
+<link rel="stylesheet" href="{% static 'vendor/introjs-2.4.0/intro.min.css' %}" />
+<link rel="stylesheet" href="{% static 'css/employer.css' %}" />
+<style>
+/* Fixes material-ui textfields and materialize css */
+input:focus:not([read-only]) {
+	border-bottom: none!important;
+	box-shadow: none!important;	
+}
+</style>
+<a name="top_of_results"></a>
+<div id="react">
+    <!-- Contents get replaced by mounted React.Component -->
+    <div style="text-align: center;">
+    	<i class="fa fa-2x fa-spinner fa-spin"></i><br><br>
+    </div>
+</div>
+<script src="{% static 'vendor/materialize/js/materialize.js' %}"></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.4/lodash.min.js'></script>
+<script>
+window.csrf_token='{{csrf_token}}';
+// make sure to escape your props to prevent XSS! See here for the source for the json filter: https://gist.github.com/pirate/c18bfe4fd96008ffa0aef25001a2e88f
+{% autoescape off %}
+window.props = '{{props|escapejs}}';
+{% endautoescape %}
+window.react_mount = document.getElementById('react');
+
+if (navigator.platform === 'MacIntel' || navigator.platform === 'MacPPC') {
+    $('head').append('<link rel="stylesheet" type="text/css" href="{% static 'css/employer_osx.css' %}" />');
+}
+</script>
+
+{% render_bundle 'manual_verifier' %}
+{% endblock %}

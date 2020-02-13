@@ -1,0 +1,47 @@
+{
+  "name": "bakround_applicant",
+  "version": "1.0.0",
+  "description": "Bakround System",
+  "main": "app.js",
+  "scripts": {
+    "build": "./node_modules/.bin/webpack --config webpack.local.config.js --progress --colors",
+    "build-production": "./node_modules/.bin/webpack --config webpack.prod.config.js --progress --colors",
+    "watch": "./node_modules/.bin/webpack --config webpack.local.config.js --progress --colors --watch",
+    "watch-hot": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://bitbucket.org/bakround/bakround-applicant.git"
+  },
+  "author": "Bakround",
+  "license": "ISC",
+  "homepage": "https://bitbucket.org/bakround/bakround-applicant#readme",
+  "devDependencies": {
+    "@babel/core": "^7.1.5",
+    "@babel/preset-env": "^7.1.5",
+    "@babel/preset-react": "^7.0.0",
+    "@babel/register": "^7.0.0",
+    "babel-loader": "^8.0.4",
+    "css-loader": "^1.0.1",
+    "style-loader": "^0.23.1",
+    "webpack": "^4.25.1",
+    "webpack-bundle-tracker": "^0.4.2-beta",
+    "webpack-cli": "^3.1.2"
+  },
+  "dependencies": {
+    "bootstrap": "3.3.7",
+    "intro.js": "^2.9.3",
+    "jquery": "^3.3.1",
+    "lodash": "^4.17.11",
+    "material-ui": "^0.19.0",
+    "materialize-css": "^0.100.2",
+    "pubsub-js": "^1.7.0",
+    "react": "^15.4.2",
+    "react-confirm": "^0.1.14",
+    "react-dom": "^15.4.2",
+    "react-input-slider": "^4.0.1",
+    "react-modal": "^2.2.2",
+    "react-tooltip": "^3.8.4",
+    "remove": "^0.1.5"
+  }
+}

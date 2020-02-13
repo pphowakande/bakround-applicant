@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="wireframe-centered-column grey-font">
+  <h1 class='signup-font grey-font'>
+    {% if display_info.first_name %}
+      Welcome, {{ display_info.first_name | title}}
+    {% else %}
+      Welcome
+    {% endif %}
+  </h1>
+
+  We already have a profile created for you.
+  <br/>
+  We have your current information
+  listed as the following.  If this information belongs to you, you can claim your
+  profile below.
+
+  <br/>
+  <br/>
+
+  <div style="font-size: 20px; text-align: center">
+  <P>{{ display_info.first_name }} {{ display_info.last_initial }}.</P>
+  <P>{{ display_info.previous_job_info }} </P>
+    {% if display_info.masked_phone_number %}
+      <P>Phone #: {{ display_info.masked_phone_number }} </P>
+    {% endif %}
+  </div>
+
+  <br/>
+
+  <form method="POST" action="{{ action_after_claim }}" id="claim_form"
+      onsubmit="return prevent_duplicate_form_submission('claim')">
+    {% csrf_token %}
+    <input type="hidden" name="email" value="{{ email }}">
+    <button type="submit" class="btn btn-default btn-round wireframe-rounded-button"
+        style="min-width: 150px" id="claim_button">claim profile</button>
+    <input type="hidden" name="should_claim_profile" value="true">
+  </form>
+
+  <br/>
+
+  <form method="POST" action="/claim_question_redirect" id="do_not_claim_form"
+      onsubmit="return prevent_duplicate_form_submission('claim')">
+    {% csrf_token %}
+    <input type="hidden" name="email" value="{{ email }}">
+    <input type="submit" style="display: none">
+    <input type="hidden" name="should_claim_profile" value="false">
+    <a class='primary-dark-blue' href="#" id="do_not_claim_button"
+        onclick="$('#do_not_claim_form').submit()">That's not me.</a>
+  </form>
+</div>
+
+{% endblock %}

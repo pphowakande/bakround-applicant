@@ -1,0 +1,113 @@
+{% extends "base.html" %}
+{% load static %}
+{% load app_filters %}
+{% load render_bundle from webpack_loader %}
+
+{% block title %}Bakround{% endblock %}
+
+{% block content %}
+    <link type="text/css" rel="stylesheet" href="{% static 'vendor/materialize/css/materialize.css' %}"  media="screen,projection"/>
+    <link rel="stylesheet" href="{% static 'vendor/introjs-2.4.0/intro.min.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/employer.css' %}" />
+
+    <link rel="stylesheet" href="{% static 'vendor/jquery-ui-1.12.1/jquery-ui.min.css' %}">
+    <script src="{% static 'vendor/jquery-ui-1.12.1/jquery-ui.min.js' %}"></script>
+
+    <style>
+        nav {
+            height: 50px;
+            line-height: 1.42857143;
+            box-shadow: none;
+            background-color: #EDF5F9;
+        }
+
+        .glyphicon-cog {
+            color: #337ab7;
+        }
+
+        .welcome-title h4 {
+            font-weight: 300;
+        }
+
+        #imgBestFit { cursor: pointer; }
+
+        .deleted-job {
+          display: none;
+        }
+    </style>
+    <div class="welcome-title row" style="margin-left: -25px">
+        <h4>
+          Welcome back, {{first_name}}!
+          <a style="font-size: 24px" class="fa fa-question-circle-o"
+                href="#!" title="show tour"
+                onclick="startJobsTour()"
+                id="show_tour"></a>
+        </h4>
+    </div>
+    <div style="float: right;">
+        {% if employer_user.user.is_staff %}
+          <a href="{% url 'employer:custom_job_profile_index' %}"
+              id="manage_custom_jobs"
+              style="margin-right: 30px">Manage Custom Job Profiles</a>
+        {% endif %}
+        <a href="{% url 'employer:stats' %}"
+            style="margin-right: 30px">View Stats</a>
+        <a class="waves-effect waves-light btn btn-primary" href="{% url 'employer:add_job' %}"
+           id="add_a_new_job">Add A New Job</a>
+    </div>
+    <br />
+    <br />
+    <div class="row" id="open_or_all_jobs_panel">
+      Showing:
+      <a id="show_my_open_jobs" href="#!" onclick="show_my_open_jobs()"
+         class="job_filter"
+         style="font-weight: bold">My Open Jobs</a>
+      |
+      <a id="show_open_jobs" href="#!" onclick="show_open_jobs()"
+         class="job_filter"
+         style="font-weight: 300">Open Jobs</a>
+      |
+      <a id="show_all_jobs" href="#!" onclick="show_all_jobs()"
+         class="job_filter"
+         style="font-weight: 300">All Jobs</a>
+    </div>
+    <div class="row">
+        {% if employer_jobs_by_location %}
+            {% for record in employer_jobs_by_location %}
+              <div class="row location
+                          {% if not record.initially_visible %} hidden {% endif %}">
+                <h5>{{ record.location }}</h5>
+                {% for job in record.jobs %}
+                  {% include "employer/job_card.html" %}
+                {% endfor %}
+              </div>
+            {% endfor %}
+        {% else %}
+            There are no jobs created yet.
+        {% endif %}
+    </div>
+
+<div id="deletion_dialog" style="display: none">
+  Are you sure you want to delete this job?
+  You will no longer be able to access this job
+  or the candidates you have contacted regarding
+  this job.
+  <br/>
+</div>
+
+<script src="{% static 'vendor/hammer/hammer.min.js' %}"></script>
+<script src="{% static 'vendor/materialize/js/materialize.js' %}"></script>
+
+<script src="{% static 'vendor/introjs-2.4.0/intro.min.js' %}"></script>
+<script src="{% static 'js/jobs.js' %}"></script>
+
+<script>
+    window.csrf_token='{{csrf_token}}';
+
+    {% if not tour_dismissed %}
+      $(function() {
+        startJobsTour();
+      });
+    {% endif %}
+</script>
+{% endblock %}

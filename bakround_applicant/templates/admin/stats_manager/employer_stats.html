@@ -1,0 +1,174 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+  {% if customer_view %}
+    Stats
+  {% else %}
+    Stats Manager
+  {% endif %}
+{% endblock %}
+
+{% block content %}
+
+<style>
+  td, th {
+    border: 1px solid black;
+    padding: 5px;
+  }
+
+  td.number, th {
+    text-align: center;
+  }
+
+  td.bold {
+    font-weight: bold;
+  }
+</style>
+
+<h3>
+  Stats for <b>{{ employer.company_name }}</b>
+  {% if not customer_view %}
+    <span style="font-size: 14px"><a href="{% url 'stats_manager:index' %}">(back)</a></span>
+  {% endif %}
+</h3>
+
+<hr/>
+
+
+
+{% for stats in summary_stats %}
+
+<h4>
+  Summary stats for {{ stats.time_range_display }}:
+</h4>
+
+{% if stats.time_range_display != "all time" %}
+  <form id="time_range_form">
+    <b>
+      (Change date range:
+      from
+      <input type="date" name="start_date" value="{{ start_date }}"/>
+      to
+      <input type="date" name="end_date" value="{{ end_date }}"/>
+      <input type="submit" value="Update"/>)
+    </b>
+  </form>
+  <br/>
+{% endif %}
+
+<P>
+  Number of jobs created: {{ stats.jobs_created }}
+  <br/>
+  Number of candidates added: {{ stats.candidates_added }}
+  <br/>
+  Number of candidates contacted: {{ stats.candidates_contacted }}
+  <br/>
+  Number of candidates who accepted: {{ stats.candidates_accepted }}
+  <br/>
+  Number of candidates who declined: {{ stats.candidates_declined }}
+  <br/>
+  {% if not customer_view %}
+    Number of candidates contacted via Bakround: {{ stats.candidates_contacted_via_bakround }}
+    <br/>
+    Number of candidates contacted externally: {{ stats.candidates_contacted_externally }}
+    <br/>
+    Number of candidates who opened emails: {{ stats.candidates_who_opened_emails }}
+    <br/>
+    Number of candidates who reported spam: {{ stats.candidates_who_reported_spam }}
+  {% endif %}
+</P>
+
+<hr/>
+
+{% endfor %}
+
+<h4>
+  Stats per job (all-time)
+</h4>
+
+
+<table>
+  <tr>
+    <th>Job name (Job id)</th>
+    <th>Location</th>
+    <th>Job status</th>
+    <th>Candidates<br/>added</th>
+    <th>Candidates<br/>contacted</th>
+    <th>Candidates<br/>who accepted</th>
+    <th>Candidates<br/>who declined</th>
+    {% if not customer_view %}
+      <th>Candidates contacted<br/>via Bakround</th>
+      <th>Candidates contacted<br/>externally</th>
+      <th>Candidates who<br/>opened emails</th>
+      <th>Candidates who<br/>reported spam</th>
+    {% endif %}
+    <th>Recruiters</th>
+  </tr>
+{% for record in per_job_stats %}
+  <tr style="background-color: {% cycle '#f0f0f0' '#ffffff' %}">
+    <td class="bold">{{ record.job_name }} ({{ record.id }})</td>
+    <td class="bold"><nobr>{{ record.location }}</nobr></td>
+    <td class="bold">{{ record.status }}</td>
+    <td class="number">{{ record.candidates_added }}</td>
+    <td class="number">{{ record.candidates_contacted }}</td>
+    <td class="number">{{ record.candidates_accepted }}</td>
+    <td class="number">{{ record.candidates_declined }}</td>
+    {% if not customer_view %}
+      <td class="number">{{ record.candidates_contacted_via_bakround }}</td>
+      <td class="number">{{ record.candidates_contacted_externally }}</td>
+      <td class="number">{{ record.candidates_who_opened_emails }}</td>
+      <td class="number">{{ record.candidates_who_reported_spam }}</td>
+    {% endif %}
+    <td>{{ record.recruiters }}</td>
+  </tr>
+{% endfor %}
+</table>
+
+
+<hr/>
+
+
+{% if not customer_view %}
+<h4>
+  List of Events ({{ events.count }} total):
+</h4>
+
+<p>
+  By user: <select id="selectEmployerUser">
+        <option value="0" {% if employer_user_id is None %} selected="selected" {% endif %}>All Users</option>
+        {% for employer_user in employer_users %}
+            <option value="{{ employer_user.id }}" {% if employer_user.id == employer_user_id %} selected="selected" {% endif %}>{{ employer_user.user.first_name }} {{ employer_user.user.last_name }}</option>
+        {% endfor %}
+    </select>
+</p>
+
+<P style="font-style: italic">
+  (If there are more than 1000 events, only the 1000 most recent will be shown.)
+</P>
+
+{% for event in events %}
+  <P>
+    {{ event.action }}
+    <br/>
+    &nbsp; performed by {{ event.user.first_name }} {{ event.user.last_name }}
+    <br/>
+    &nbsp; at {{ event.date_created }}
+    <br/>
+    &nbsp; event metadata: {{ event.metadata }}
+  </P>
+{% endfor %}
+
+<P>
+  <a href="{% url 'stats_manager:index' %}">back</a>
+</P>
+{% endif %}
+
+
+<script>
+    $("#selectEmployerUser").on("change", function() {
+        window.location = '/stats_manager/employer/{{ employer.id }}?employer_user_id=' + $("#selectEmployerUser").val();
+    });
+</script>
+
+{% endblock %}

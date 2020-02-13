@@ -1,0 +1,115 @@
+# Wheel 0.25+ needed to install certain packages on CPython 3.5+
+# like Pillow and psycopg2
+# See http://bitly.com/wheel-building-fails-CPython-35
+# Verified bug on Python 3.5.1
+
+--constraint constraint.txt
+
+# cryptography==2.1
+
+pyOpenSSL==17.4.0
+
+wheel==0.29.0
+
+# PDF Generation
+pdfkit
+
+# Data Quality
+phonenumbers
+
+# Bleeding edge Django
+django==1.11.1
+
+# Configuration
+django-environ==0.4.1
+
+# Forms
+django-braces==1.10.0
+django-crispy-forms==1.6.1
+
+# Models
+django-model-utils==2.6
+
+# Images
+Pillow==3.4.2
+
+# For user registration, either via email or social
+# Well-built with regular release cycles!
+django-allauth==0.28.0
+
+# Python-PostgreSQL Database Adapter
+psycopg2==2.7.1
+
+# Unicode slugification
+awesome-slugify==1.6.5
+
+# Time zones support
+pytz==2016.7
+
+# Redis support
+django-redis==4.6.0
+redis>=2.10.5
+
+rcssmin==1.0.6
+
+boto==2.43.0
+boto3
+
+#xmltodict==0.10.2
+
+lxml
+
+# RabbitMQ client
+pika==0.12.0
+
+# Scraping & Crawling
+selenium
+bs4
+tldextract
+stem
+
+requests==2.12.1
+
+# json serializing/deserializing complex objects
+marshmallow
+
+# parsing emails from SendGrid
+sendgrid_parse
+
+# websocket notifications
+pusher
+
+# monitoring
+raven==6.0.0
+
+# Stripe payments
+dj-stripe==0.8.0
+stripe==1.59.0
+
+# caching
+django-cachalot==1.4.1
+
+# accessing settings in template
+django-settings-export==1.2.1
+
+#date-util
+python-dateutil==2.6.0
+
+django-extensions==1.7.4
+
+# This is used when we copy rows from the employer ONet tables to the applicant databases.
+PyMySQL==0.7.9
+
+# Webpack (assets compilation and bundling)
+django-webpack-loader
+
+# Pipl API
+piplapis-python
+
+# Smtp API for SendGrid headers
+smtpapi==0.3.1
+
+# alternate template engine
+Jinja2==2.10
+
+certifi==2018.1.18

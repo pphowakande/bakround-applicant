@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block title %}
+  Scheduler Tool
+{% endblock %}
+
+{% block content %}
+  <h3>
+    Scheduler Tool
+  </h3>
+
+  {% for task in tasks %}
+      <form method="POST" style="margin: 20px">
+      {{ task.class_name }}: {{ task.name }}
+        {% csrf_token %}
+        <input type="hidden" name="task_name" value="{{ task.name }}"/>
+        <input type="submit" value="run now"/>
+      </form>
+  {% endfor %}
+{% endblock %}

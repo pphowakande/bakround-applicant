@@ -1,0 +1,213 @@
+{% extends "base.html" %}
+{% load static %}
+{% load app_filters %}
+
+{% block title %}{{employer_job.job_name}} - Settings{% endblock %}
+
+{% block content %}
+    <link type="text/css" rel="stylesheet" href="{% static 'vendor/materialize/css/materialize.css' %}"  media="screen,projection"/>
+    <link rel="stylesheet" href="{% static 'css/employer.css' %}" />
+    <div>
+        <h4>
+            Job Settings
+        </h4>
+    </div>
+    <br />
+    <div style="padding-bottom: 10px"><b>Job Profile:</b> <a href="#modal3" id="show_job_info" title="Show job profile description">{{ employer_job.job.job_name }}</a>
+    </div>
+    <div style="padding-bottom: 10px"><b>Store New Candidate:</b> {{application_inbox}} &nbsp;<span class="fa fa-info-circle" title="You can use this email address to import candidate resumes into the job candidate list below.">&nbsp;</span></div>
+    <br />
+    <div><h5>Details</h5></div>
+    <br />
+    <div>
+      <form id="formEditJob" class="col s12" action="/employer/edit_job/{{employer_job_id}}" method="post">
+          {% csrf_token %}
+          <div class="content">
+              <div class="row" style="margin-top: -20px; margin-bottom: 30px">
+                <div class="input-field col s6">
+                  {{ form.open }}
+                  <label for="id_open">Is this job active?</label>
+                </div>
+              </div>
+
+              <div class="row">
+                  <label style="padding-left: 15px">Job Profile</label>
+                <div class="input-field col s12">
+                  {{form.job}}
+                </div>
+              </div>
+              <div class="row">
+                <div class="input-field col s12" style="margin-top: 50px">
+                  {{form.job_name}}
+                  <label style="font-size: 12px; transform: translateY(-140%)">
+                    Job Name <br />
+                    Note: This is how the job will be displayed to candidates.
+                    You can modify this field if you would like to indicate a shift type
+                    (e.g. Nights/Weekends) or a specialization (e.g. Pediatrics).
+                  </label>
+                </div>
+              </div>
+              <div class="row">
+                <div class="input-field col s6">
+                  {{form.city}}
+                  <label>City</label>
+                </div>
+                <div class="input-field col s6">
+                    {{form.state}}
+                </div>
+              </div>
+
+              <div style="display: {% if can_edit_email %} block {% else %} none {% endif %};">
+                  <div><h5><a name="custom_email_body"></a>Custom Email Body</h5></div>
+                  <div class="row">
+                      <div class="col">
+                          <br />
+                          <p>Use the box below to specify a custom message for all job candidates. <b>This will appear in the email sent to the candidate when you click the "Send Intro" button.</b></p>
+                          <p>If you would like to add images to the email, right click and copy an individual image, and then paste it into the editor below. You can also copy and paste blocks of content, but images included in the content will be linked to their original source.</p>
+                          {% if logo_url %}
+                            <p>Drag this image into the editor below to insert your company logo: <img src="{{logo_url}}" /></p>
+                            <p>Click <a target="_blank" href="/employer/email_settings#logo">here</a> to update your company logo.</p>
+                          {% else %}
+                            <p>Click <a target="_blank" href="/employer/email_settings#logo">here</a> to upload a company logo.</p>
+                          {% endif %}
+                          <p class="hidden"><b>Note:</b> If nothing is specified below, we'll default to the <a href="#modal2">system-level setting.</a></p>
+                      </div>
+
+                    <div class="input-field col s12">
+                      {{form.custom_email_body}}
+
+                    </div>
+                  </div>
+              </div>
+
+              <br/>
+              <div class="row">
+                <h3 style='font-size: 18px;'>
+                  Custom Job Description
+                </h3>
+
+                <div class="input-field col s12">
+                  {{ form.job_description }}
+                </div>
+              </div>
+
+              <br />
+                <div><h5>Users Receiving Notifications</h5></div>
+                  <div class="row">
+                        {% for user in employer_users %}
+                            <div class="input-field col s12">
+                                <input type="checkbox" id="notification_user_{{ user.id }}" name="notifications" value="{{ user.id }}" {% if user.id in employer_user_ids %}checked{% endif %}>
+                                <label for="notification_user_{{ user.id }}">{{ user.user_first_name }} {{ user.user_last_name }}</label>
+                            </div>
+                        {% endfor %}
+                    </div>
+        </div>
+
+    </form>
+  </div>
+
+<div class="clearfix">
+    <div class="pull-right">
+          <button type="submit" name="action" id="btnEditJob" class="waves-effect waves-light btn btn-primary">Save</button>
+        </div>
+</div>
+
+  <div id="modal1" class="modal" style="padding: 20px">
+      <div>
+          <div class="row" style="margin-top: 10px">
+              {% if current_email_body is not None %}
+                {% autoescape off %}{{ current_email_body }}{% endautoescape %}
+              {% endif %}
+          </div>
+      </div>
+  </div>
+
+  <div id="modal2" class="modal" style="padding: 20px">
+      <div class="clearfix">
+        <div class="pull-right">
+              <a id="btnEditEmailSettings" href="/employer/email_settings" class="waves-effect waves-light btn btn-primary">Edit System Message</a>
+            </div>
+    </div>
+      <div>
+          <div class="row" style="margin-top: 10px">
+              {% autoescape off %}{{ default_email_body }}{% endautoescape %}
+          </div>
+      </div>
+  </div>
+
+    <div id="modal3" class="modal" style="padding: 10px">
+      <P><b>Job profile:</b> {{ employer_job.job.job_name }}</P>
+      <br/>
+      <P><b>Job description:</b></P>
+
+      <P>{{ employer_job.job.job_description|linebreaksbr }}</P>
+
+      <br/>
+
+      <P style="text-align: center">
+        <button class="modal-close waves-effect waves-light btn btn-primary">
+          Close
+        </button>
+      </P>
+    </div>
+
+    <div id="lowAccuracyModal" class="modal" style="padding: 20px; height: 150px">
+      <div>
+          <div class="row" style="margin-top: 10px">
+              <b>Note:</b> This job is currently in beta mode and the bScore values may not be accurate.
+          </div>
+      </div>
+        <div class="clearfix">
+            <div class="pull-right">
+              <a id="btnConfirmLowAccuracy" href="#" class="waves-effect waves-light btn btn-primary">Ok</a>
+            </div>
+    </div>
+  </div>
+
+<script src="{% static 'vendor/hammer/hammer.min.js' %}"></script>
+<script src="{% static 'vendor/materialize/js/materialize.js' %}"></script>
+<script>
+    var lowAccuracyJobs = {{ low_accuracy_jobs|safe }};
+
+    var completeRequest = function () {
+        $("#formEditJob").submit();
+    };
+
+    var hasJobProfileChanged = false;
+
+    $('#modal1').modal();
+    $('#modal2').modal();
+    $('#modal3').modal();
+    $('#lowAccuracyModal').modal();
+
+    $('#id_job').on('change', function() {
+        hasJobProfileChanged = true;
+    });
+
+    $('#btnEditJob').on('click', function () {
+        {% if not is_demo_account %}
+            if (hasJobProfileChanged && $('#id_job').val() != null && $.inArray(parseInt($('#id_job').val()), lowAccuracyJobs) != -1) {
+                $('#lowAccuracyModal').modal('open');
+            } else {
+                completeRequest();
+            }
+        {% else %}
+            completeRequest();
+        {% endif %}
+    });
+
+    $('#btnConfirmLowAccuracy').on('click', function () {
+        $('#lowAccuracyModal').modal('close');
+        completeRequest();
+    });
+
+  $("#id_job").on('change', function (){
+    var job_name = $("#id_job option:selected").text().trim();
+    $("#id_job_name").val(job_name);
+  });
+</script>
+
+{% include "employer/load_tinymce.html" with selector="textarea#id_custom_email_body" %}
+{% include "employer/load_tinymce.html" with selector="textarea#id_job_description" %}
+
+{% endblock %}

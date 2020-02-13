@@ -1,0 +1,21 @@
+
+{% load static %}
+
+<script src="{% static 'vendor/tinymce/tinymce.min.js' %}"></script>
+<script src="{% static 'vendor/tinymce/themes/modern/theme.min.js' %}"></script>
+<script src="{% static 'vendor/tinymce/plugins/link/plugin.min.js' %}"></script>
+
+<script>
+    tinymce.baseURL = "{% get_static_prefix %}vendor/tinymce";
+
+    $(function() {
+        tinymce.init({
+          selector: "{{ selector|escapejs }}",
+          plugins: "link textcolor colorpicker code paste",
+          menubar: false,
+          theme : "modern",
+          toolbar: "undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | table | fontsizeselect | forecolor backcolor | link | code",
+          paste_data_images: true
+        });
+    });
+</script>

@@ -1,0 +1,216 @@
+{% extends "account/base.html" %}
+
+{% load i18n %}
+{% load crispy_forms_tags %}
+{% load staticfiles %}
+
+{% block head_title %}
+Bakround | Sign Up
+{% endblock %}
+
+{% block inner %}
+<style>
+  .create-account-btn {
+    text-transform: uppercase;
+    padding: 5px 0px;
+    margin: 10px 0px;
+    width:100%;
+    background-color: white;
+    border: 2px solid #40b4aa;
+    color: #40b4aa;
+    letter-spacing: 1px;
+  }
+
+  .create-account-btn:hover {
+    color: white;
+    background-color: #40b4aa;
+    border: 2px solid #40b4aa;
+  }
+
+  @media (max-width: 767px) {
+    .third-party-sign-in-btn {
+      width: 290px !important;
+    }
+  }
+  .third-party-sign-in-btn {
+    width: 350px;
+    margin: 10px 0px;
+  }
+  .third-party-sign-in-btn:first-of-type {
+    margin: 0px 0px;
+  }
+  i.fa-linkedin {
+    float:left;
+    font-size: 21px;
+    line-height: 21px;
+    padding-right:10px;
+  }
+  .linkedin-btn {
+    color:white;
+    background-color: #0076b4;
+  }
+  .linkedin-btn:hover {
+    color:white !important;
+    background-color: #0076b4 !important;
+  }
+  .google-btn img {
+    float: left;
+    height:20px;
+  }
+  .google-btn:hover {
+     background-color: white !important;
+  }
+
+  hr {
+    margin: 5px 0px;
+  }
+  .textinput, .select {
+    max-width: 400px;
+  }
+  .form-control-label {
+    text-align: left;
+    display: block;
+  }
+
+  .why-bakround {
+    background-color: #62c1f2;
+    color: white;
+  }
+
+  .why-bakround img {
+    margin: 0px -15px;
+    width: 105%
+  }
+
+  .why-bakround p {
+    font-size: 16px;
+  }
+
+  label {
+    font-weight: 300;
+  }
+
+  #signup_form {
+    max-width: 650px;
+    display: inline-block;
+    font-size: 18px;
+  }
+
+  #id_email, #id_password1 {
+    max-width: 350px;
+  }
+</style>
+
+<div class="grey-font col-sm-12 col-xs-12 create-account" style='text-align: center;'>
+  <h2 class='signup-font'>{% trans "Create Your Account" %}</h2>
+  <P>Join thousands of people who've improved their career using Bakround. Sign-up takes less than a minute.</P>
+  <div>
+    <a onclick="sendPageView('linkedin')" href="/accounts/linkedin_oauth2/login/?process=login" class="btn btn-default btn-round third-party-sign-in-btn linkedin-btn">
+      <i class='fa fa-linkedin'></i>
+      <span>Sign up with LinkedIn</span>
+    </a>
+    <a onclick="sendPageView('google')" class="btn btn-default btn-round third-party-sign-in-btn google-btn" href='/accounts/google/login/?process=login' style="color:grey;">
+      <img src="{% static 'images/g-logo.png' %}">
+      <span>Sign up with Google</span>
+    </a>
+    <hr/>
+    <form class="signup" id="signup_form" method="post"
+          action="{% url 'account_signup' %}"
+          onsubmit="return prevent_duplicate_form_submission('signup_form')">
+      {% csrf_token %}
+
+      {% if request.session.email_already_registered %}
+        <div class="help-block">
+          <strong>That email is already registered.</strong>
+        </div>
+      {% endif %}
+
+      <P style="text-align: left">
+        <span class="form-leading-text">My name is</span>
+        {{ form.first_name }} {{ form.last_name }}
+      </P>
+
+      <P style="text-align: left; white-space: nowrap">
+        <span class="form-leading-text">I am a(n)</span>
+        {{ form.primary_occupation }}
+        in {{ form.city }}, {{ form.state }}
+      </P>
+
+      <P style="text-align: left">
+        <span class="form-leading-text">Email me at</span>
+        {{ form.email }}
+      </P>
+
+      <P style="text-align: left">
+        <span class="form-leading-text"></span>
+        {{ form.password1 }}
+      </P>
+
+      {% if redirect_field_value %}
+      <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+      {% endif %}
+
+      <p style="font-size: 11px; text-align: center;">By creating an account, you agree to the Bakround <a href="{% url 'legal' %}">User Agreement</a></p>
+
+      <button class="btn btn-default btn-round create-account-btn"
+              type="submit" style="min-width: 170px">create account</button>
+    </form>
+    <P style='margin: 10px 0px'>Already have an account? Then please <a href="{{ login_url }}">sign in</a>.</P>
+    <P style='margin: 10px 0px; display: none'>
+      Are you an employer or recruiter?
+      Then please use <a href="{% url 'employer_signup' %}">employer sign-up</a> instead.
+    </P>
+  </div>
+  <div style="display: none" id="password_1_error_template" class="help-block">
+    <strong>Please choose a password with at least 8 characters.</strong>
+  </div>
+
+  <script>
+  document.getElementById('id_email').setAttribute('autocomplete', 'off')
+
+  function sendPageView(provider) {
+    {% if settings.USE_GOOGLE_ANALYTICS %}
+      ga('send', 'pageview', '/signup-' + provider + '-start');
+    {% endif %}
+    return true;
+  }
+
+  {% if request.session.appl_wants_to_claim %}
+  document.getElementById('id_email').value = ("{{ request.session.appl_email|escapejs }}");
+  document.getElementById('id_email').readOnly = true;
+  document.getElementById('id_password1').focus();
+  {% elif email %}
+  document.getElementById('id_email').value = ("{{ email|escapejs }}");
+  document.getElementById('id_email').focus();
+  {% else %}
+  document.getElementById('id_email').focus();
+  {% endif %}
+
+
+  var error1 = $("#password_1_error_template").clone();
+  $("#div_id_password1").append(error1);
+
+  function clear_password_errors(){
+    error1.hide();
+  }
+
+  function check_password_1(){
+    var password = $("#id_password1").val();
+    if (password.length < 8){
+      error1.show();
+      if ($("#id_password2").val() == ""){
+        $("#id_password1").focus();
+      }
+    } else {
+      error1.hide();
+    }
+  }
+
+  $("#id_password1").blur(check_password_1);
+  $("#id_password1").change(clear_password_errors);
+  </script>
+
+</div>
+
+{% endblock %}
+

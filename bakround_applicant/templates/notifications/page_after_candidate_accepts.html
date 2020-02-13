@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+{% if sent_message %}
+  Your message has been sent.  You may close this page.
+{% elif success %}
+  <P>
+    You have accepted the invitation.
+    Please verify your contact information below.
+    You can also leave a message for the recruiter.
+    {% if suggest_claim %}
+      To see more great opportunities like this, please
+      <a href="#" onclick='$("#claim_form").submit()'>claim your Bakround profile</a>.
+    {% endif %}
+  </P>
+
+  <form method="POST" action="/candidate/send_message"
+      onsubmit="return prevent_duplicate_form_submission('form')">
+    Email: <input type="email" name="email" size="30" value="{{ candidate_email|default_if_none:'' }}" required>
+    <br/>
+    Phone: <input type="text" name="phone" size="30" value="{{ candidate_phone|default_if_none:'' }}" required>
+    <br/>
+    To leave a message, type in the box below.
+    <br/>
+    <textarea name="message" rows="5" cols="60" maxlength="10000"></textarea>
+    <br/>
+    <input type="submit" value="Submit">
+
+    {% csrf_token %}
+    <input type="hidden" name="employer_candidate_guid"
+           value="{{ employer_candidate_guid }}">
+  </form>
+
+  {% if suggest_claim %}
+    <form id="claim_form"
+          style="display: none"
+          method="POST"
+          action="/"
+          target="_blank"
+          onsubmit="return prevent_duplicate_form_submission('form')">
+      <input type="hidden" name="email" value="{{ candidate_email|escapejs }}">
+      <input type="submit">
+    {% csrf_token %}
+    </form>
+  {% endif %}
+
+{% elif already_responded %}
+  You already replied to this invitation.
+{% elif no_such_guid %}
+  The record for that ID does not exist or has been deleted.
+{% else %}
+  Unspecified error.
+{% endif %}
+
+{% endblock %}

@@ -1,0 +1,7 @@
+files:
+  - /var/log/*.log
+hostname: NAME
+destination:
+  host: HOST
+  port: PORT
+  protocol: tls

@@ -1,0 +1,48 @@
+<html>
+  <head>
+
+  </head>
+
+  <body>
+    <div id='container'>
+
+    </div>
+    <script src="https://unpkg.com/ua-parser-js@0.7.18/src/ua-parser.js"></script>
+    <script src="file:///app/test_scripts/test_browser_resources/fpCollect.js"></script>
+    <script src="file:///app/test_scripts/test_browser_resources/fpScanner.js"></script>
+    <script>
+        function renderHTML(strHTML) {
+            var temp = document.createElement('template');
+            temp.innerHTML = strHTML;
+            return temp.content;
+        }
+
+        /*
+          N.B.
+          - CHR_DEBUG_TOOLS is unsure at worst
+          - MQ_SCREEN is a bad test.
+        */
+
+        let container = document.getElementById("container");
+        let p = fpCollect.generateFingerprint();
+        p.then(fingerprint => {
+                let results = fpscanner.analyseFingerprint(fingerprint);
+                for (let k in results) {
+                    let result = results[k];
+                    let status = "";
+
+                    if (result.consistent === 1) {
+                        status = 'inconsistent';
+                    } else if (result.consistent === 2) {
+                        status = 'unsure';
+                        if (result.name + "" in ["CHR_DEBUG_TOOLS", "HEADCHR_PLUGINS"]) continue;
+                    } else if (result.consistent === 3) {
+                        status = 'consistent';
+                        continue;
+                    }
+                    console.log(result.name + " " + status);
+                }
+        });
+    </script>
+  </body>
+</html>

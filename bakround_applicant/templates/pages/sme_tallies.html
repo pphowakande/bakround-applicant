@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<style>
+  td, th {
+    padding: 5px;
+  }
+
+  th {
+    text-align: center;
+  }
+</style>
+
+<h3>Expert Review Counts</h3>
+
+{% if error %}
+  <P>
+    ERROR: {{ error }}
+  </P>
+{% else %}
+  <P>
+    The current server time is {{ display_date }}.
+  </P>
+
+  <P>
+    Here are the review counts for <b>{{ sme_email }}</b>
+    for the past six calendar months, including the current month.
+  </P>
+
+  <table border="1">
+    <tr>
+      <th>Job</th>
+      {% for month in month_names %}
+        <th valign="top">{{ month|linebreaksbr }}</th>
+      {% endfor %}
+    </tr>
+
+    {% for row in sme_tallies %}
+      <tr>
+        <td>{{ row.sme.job.job_name }}</td>
+        {% for number in row.numbers_of_reviews %}
+          <td align="right">{{ number }}</td>
+        {% endfor %}
+      </tr>
+    {% endfor %}
+
+    {% for row in qa_tallies %}
+      <tr>
+        <td>{{ row.job.job_name }} (QA)</td>
+        {% for number in row.numbers_of_reviews %}
+          <td align="right">{{ number }}</td>
+        {% endfor %}
+      </tr>
+    {% endfor %}
+
+    <tr>
+      <td><b>Total</b></td>
+      {% for number in total_reviews_by_month %}
+        <td align="right"><b>{{ number }}</b></td>
+      {% endfor %}
+    </tr>
+  </table>
+{% endif %}
+
+<br/>
+
+<P>
+  Rows marked "(QA)" represent reviews performed from the employer search pages.
+  <br/>
+  Rows without this marking represent reviews performed from the SME feedback pages.
+</P>
+
+{% endblock %}

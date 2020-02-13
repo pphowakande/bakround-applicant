@@ -1,0 +1,149 @@
+{% load static app_filters %}
+
+<style>
+  .tt-selectable {
+    cursor: pointer;
+  }
+</style>
+
+<div><label style="font-size: 1em;">Current users</label></div>
+
+<div id="employer_job_user_list">
+  {% for employer_job_user in employer_job_users %}
+    {% with emp_user=employer_job_user.employer_user %}
+      <P class="employer_job_user" data-sort-key="{{ emp_job_user.user_last_name }} {{ emp_job_user.user_first_name }}">
+        <span class="name">{{ employer_job_user.user_first_name }} {{ employer_job_user.user_last_name }}</span>
+        <input type="hidden" class="employer_user_id" value="{{ employer_job_user.employer_user.id }}">
+        <a onclick="remove_user_from_job(this)" href="#">(remove)</a>
+      </P>
+    {% endwith %}
+  {% endfor %}
+</div>
+
+<form>
+  <div class="row">
+    <div class="input-field col s6">
+      <label>Add users</label><br />
+      <input type="text" name="user_field" id="user_field" value="">
+      </div>
+    </div>
+</form>
+
+
+<div id="employer_job_user_template" class="employer_job_user" style="display: none">
+  <span class="name"></span>
+  <input type="hidden" class="employer_user_id" value="">
+  <a onclick="remove_user_from_job(this)" href="#">(remove)</a>
+</div>
+
+
+<script src="{% static 'vendor/typeahead.js/typeahead.bundle.min.js' %}"></script>
+<script>
+  function get_prefixes_of_string(s){
+    var prefixes = [];
+    var i, n = s.length;
+    for (i = 0; i < n - 2; i++){
+      prefixes.push(s.substring(i, n));
+    }
+    return prefixes;
+  }
+
+  var names = [];
+  {% for emp_user in employer_users %}
+      names.push({"name": "{{ emp_user.user_first_name|escapejs }} {{ emp_user.user_last_name|escapejs }}",
+                  "id": {{ emp_user.id }},
+                  "sort_name": "{{ emp_user.user_last_name|escapejs }} {{ emp_user.user_first_name|escapejs }}"});
+  {% endfor %}
+
+  // from example at http://twitter.github.io/typeahead.js/examples/
+  var bloodhound = new Bloodhound({
+    datumTokenizer: function (obj){ return get_prefixes_of_string(obj.name) },
+    queryTokenizer: Bloodhound.tokenizers.whitespace,
+    local: names
+  });
+
+  // see https://github.com/twitter/typeahead.js/issues/1111
+  function bloodhound_wrapper(q, sync) {
+    var results = bloodhound.search(q, function(results) {
+      var filtered_results = remove_already_selected(results);
+      sync(filtered_results);
+    });
+  }
+
+  function remove_already_selected(results){
+    var ids_selected = {};
+    $(".employer_user_id").each(function (i, elt){
+      var id = $(elt).val();
+      if (id != ""){
+        ids_selected[id] = 1;
+      }
+    });
+
+    return $(results).filter(function (i, elt){
+      return !ids_selected[elt.id];
+    });
+  }
+
+  $("#user_field").typeahead({
+    hint: false,
+    highlight: true,
+    minLength: 0
+  },
+  {
+    name: 'people',
+    source: bloodhound_wrapper,
+    displayKey: "name"
+  });
+  $("#user_field").bind('typeahead:selected', function(obj, datum, name){
+        console.log(datum.id)
+        add_user_to_job(datum.id, datum.name, datum.sort_name);
+        $("#user_field").typeahead('val', '');
+        $("#user_field").focus();
+  });
+
+  function add_user_to_job(employer_user_id, name, sort_name){
+    $.ajax({
+      url: "/employer/add_user_to_job",
+      method: "POST",
+      data: {
+        "csrfmiddlewaretoken": "{{ csrf_token }}",
+        "employer_job_id": {{ employer_job.id }},
+        "employer_user_id": employer_user_id
+      }
+    }).done(function (response){
+      if (response){
+        // add the user to the list
+        var elt = $("#employer_job_user_template").clone();
+        $(elt).attr('id', '');
+        $(elt).find(".name").text(name);
+        $(elt).find(".employer_user_id").val(employer_user_id);
+        $(elt).attr("data-sort-key", sort_name);
+        $(elt).show();
+        $("#employer_job_user_list").append(elt);
+        sort_users_by_name();
+      }
+    });
+  }
+
+  function remove_user_from_job(elt){
+    var employer_user_id = $(elt).parent(".employer_job_user").find(".employer_user_id").val();
+
+    $.ajax({
+      url: "/employer/remove_user_from_job",
+      method: "POST",
+      data: {
+        "csrfmiddlewaretoken": "{{ csrf_token }}",
+        "employer_job_id": {{ employer_job.id }},
+        "employer_user_id": Number(employer_user_id)
+      }
+    });
+    $(elt).parent(".employer_job_user").remove();
+    $("#user_field").focus();
+  }
+
+  function sort_users_by_name(){
+    $("#employer_job_user_list .employer_job_user").sort(function (a, b){
+      return a.dataset.sort_key > b.dataset.sort_key
+    }).appendTo("#employer_job_user_list");
+  }
+</script>
