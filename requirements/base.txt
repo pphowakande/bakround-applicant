@@ -110,6 +110,6 @@ piplapis-python
 smtpapi==0.3.1
 
 # alternate template engine
-Jinja2==2.10
+Jinja2==2.11.3
 
 certifi==2018.1.18
